@@ -38,37 +38,43 @@ class _PracticeSetupScreenState extends State<PracticeSetupScreen> {
               ),
               const SizedBox(height: 12),
               Expanded(
-                child: ClipRect(
-                  child: ListView.separated(
-                    padding: EdgeInsets.zero,
-                    physics: const ClampingScrollPhysics(),
-                    clipBehavior: Clip.hardEdge,
-                    itemCount: skills.length,
-                    separatorBuilder: (_, __) => const SizedBox(height: 12),
-                    itemBuilder: (context, index) {
-                      final skill = skills[index];
-                      final selected = skill == _selectedSkill;
+                child: ScrollConfiguration(
+                  behavior: const _NoIndicatorScrollBehavior(),
+                  child: ClipRect(
+                    child: ListView.separated(
+                      padding: EdgeInsets.zero,
+                      physics: const ClampingScrollPhysics(),
+                      clipBehavior: Clip.hardEdge,
+                      itemCount: skills.length,
+                      separatorBuilder: (_, __) => const SizedBox(height: 12),
+                      itemBuilder: (context, index) {
+                        final skill = skills[index];
+                        final selected = skill == _selectedSkill;
 
-                      return _CategoryRow(
-                        label: skill,
-                        selected: selected,
-                        difficulty: selected ? _selectedDifficulty : null,
-                        onTap: () {
-                          setState(() {
-                            _selectedSkill = skill;
-                          });
-                        },
-                        onDifficultyTap: selected
-                            ? (value) {
-                                setState(() {
-                                  _selectedDifficulty = value;
-                                });
-                              }
-                            : null,
-                      );
-                    },
+                        return _CategoryRow(
+                          label: skill,
+                          selected: selected,
+                          difficulty: selected ? _selectedDifficulty : null,
+                          progressByDifficulty: {
+                            for (final d in const [1, 2, 3]) d: state.progressForSkillDifficulty(skill, d),
+                          },
+                          onTap: () {
+                            setState(() {
+                              _selectedSkill = skill;
+                            });
+                          },
+                          onDifficultyTap: selected
+                              ? (value) {
+                                  setState(() {
+                                    _selectedDifficulty = value;
+                                  });
+                                }
+                              : null,
+                        );
+                      },
+                    ),
                   ),
-                ),
+                )
               ),
               const SizedBox(height: 12),
               SizedBox(
@@ -98,6 +104,7 @@ class _CategoryRow extends StatelessWidget {
     required this.label,
     required this.selected,
     required this.difficulty,
+    required this.progressByDifficulty,
     required this.onTap,
     required this.onDifficultyTap,
   });
@@ -105,6 +112,7 @@ class _CategoryRow extends StatelessWidget {
   final String label;
   final bool selected;
   final int? difficulty;
+  final Map<int, double> progressByDifficulty;
   final VoidCallback onTap;
   final ValueChanged<int>? onDifficultyTap;
 
@@ -142,6 +150,7 @@ class _CategoryRow extends StatelessWidget {
                     value: value,
                     selected: selected && difficulty == value,
                     enabled: selected,
+                    progress: progressByDifficulty[value] ?? 0.0,
                     onTap: () => onDifficultyTap?.call(value),
                   ),
                   if (value != 3) const SizedBox(width: 8),
@@ -160,12 +169,14 @@ class _DifficultySquare extends StatelessWidget {
     required this.value,
     required this.selected,
     required this.enabled,
+    required this.progress,
     required this.onTap,
   });
 
   final int value;
   final bool selected;
   final bool enabled;
+  final double progress;
   final VoidCallback onTap;
 
   @override
@@ -175,34 +186,65 @@ class _DifficultySquare extends StatelessWidget {
     return InkWell(
       onTap: enabled ? onTap : null,
       borderRadius: BorderRadius.circular(12),
-      child: Ink(
+      child: SizedBox(
         width: 36,
-        height: 36,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          color: selected
-              ? colorScheme.primary
-              : enabled
-                  ? colorScheme.surface
-                  : colorScheme.surface.withOpacity(0.5),
-          border: Border.all(
-            color: selected ? colorScheme.primary : colorScheme.outline.withOpacity(0.4),
-          ),
-        ),
-        child: Center(
-          child: Text(
-            '$value',
-            style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  fontWeight: FontWeight.w900,
-                  color: selected
-                      ? colorScheme.onPrimary
-                      : enabled
-                          ? colorScheme.onSurface
-                          : colorScheme.onSurface.withOpacity(0.5),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Ink(
+              width: 36,
+              height: 36,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: selected
+                    ? colorScheme.primary
+                    : enabled
+                        ? colorScheme.surface
+                        : colorScheme.surface.withOpacity(0.5),
+                border: Border.all(
+                  color: selected ? colorScheme.primary : colorScheme.outline.withOpacity(0.4),
                 ),
-          ),
+              ),
+              child: Center(
+                child: Text(
+                  '$value',
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        fontWeight: FontWeight.w900,
+                        color: selected
+                            ? colorScheme.onPrimary
+                            : enabled
+                                ? colorScheme.onSurface
+                                : colorScheme.onSurface.withOpacity(0.5),
+                      ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 4),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(999),
+              child: LinearProgressIndicator(
+                value: progress.clamp(0.0, 1.0),
+                minHeight: 5,
+                backgroundColor: colorScheme.surface.withOpacity(0.6),
+              ),
+            ),
+          ],
         ),
       ),
     );
+  }
+}
+
+class _NoIndicatorScrollBehavior extends MaterialScrollBehavior {
+  const _NoIndicatorScrollBehavior();
+
+  @override
+  Widget buildOverscrollIndicator(BuildContext context, Widget child, ScrollableDetails details) {
+    return child;
+  }
+
+  @override
+  Widget buildScrollbar(BuildContext context, Widget child, ScrollableDetails details) {
+    return child;
   }
 }

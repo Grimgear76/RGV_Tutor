@@ -18,7 +18,8 @@ void main() {
     );
 
     expect(find.text('RGV Math Coach'), findsOneWidget);
-    expect(find.text('Continue'), findsOneWidget);
+    expect(find.text('Continue math'), findsOneWidget);
     expect(find.byIcon(Icons.insights_rounded), findsOneWidget);
+    expect(find.text('Personal\nQuestions'), findsOneWidget);
   });
 }

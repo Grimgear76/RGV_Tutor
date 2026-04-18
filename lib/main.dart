@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -42,10 +41,10 @@ class App extends StatelessWidget {
       ),
     );
 
-    final textTheme = GoogleFonts.plusJakartaSansTextTheme(base.textTheme).copyWith(
-      headlineSmall: GoogleFonts.plusJakartaSans(fontWeight: FontWeight.w900),
-      titleLarge: GoogleFonts.plusJakartaSans(fontWeight: FontWeight.w900),
-      titleMedium: GoogleFonts.plusJakartaSans(fontWeight: FontWeight.w800),
+    final textTheme = base.textTheme.copyWith(
+      headlineSmall: base.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w900),
+      titleLarge: base.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w900),
+      titleMedium: base.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
     );
 
     return MaterialApp(

@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../app_state.dart';
@@ -92,7 +91,41 @@ class _PracticeScreenState extends State<PracticeScreen> with SingleTickerProvid
         );
 
     if (!_looksLikeMath(text)) return base ?? const TextStyle();
-    return GoogleFonts.robotoMono(textStyle: base);
+    return (base ?? const TextStyle()).copyWith(fontFamily: 'monospace');
+  }
+
+  TextStyle _fitSingleLine(
+    BuildContext context, {
+    required String text,
+    required TextStyle style,
+    required double maxWidth,
+    required double minFontSize,
+  }) {
+    final baseSize = style.fontSize ?? Theme.of(context).textTheme.titleLarge?.fontSize ?? 20;
+    var low = minFontSize;
+    var high = baseSize;
+
+    bool fits(double size) {
+      final painter = TextPainter(
+        text: TextSpan(text: text, style: style.copyWith(fontSize: size)),
+        maxLines: 1,
+        textDirection: TextDirection.ltr,
+      )..layout(maxWidth: maxWidth);
+      return !painter.didExceedMaxLines;
+    }
+
+    if (fits(high)) return style;
+
+    for (var i = 0; i < 12; i++) {
+      final mid = (low + high) / 2;
+      if (fits(mid)) {
+        low = mid;
+      } else {
+        high = mid;
+      }
+    }
+
+    return style.copyWith(fontSize: low);
   }
 
   @override
@@ -106,6 +139,9 @@ class _PracticeScreenState extends State<PracticeScreen> with SingleTickerProvid
 
     final correct = state.lastCorrect == true;
     final answered = state.lastCorrect != null;
+    final questionsLeft = state.questionsLeftInDifficulty;
+    final difficultyProgress = state.difficultyProgress;
+    final displayDifficulty = state.practiceDifficulty ?? problem.difficulty;
 
     return Scaffold(
       appBar: AppBar(
@@ -142,7 +178,7 @@ class _PracticeScreenState extends State<PracticeScreen> with SingleTickerProvid
                               color: Theme.of(context).colorScheme.secondaryContainer,
                             ),
                             child: Text(
-                              'Difficulty ${problem.difficulty}',
+                              'Difficulty $displayDifficulty',
                               style: Theme.of(context).textTheme.labelLarge?.copyWith(
                                     fontWeight: FontWeight.w800,
                                   ),
@@ -150,6 +186,29 @@ class _PracticeScreenState extends State<PracticeScreen> with SingleTickerProvid
                           ),
                         ],
                       ),
+                      if (difficultyProgress != null && questionsLeft != null) ...[
+                        const SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(999),
+                                child: LinearProgressIndicator(
+                                  value: difficultyProgress,
+                                  minHeight: 10,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            Text(
+                              '$questionsLeft left',
+                              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                            ),
+                          ],
+                        ),
+                      ],
                       const SizedBox(height: 14),
                       AnimatedBuilder(
                         animation: _shakeAnim,
@@ -167,12 +226,42 @@ class _PracticeScreenState extends State<PracticeScreen> with SingleTickerProvid
                             color: Theme.of(context).colorScheme.surfaceContainerHighest,
                             borderRadius: BorderRadius.circular(22),
                           ),
-                          child: SingleChildScrollView(
-                            child: Text(
-                              problem.question,
-                              textAlign: TextAlign.start,
-                              style: _problemTextStyle(context, problem.question),
-                            ),
+                          child: LayoutBuilder(
+                            builder: (context, box) {
+                              final style = _problemTextStyle(context, problem.question);
+                              final isMath = _looksLikeMath(problem.question);
+
+                              if (isMath) {
+                                final fitted = _fitSingleLine(
+                                  context,
+                                  text: problem.question,
+                                  style: style,
+                                  maxWidth: box.maxWidth,
+                                  minFontSize: 16,
+                                );
+
+                                return SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: ConstrainedBox(
+                                    constraints: BoxConstraints(minWidth: box.maxWidth),
+                                    child: Text(
+                                      problem.question,
+                                      maxLines: 1,
+                                      softWrap: false,
+                                      style: fitted,
+                                    ),
+                                  ),
+                                );
+                              }
+
+                              return SingleChildScrollView(
+                                child: Text(
+                                  problem.question,
+                                  textAlign: TextAlign.start,
+                                  style: style,
+                                ),
+                              );
+                            },
                           ),
                         ),
                       ),
@@ -201,6 +290,7 @@ class _PracticeScreenState extends State<PracticeScreen> with SingleTickerProvid
                             }
 
                             final choice = problem.choices[idx];
+                            final choiceStyle = _problemTextStyle(context, choice);
 
                             return InkWell(
                               borderRadius: BorderRadius.circular(18),
@@ -216,21 +306,53 @@ class _PracticeScreenState extends State<PracticeScreen> with SingleTickerProvid
                                         : Colors.transparent,
                                   ),
                                 ),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Text(
-                                        choice,
-                                        style: _problemTextStyle(context, choice).copyWith(
-                                          fontWeight: FontWeight.w800,
-                                          color: fg,
-                                        ),
-                                      ),
-                                    ),
-                                    if (showCorrect)
-                                      Icon(Icons.check_circle, color: fg)
-                                    else if (showWrong)
-                                      Icon(Icons.cancel, color: fg)
+                                 child: Row(
+                                   children: [
+                                     Expanded(
+                                       child: LayoutBuilder(
+                                         builder: (context, box) {
+                                           if (_looksLikeMath(choice)) {
+                                             final fitted = _fitSingleLine(
+                                               context,
+                                               text: choice,
+                                               style: choiceStyle.copyWith(
+                                                 fontWeight: FontWeight.w800,
+                                                 color: fg,
+                                               ),
+                                               maxWidth: box.maxWidth,
+                                               minFontSize: 14,
+                                             );
+
+                                             return SingleChildScrollView(
+                                               scrollDirection: Axis.horizontal,
+                                               child: ConstrainedBox(
+                                                 constraints: BoxConstraints(minWidth: box.maxWidth),
+                                                 child: Text(
+                                                   choice,
+                                                   maxLines: 1,
+                                                   softWrap: false,
+                                                   style: fitted,
+                                                 ),
+                                               ),
+                                             );
+                                           }
+
+                                           return Text(
+                                             choice,
+                                             maxLines: 2,
+                                             overflow: TextOverflow.ellipsis,
+                                             style: choiceStyle.copyWith(
+                                               fontWeight: FontWeight.w800,
+                                               color: fg,
+                                             ),
+                                           );
+                                         },
+                                       ),
+                                     ),
+                                     if (showCorrect)
+                                       Icon(Icons.check_circle, color: fg)
+                                     else if (showWrong)
+                                       Icon(Icons.cancel, color: fg)
                                   ],
                                 ),
                               ),
@@ -247,6 +369,20 @@ class _PracticeScreenState extends State<PracticeScreen> with SingleTickerProvid
                               child: Text(_showSteps ? 'Hide steps' : 'Show steps'),
                             ),
                           ),
+                          if (answered && !correct) ...[
+                            const SizedBox(width: 12),
+                            FilledButton.tonal(
+                              onPressed: () {
+                                _autoNext?.cancel();
+                                setState(() {
+                                  _selected = null;
+                                  _showSteps = false;
+                                });
+                                state.retry();
+                              },
+                              child: const Text('Retry'),
+                            ),
+                          ],
                           const SizedBox(width: 12),
                           FilledButton(
                             onPressed: answered

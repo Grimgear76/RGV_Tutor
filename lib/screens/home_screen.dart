@@ -7,6 +7,7 @@ import '../widgets/rgv_logo.dart';
 import 'practice_screen.dart';
 import 'practice_setup_screen.dart';
 import 'progress_screen.dart';
+import 'personal_questions_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -160,6 +161,13 @@ class HomeScreen extends StatelessWidget {
                                 crossAxisSpacing: 12,
                                 childAspectRatio: 1.15,
                                 children: [
+                                  _PersonalQuestionsCard(
+                                    onTap: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(builder: (_) => const PersonalQuestionsScreen()),
+                                      );
+                                    },
+                                  ),
                                   for (final skill in state.skills)
                                     _SkillCard(
                                       skill: skill,
@@ -231,15 +239,15 @@ class _SubjectCard extends StatelessWidget {
       Subject.history => (Icons.public_rounded, const Color(0xFFF59E0B)),
     };
 
-    return InkWell(
-      borderRadius: BorderRadius.circular(22),
-      onTap: onTap,
-      child: Ink(
-        decoration: BoxDecoration(
-          color: selected ? accent.withOpacity(0.12) : colorScheme.surfaceContainerHighest,
-          borderRadius: BorderRadius.circular(22),
-          border: selected ? Border.all(color: accent.withOpacity(0.55), width: 2) : null,
-        ),
+    final backgroundColor = selected ? accent.withOpacity(0.12) : colorScheme.surfaceContainerHighest;
+    final side = selected ? BorderSide(color: accent.withOpacity(0.55), width: 2) : BorderSide.none;
+
+    return Material(
+      color: backgroundColor,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22), side: side),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: onTap,
         child: Padding(
           padding: const EdgeInsets.all(14),
           child: Column(
@@ -277,6 +285,62 @@ class _SubjectCard extends StatelessWidget {
   }
 }
 
+class _PersonalQuestionsCard extends StatelessWidget {
+  const _PersonalQuestionsCard({required this.onTap});
+
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final accent = colorScheme.tertiary;
+
+    return Material(
+      color: accent.withOpacity(0.14),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(22),
+        side: BorderSide(color: accent.withOpacity(0.55), width: 2),
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                  color: accent.withOpacity(0.18),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Icon(Icons.create_rounded, color: accent),
+              ),
+              const Spacer(),
+              Text(
+                'Personal\nQuestions',
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w900,
+                    ),
+              ),
+              const SizedBox(height: 6),
+              Text(
+                'Make your own',
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                      fontWeight: FontWeight.w700,
+                    ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _SkillCard extends StatelessWidget {
   const _SkillCard({required this.skill, required this.mastery, required this.onTap});
 
@@ -288,14 +352,12 @@ class _SkillCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    return InkWell(
+    return Material(
+      color: colorScheme.surfaceContainerHighest,
       borderRadius: BorderRadius.circular(22),
-      onTap: onTap,
-      child: Ink(
-        decoration: BoxDecoration(
-          color: colorScheme.surfaceContainerHighest,
-          borderRadius: BorderRadius.circular(22),
-        ),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: onTap,
         child: Padding(
           padding: const EdgeInsets.all(14),
           child: Column(
