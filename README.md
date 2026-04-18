@@ -1,24 +1,20 @@
-# RGV Math Coach (Offline MVP)
+# RGV Tutor
 
-This folder contains a Flutter MVP (offline-first) with:
+Flutter offline-first MVP featuring:
 - Adaptive recommendations (simple mastery model)
 - Animated XP bar + mastery bars
 - Instant feedback burst + shake on wrong answers
 
 ## Run
 
-1) Ensure Flutter SDK is installed.
-2) From this folder:
-
 ```bash
 flutter pub get
 flutter run
 ```
 
-If you need a full Flutter platform scaffold (android/ios/web), you can run:
+If you’re missing platform folders (`android/`, `ios/`, `web/`, etc.):
 
 ```bash
 flutter create .
+flutter pub get
 ```
-
-Then re-run `flutter pub get`.
