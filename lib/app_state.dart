@@ -142,6 +142,8 @@ class AppState extends ChangeNotifier {
         .where((row) => row.isNotEmpty)
         .where((row) => row.toLowerCase() != a.toLowerCase())
         .toSet()
+        .toList(growable: false)
+        .take(3)
         .toList(growable: false);
     if (q.isEmpty || a.isEmpty) return;
 
@@ -177,6 +179,8 @@ class AppState extends ChangeNotifier {
         .where((row) => row.isNotEmpty)
         .where((row) => row.toLowerCase() != a.toLowerCase())
         .toSet()
+        .toList(growable: false)
+        .take(3)
         .toList(growable: false);
     if (q.isEmpty || a.isEmpty) return;
 

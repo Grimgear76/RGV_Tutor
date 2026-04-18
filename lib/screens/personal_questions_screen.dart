@@ -368,8 +368,10 @@ Future<void> _confirmDeleteCategory(BuildContext context, PersonalCategory categ
 Future<void> _showCreateQuestionDialog(BuildContext context, {required String categoryId}) async {
   final questionController = TextEditingController();
   final answerController = TextEditingController();
+  final incorrect1Controller = TextEditingController();
+  final incorrect2Controller = TextEditingController();
+  final incorrect3Controller = TextEditingController();
   final explanationController = TextEditingController();
-  final incorrectAnswersController = TextEditingController();
 
   final result = await showDialog<bool>(
     context: context,
@@ -390,19 +392,27 @@ Future<void> _showCreateQuestionDialog(BuildContext context, {required String ca
               const SizedBox(height: 10),
               TextField(
                 controller: answerController,
-                decoration: const InputDecoration(labelText: 'Answer'),
+                decoration: const InputDecoration(labelText: 'Correct answer'),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: incorrect1Controller,
+                decoration: const InputDecoration(labelText: 'Incorrect answer 1 (optional)'),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: incorrect2Controller,
+                decoration: const InputDecoration(labelText: 'Incorrect answer 2 (optional)'),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: incorrect3Controller,
+                decoration: const InputDecoration(labelText: 'Incorrect answer 3 (optional)'),
               ),
               const SizedBox(height: 10),
               TextField(
                 controller: explanationController,
                 decoration: const InputDecoration(labelText: 'Explanation (optional)'),
-                minLines: 2,
-                maxLines: 4,
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: incorrectAnswersController,
-                decoration: const InputDecoration(labelText: 'Incorrect answers (one per line)'),
                 minLines: 2,
                 maxLines: 4,
               ),
@@ -424,11 +434,11 @@ Future<void> _showCreateQuestionDialog(BuildContext context, {required String ca
   );
 
   if (result != true) return;
-  final incorrect = incorrectAnswersController.text
-      .split(RegExp(r'\r?\n'))
-      .map((row) => row.trim())
-      .where((row) => row.isNotEmpty)
-      .toList(growable: false);
+  final incorrect = [
+    incorrect1Controller.text,
+    incorrect2Controller.text,
+    incorrect3Controller.text,
+  ];
   context.read<AppState>().createPersonalQuestion(
         categoryId: categoryId,
         question: questionController.text,
@@ -446,7 +456,9 @@ Future<void> _showEditQuestionDialog(
   final questionController = TextEditingController(text: question.question);
   final answerController = TextEditingController(text: question.answer);
   final explanationController = TextEditingController(text: question.explanation);
-  final incorrectAnswersController = TextEditingController(text: question.incorrectAnswers.join('\n'));
+  final incorrect1Controller = TextEditingController(text: question.incorrectAnswers.length > 0 ? question.incorrectAnswers[0] : '');
+  final incorrect2Controller = TextEditingController(text: question.incorrectAnswers.length > 1 ? question.incorrectAnswers[1] : '');
+  final incorrect3Controller = TextEditingController(text: question.incorrectAnswers.length > 2 ? question.incorrectAnswers[2] : '');
 
   final result = await showDialog<bool>(
     context: context,
@@ -467,19 +479,27 @@ Future<void> _showEditQuestionDialog(
               const SizedBox(height: 10),
               TextField(
                 controller: answerController,
-                decoration: const InputDecoration(labelText: 'Answer'),
+                decoration: const InputDecoration(labelText: 'Correct answer'),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: incorrect1Controller,
+                decoration: const InputDecoration(labelText: 'Incorrect answer 1 (optional)'),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: incorrect2Controller,
+                decoration: const InputDecoration(labelText: 'Incorrect answer 2 (optional)'),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: incorrect3Controller,
+                decoration: const InputDecoration(labelText: 'Incorrect answer 3 (optional)'),
               ),
               const SizedBox(height: 10),
               TextField(
                 controller: explanationController,
                 decoration: const InputDecoration(labelText: 'Explanation (optional)'),
-                minLines: 2,
-                maxLines: 4,
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: incorrectAnswersController,
-                decoration: const InputDecoration(labelText: 'Incorrect answers (one per line)'),
                 minLines: 2,
                 maxLines: 4,
               ),
@@ -501,11 +521,11 @@ Future<void> _showEditQuestionDialog(
   );
 
   if (result != true) return;
-  final incorrect = incorrectAnswersController.text
-      .split(RegExp(r'\r?\n'))
-      .map((row) => row.trim())
-      .where((row) => row.isNotEmpty)
-      .toList(growable: false);
+  final incorrect = [
+    incorrect1Controller.text,
+    incorrect2Controller.text,
+    incorrect3Controller.text,
+  ];
   context.read<AppState>().updatePersonalQuestion(
         categoryId: categoryId,
         questionId: question.id,

@@ -86,6 +86,8 @@ class PersonalQuestion {
         .map((row) => row.trim())
         .where((row) => row.isNotEmpty)
         .toSet()
+        .toList(growable: false)
+        .take(3)
         .toList(growable: false);
     return PersonalQuestion(
       id: (map['id'] as String?) ?? '',
