@@ -13,7 +13,7 @@ Future<void> main() async {
   await Hive.initFlutter();
 
   final problems = await const ProblemBank().load();
-  final state = AppState(problems: problems, recommender: const Recommender());
+  final state = AppState(problems: problems, recommender: Recommender());
   await state.init();
 
   runApp(

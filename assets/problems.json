@@ -61,5 +61,1589 @@
       "Area of a rectangle = length × width.",
       "9 × 4 = 36."
     ]
+  },
+
+  {
+    "id": "elem_01",
+    "skill": "Elementary",
+    "difficulty": 1,
+    "question": "What is 7 + 5?",
+    "choices": ["10", "11", "12", "13"],
+    "answerIndex": 2,
+    "steps": [
+      "Start with 7.",
+      "Add 5 more: 7 + 5 = 12.",
+      "So the answer is 12."
+    ]
+  },
+  {
+    "id": "elem_02",
+    "skill": "Elementary",
+    "difficulty": 1,
+    "question": "What is 14 − 6?",
+    "choices": ["6", "7", "8", "9"],
+    "answerIndex": 2,
+    "steps": [
+      "Start with 14.",
+      "Take away 6: 14 − 6 = 8.",
+      "So the answer is 8."
+    ]
+  },
+  {
+    "id": "elem_03",
+    "skill": "Elementary",
+    "difficulty": 1,
+    "question": "What is 9 × 3?",
+    "choices": ["18", "21", "27", "36"],
+    "answerIndex": 2,
+    "steps": [
+      "Multiplication means repeated addition.",
+      "9 × 3 = 9 + 9 + 9 = 27.",
+      "So the answer is 27."
+    ]
+  },
+  {
+    "id": "elem_04",
+    "skill": "Elementary",
+    "difficulty": 1,
+    "question": "What is 24 ÷ 6?",
+    "choices": ["3", "4", "5", "6"],
+    "answerIndex": 1,
+    "steps": [
+      "Division asks how many groups of 6 are in 24.",
+      "6 × 4 = 24.",
+      "So 24 ÷ 6 = 4."
+    ]
+  },
+  {
+    "id": "elem_05",
+    "skill": "Elementary",
+    "difficulty": 1,
+    "question": "Which fraction is equal to 1/2?",
+    "choices": ["2/4", "1/3", "3/5", "4/3"],
+    "answerIndex": 0,
+    "steps": [
+      "Equivalent fractions come from multiplying numerator and denominator by the same number.",
+      "1/2 × 2/2 = 2/4.",
+      "So 2/4 is equal to 1/2."
+    ]
+  },
+  {
+    "id": "elem_06",
+    "skill": "Elementary",
+    "difficulty": 2,
+    "question": "What is 36 + 47?",
+    "choices": ["73", "83", "84", "93"],
+    "answerIndex": 1,
+    "steps": [
+      "Add ones: 6 + 7 = 13 (write 3, carry 1).",
+      "Add tens: 3 + 4 + 1 = 8.",
+      "So 36 + 47 = 83."
+    ]
+  },
+  {
+    "id": "elem_07",
+    "skill": "Elementary",
+    "difficulty": 2,
+    "question": "What is 70 − 28?",
+    "choices": ["32", "42", "52", "62"],
+    "answerIndex": 1,
+    "steps": [
+      "Subtract ones: you can borrow from the tens.",
+      "70 becomes 60 + 10.",
+      "10 − 8 = 2 and 60 − 20 = 40.",
+      "So 70 − 28 = 42."
+    ]
+  },
+  {
+    "id": "elem_08",
+    "skill": "Elementary",
+    "difficulty": 2,
+    "question": "What is 6 × 14?",
+    "choices": ["64", "74", "84", "94"],
+    "answerIndex": 2,
+    "steps": [
+      "Break 14 into 10 + 4.",
+      "6 × 10 = 60 and 6 × 4 = 24.",
+      "Add: 60 + 24 = 84."
+    ]
+  },
+  {
+    "id": "elem_09",
+    "skill": "Elementary",
+    "difficulty": 2,
+    "question": "What is 3/5 of 20?",
+    "choices": ["8", "10", "12", "15"],
+    "answerIndex": 2,
+    "steps": [
+      "Find 1/5 of 20: 20 ÷ 5 = 4.",
+      "Multiply by 3: 3 × 4 = 12.",
+      "So 3/5 of 20 is 12."
+    ]
+  },
+  {
+    "id": "elem_10",
+    "skill": "Elementary",
+    "difficulty": 2,
+    "question": "A book costs $8.50 and you pay with $10. How much change do you get?",
+    "choices": ["$0.50", "$1.00", "$1.50", "$2.00"],
+    "answerIndex": 2,
+    "steps": [
+      "Change = amount paid − cost.",
+      "10.00 − 8.50 = 1.50.",
+      "So the change is $1.50."
+    ]
+  },
+  {
+    "id": "elem_11",
+    "skill": "Elementary",
+    "difficulty": 3,
+    "question": "What is 125 ÷ 5?",
+    "choices": ["15", "20", "25", "30"],
+    "answerIndex": 2,
+    "steps": [
+      "Split 125 into 100 + 25.",
+      "100 ÷ 5 = 20 and 25 ÷ 5 = 5.",
+      "Add: 20 + 5 = 25."
+    ]
+  },
+  {
+    "id": "elem_12",
+    "skill": "Elementary",
+    "difficulty": 3,
+    "question": "What is 3.6 + 0.75?",
+    "choices": ["4.05", "4.25", "4.35", "4.45"],
+    "answerIndex": 2,
+    "steps": [
+      "Line up the decimals: 3.60 + 0.75.",
+      "Add hundredths/tenths/ones: 3.60 + 0.75 = 4.35.",
+      "So the answer is 4.35."
+    ]
+  },
+  {
+    "id": "elem_13",
+    "skill": "Elementary",
+    "difficulty": 3,
+    "question": "A box has 3 rows of 8 crayons. How many crayons are there?",
+    "choices": ["11", "16", "24", "32"],
+    "answerIndex": 2,
+    "steps": [
+      "Rows of equal size means multiplication.",
+      "3 rows × 8 crayons each = 3 × 8 = 24.",
+      "So there are 24 crayons."
+    ]
+  },
+  {
+    "id": "elem_14",
+    "skill": "Elementary",
+    "difficulty": 3,
+    "question": "What is the perimeter of a rectangle with length 11 and width 4?",
+    "choices": ["15", "26", "30", "44"],
+    "answerIndex": 2,
+    "steps": [
+      "Perimeter of a rectangle = 2(length + width).",
+      "2(11 + 4) = 2(15) = 30.",
+      "So the perimeter is 30."
+    ]
+  },
+  {
+    "id": "elem_15",
+    "skill": "Elementary",
+    "difficulty": 3,
+    "question": "Which is greater: 5/6 or 3/4?",
+    "choices": ["5/6", "3/4", "They are equal", "Not enough information"],
+    "answerIndex": 0,
+    "steps": [
+      "Use a common denominator: 5/6 = 10/12 and 3/4 = 9/12.",
+      "Compare numerators: 10 > 9.",
+      "So 5/6 is greater."
+    ]
+  },
+
+  {
+    "id": "ms_01",
+    "skill": "Middle School",
+    "difficulty": 1,
+    "question": "What is -7 + 12?",
+    "choices": ["-19", "-5", "5", "19"],
+    "answerIndex": 2,
+    "steps": [
+      "Adding a positive moves right on the number line.",
+      "Start at -7 and move 12 right.",
+      "You land on 5."
+    ]
+  },
+  {
+    "id": "ms_02",
+    "skill": "Middle School",
+    "difficulty": 1,
+    "question": "What is 3/8 + 1/8?",
+    "choices": ["4/8", "3/16", "1/2", "5/8"],
+    "answerIndex": 0,
+    "steps": [
+      "Denominators match, so add numerators.",
+      "3/8 + 1/8 = 4/8.",
+      "4/8 simplifies to 1/2, but 4/8 is correct as written."
+    ]
+  },
+  {
+    "id": "ms_03",
+    "skill": "Middle School",
+    "difficulty": 1,
+    "question": "Convert 0.4 to a fraction in simplest form.",
+    "choices": ["4/10", "2/5", "4/5", "1/4"],
+    "answerIndex": 1,
+    "steps": [
+      "0.4 = 4/10.",
+      "Simplify by dividing numerator and denominator by 2.",
+      "4/10 = 2/5."
+    ]
+  },
+  {
+    "id": "ms_04",
+    "skill": "Middle School",
+    "difficulty": 1,
+    "question": "What is 15% of 80?",
+    "choices": ["8", "10", "12", "15"],
+    "answerIndex": 2,
+    "steps": [
+      "10% of 80 is 8.",
+      "5% of 80 is half of 8, which is 4.",
+      "15% = 10% + 5% = 8 + 4 = 12."
+    ]
+  },
+  {
+    "id": "ms_05",
+    "skill": "Middle School",
+    "difficulty": 1,
+    "question": "Find the greatest common factor (GCF) of 18 and 24.",
+    "choices": ["3", "6", "9", "12"],
+    "answerIndex": 1,
+    "steps": [
+      "List factors of 18: 1, 2, 3, 6, 9, 18.",
+      "List factors of 24: 1, 2, 3, 4, 6, 8, 12, 24.",
+      "The greatest common factor is 6."
+    ]
+  },
+  {
+    "id": "ms_06",
+    "skill": "Middle School",
+    "difficulty": 2,
+    "question": "Solve: 3x = 27",
+    "choices": ["6", "7", "8", "9"],
+    "answerIndex": 3,
+    "steps": [
+      "Divide both sides by 3.",
+      "x = 27 ÷ 3 = 9."
+    ]
+  },
+  {
+    "id": "ms_07",
+    "skill": "Middle School",
+    "difficulty": 2,
+    "question": "What is 2.5 × 1.2?",
+    "choices": ["0.3", "3.0", "3.7", "30"],
+    "answerIndex": 1,
+    "steps": [
+      "Multiply as whole numbers: 25 × 12 = 300.",
+      "There are 2 decimal places total (one in each factor).",
+      "Place decimals: 3.00 = 3.0."
+    ]
+  },
+  {
+    "id": "ms_08",
+    "skill": "Middle School",
+    "difficulty": 2,
+    "question": "A store applies a 20% discount to a $35 item. What is the sale price?",
+    "choices": ["$7", "$28", "$30", "$42"],
+    "answerIndex": 1,
+    "steps": [
+      "Find 20% of 35: 0.20 × 35 = 7.",
+      "Subtract the discount: 35 − 7 = 28.",
+      "So the sale price is $28."
+    ]
+  },
+  {
+    "id": "ms_09",
+    "skill": "Middle School",
+    "difficulty": 2,
+    "question": "Simplify: 12/30",
+    "choices": ["2/5", "3/5", "4/10", "6/15"],
+    "answerIndex": 0,
+    "steps": [
+      "Find GCF of 12 and 30: 6.",
+      "Divide numerator and denominator by 6: 12/30 = 2/5.",
+      "So the simplified fraction is 2/5."
+    ]
+  },
+  {
+    "id": "ms_10",
+    "skill": "Middle School",
+    "difficulty": 2,
+    "question": "If y = 2x + 1, what is y when x = 4?",
+    "choices": ["7", "8", "9", "10"],
+    "answerIndex": 2,
+    "steps": [
+      "Substitute x = 4 into y = 2x + 1.",
+      "y = 2(4) + 1 = 8 + 1 = 9."
+    ]
+  },
+  {
+    "id": "ms_11",
+    "skill": "Middle School",
+    "difficulty": 3,
+    "question": "Solve: 5(x − 2) = 3x + 6",
+    "choices": ["6", "7", "8", "9"],
+    "answerIndex": 2,
+    "steps": [
+      "Distribute: 5x − 10 = 3x + 6.",
+      "Subtract 3x from both sides: 2x − 10 = 6.",
+      "Add 10 to both sides: 2x = 16.",
+      "Divide by 2: x = 8."
+    ]
+  },
+  {
+    "id": "ms_12",
+    "skill": "Middle School",
+    "difficulty": 3,
+    "question": "A map scale is 1 inch = 5 miles. If two towns are 3.4 inches apart on the map, how far apart are they?",
+    "choices": ["8.5 miles", "15 miles", "17 miles", "25 miles"],
+    "answerIndex": 2,
+    "steps": [
+      "Use the scale: 1 inch corresponds to 5 miles.",
+      "Multiply: 3.4 × 5 = 17.",
+      "So the towns are 17 miles apart."
+    ]
+  },
+  {
+    "id": "ms_13",
+    "skill": "Middle School",
+    "difficulty": 3,
+    "question": "What is the volume of a rectangular prism with dimensions 5 cm, 4 cm, and 3 cm?",
+    "choices": ["12 cm³", "20 cm³", "60 cm³", "120 cm³"],
+    "answerIndex": 2,
+    "steps": [
+      "Volume of a rectangular prism = length × width × height.",
+      "5 × 4 × 3 = 60.",
+      "So the volume is 60 cm³."
+    ]
+  },
+  {
+    "id": "ms_14",
+    "skill": "Middle School",
+    "difficulty": 3,
+    "question": "Order from least to greatest: -1/2, 0.2, -0.1, 1/4",
+    "choices": ["-1/2, -0.1, 0.2, 1/4", "-1/2, -0.1, 1/4, 0.2", "-0.1, -1/2, 0.2, 1/4", "-0.1, -1/2, 1/4, 0.2"],
+    "answerIndex": 1,
+    "steps": [
+      "Convert to decimals: -1/2 = -0.5, 0.2 = 0.2, -0.1 = -0.1, 1/4 = 0.25.",
+      "Order: -0.5 < -0.1 < 0.2 < 0.25.",
+      "So: -1/2, -0.1, 0.2, 1/4."
+    ]
+  },
+  {
+    "id": "ms_15",
+    "skill": "Middle School",
+    "difficulty": 3,
+    "question": "A number is increased by 30% and becomes 78. What was the original number?",
+    "choices": ["50", "60", "65", "70"],
+    "answerIndex": 1,
+    "steps": [
+      "Let the original be x.",
+      "Increased by 30% means x + 0.30x = 1.30x.",
+      "So 1.30x = 78.",
+      "Divide: x = 78 ÷ 1.30 = 60."
+    ]
+  },
+
+  {
+    "id": "prealg_01",
+    "skill": "Pre-Algebra",
+    "difficulty": 1,
+    "question": "Evaluate: 4^2",
+    "choices": ["8", "12", "16", "18"],
+    "answerIndex": 2,
+    "steps": [
+      "4^2 means 4 × 4.",
+      "4 × 4 = 16."
+    ]
+  },
+  {
+    "id": "prealg_02",
+    "skill": "Pre-Algebra",
+    "difficulty": 1,
+    "question": "Simplify: 3x + 2x",
+    "choices": ["5", "5x", "6x", "x^2"],
+    "answerIndex": 1,
+    "steps": [
+      "Combine like terms (both are x terms).",
+      "3x + 2x = (3 + 2)x = 5x."
+    ]
+  },
+  {
+    "id": "prealg_03",
+    "skill": "Pre-Algebra",
+    "difficulty": 1,
+    "question": "Solve: x − 9 = 4",
+    "choices": ["-5", "5", "13", "36"],
+    "answerIndex": 2,
+    "steps": [
+      "Add 9 to both sides.",
+      "x = 4 + 9 = 13."
+    ]
+  },
+  {
+    "id": "prealg_04",
+    "skill": "Pre-Algebra",
+    "difficulty": 1,
+    "question": "What is the coefficient of x in 7x − 3?",
+    "choices": ["-3", "3", "7", "x"],
+    "answerIndex": 2,
+    "steps": [
+      "The coefficient is the number multiplying x.",
+      "In 7x − 3, x is multiplied by 7.",
+      "So the coefficient is 7."
+    ]
+  },
+  {
+    "id": "prealg_05",
+    "skill": "Pre-Algebra",
+    "difficulty": 1,
+    "question": "Evaluate: 2(5 + 3)",
+    "choices": ["13", "16", "18", "20"],
+    "answerIndex": 2,
+    "steps": [
+      "Do parentheses first: 5 + 3 = 8.",
+      "Multiply: 2 × 8 = 16.",
+      "So the value is 16."
+    ]
+  },
+  {
+    "id": "prealg_06",
+    "skill": "Pre-Algebra",
+    "difficulty": 2,
+    "question": "Solve: 2x + 5 = 19",
+    "choices": ["5", "6", "7", "12"],
+    "answerIndex": 2,
+    "steps": [
+      "Subtract 5 from both sides: 2x = 14.",
+      "Divide by 2: x = 7."
+    ]
+  },
+  {
+    "id": "prealg_07",
+    "skill": "Pre-Algebra",
+    "difficulty": 2,
+    "question": "Simplify: 6(x − 4)",
+    "choices": ["6x − 4", "6x − 24", "x − 24", "24x"],
+    "answerIndex": 1,
+    "steps": [
+      "Distribute 6 to each term inside parentheses.",
+      "6 × x = 6x and 6 × (−4) = −24.",
+      "So 6(x − 4) = 6x − 24."
+    ]
+  },
+  {
+    "id": "prealg_08",
+    "skill": "Pre-Algebra",
+    "difficulty": 2,
+    "question": "Solve: 3(x + 2) = 21",
+    "choices": ["3", "5", "7", "9"],
+    "answerIndex": 1,
+    "steps": [
+      "Divide both sides by 3: x + 2 = 7.",
+      "Subtract 2: x = 5."
+    ]
+  },
+  {
+    "id": "prealg_09",
+    "skill": "Pre-Algebra",
+    "difficulty": 2,
+    "question": "Which expression is equivalent to 4x + 12?",
+    "choices": ["4(x + 3)", "12(x + 4)", "4(x + 12)", "(4x)(12)"],
+    "answerIndex": 0,
+    "steps": [
+      "Factor out the greatest common factor, 4.",
+      "4x + 12 = 4(x + 3).",
+      "So the equivalent expression is 4(x + 3)."
+    ]
+  },
+  {
+    "id": "prealg_10",
+    "skill": "Pre-Algebra",
+    "difficulty": 2,
+    "question": "A phone plan charges $20 plus $0.10 per text. Write the cost for t texts.",
+    "choices": ["C = 20t + 0.10", "C = 20 + 0.10t", "C = 0.10 + t", "C = 0.10t"],
+    "answerIndex": 1,
+    "steps": [
+      "There is a fixed fee of $20.",
+      "Each text adds $0.10, so the variable part is 0.10t.",
+      "Total cost: C = 20 + 0.10t."
+    ]
+  },
+  {
+    "id": "prealg_11",
+    "skill": "Pre-Algebra",
+    "difficulty": 3,
+    "question": "Solve: 4x − 7 = 2x + 9",
+    "choices": ["7", "8", "9", "10"],
+    "answerIndex": 1,
+    "steps": [
+      "Subtract 2x from both sides: 2x − 7 = 9.",
+      "Add 7 to both sides: 2x = 16.",
+      "Divide by 2: x = 8."
+    ]
+  },
+  {
+    "id": "prealg_12",
+    "skill": "Pre-Algebra",
+    "difficulty": 3,
+    "question": "If 3/4 of a number is 27, what is the number?",
+    "choices": ["20", "24", "32", "36"],
+    "answerIndex": 3,
+    "steps": [
+      "Let the number be x.",
+      "(3/4)x = 27.",
+      "Multiply both sides by 4/3: x = 27 × 4/3.",
+      "27 ÷ 3 = 9, and 9 × 4 = 36."
+    ]
+  },
+  {
+    "id": "prealg_13",
+    "skill": "Pre-Algebra",
+    "difficulty": 3,
+    "question": "Simplify: (2x + 3) + (5x − 8)",
+    "choices": ["7x − 5", "7x + 5", "3x − 5", "3x + 5"],
+    "answerIndex": 0,
+    "steps": [
+      "Remove parentheses: 2x + 3 + 5x − 8.",
+      "Combine x terms: 2x + 5x = 7x.",
+      "Combine constants: 3 − 8 = −5.",
+      "So the result is 7x − 5."
+    ]
+  },
+  {
+    "id": "prealg_14",
+    "skill": "Pre-Algebra",
+    "difficulty": 3,
+    "question": "A car travels 180 miles in 3 hours. At the same rate, how far in 5 hours?",
+    "choices": ["250", "280", "300", "360"],
+    "answerIndex": 2,
+    "steps": [
+      "Find the rate: 180 ÷ 3 = 60 miles per hour.",
+      "Multiply by 5 hours: 60 × 5 = 300.",
+      "So the car travels 300 miles."
+    ]
+  },
+  {
+    "id": "prealg_15",
+    "skill": "Pre-Algebra",
+    "difficulty": 3,
+    "question": "Solve: 2(3x − 1) + 4 = 10",
+    "choices": ["4/3", "1", "2", "3"],
+    "answerIndex": 0,
+    "steps": [
+      "Distribute: 2(3x − 1) = 6x − 2.",
+      "Now add 4: (6x − 2) + 4 = 10 → 6x + 2 = 10.",
+      "Subtract 2: 6x = 8.",
+      "Divide by 6: x = 8/6 = 4/3."
+    ]
+  },
+
+  {
+    "id": "alg1_01",
+    "skill": "Algebra 1",
+    "difficulty": 1,
+    "question": "Solve: x/5 = 7",
+    "choices": ["2", "12", "35", "42"],
+    "answerIndex": 2,
+    "steps": [
+      "Multiply both sides by 5.",
+      "x = 7 × 5 = 35."
+    ]
+  },
+  {
+    "id": "alg1_02",
+    "skill": "Algebra 1",
+    "difficulty": 1,
+    "question": "Simplify: (x^2)(x^3)",
+    "choices": ["x^5", "x^6", "x^9", "x^1"],
+    "answerIndex": 0,
+    "steps": [
+      "When multiplying powers with the same base, add exponents.",
+      "x^2 · x^3 = x^(2+3) = x^5."
+    ]
+  },
+  {
+    "id": "alg1_03",
+    "skill": "Algebra 1",
+    "difficulty": 1,
+    "question": "Solve: 2x − 9 = 1",
+    "choices": ["4", "5", "6", "7"],
+    "answerIndex": 1,
+    "steps": [
+      "Add 9 to both sides: 2x = 10.",
+      "Divide by 2: x = 5."
+    ]
+  },
+  {
+    "id": "alg1_04",
+    "skill": "Algebra 1",
+    "difficulty": 1,
+    "question": "If f(x) = x + 3, find f(10).",
+    "choices": ["7", "10", "13", "30"],
+    "answerIndex": 2,
+    "steps": [
+      "Substitute x = 10.",
+      "f(10) = 10 + 3 = 13."
+    ]
+  },
+  {
+    "id": "alg1_05",
+    "skill": "Algebra 1",
+    "difficulty": 1,
+    "question": "Solve the inequality: x + 4 < 9",
+    "choices": ["x < 5", "x < 13", "x > 5", "x > 13"],
+    "answerIndex": 0,
+    "steps": [
+      "Subtract 4 from both sides.",
+      "x < 9 − 4 = 5."
+    ]
+  },
+  {
+    "id": "alg1_06",
+    "skill": "Algebra 1",
+    "difficulty": 2,
+    "question": "Solve: 3x + 2 = 2x + 11",
+    "choices": ["7", "8", "9", "10"],
+    "answerIndex": 2,
+    "steps": [
+      "Subtract 2x from both sides: x + 2 = 11.",
+      "Subtract 2: x = 9."
+    ]
+  },
+  {
+    "id": "alg1_07",
+    "skill": "Algebra 1",
+    "difficulty": 2,
+    "question": "Solve: x^2 = 49",
+    "choices": ["7", "-7", "7 and -7", "0"],
+    "answerIndex": 2,
+    "steps": [
+      "If x^2 = 49, then x is a number whose square is 49.",
+      "7^2 = 49 and (−7)^2 = 49.",
+      "So x = 7 or x = −7."
+    ]
+  },
+  {
+    "id": "alg1_08",
+    "skill": "Algebra 1",
+    "difficulty": 2,
+    "question": "Factor: x^2 + 7x + 10",
+    "choices": ["(x+5)(x+2)", "(x+10)(x-1)", "(x+7)(x+10)", "(x-5)(x-2)"],
+    "answerIndex": 0,
+    "steps": [
+      "Find two numbers that multiply to 10 and add to 7.",
+      "5 and 2 work because 5×2=10 and 5+2=7.",
+      "So x^2 + 7x + 10 = (x+5)(x+2)."
+    ]
+  },
+  {
+    "id": "alg1_09",
+    "skill": "Algebra 1",
+    "difficulty": 2,
+    "question": "Find the slope between points (2, 3) and (6, 11).",
+    "choices": ["1", "2", "3", "4"],
+    "answerIndex": 1,
+    "steps": [
+      "Use slope formula: m = (y2 − y1)/(x2 − x1).",
+      "m = (11 − 3)/(6 − 2) = 8/4 = 2."
+    ]
+  },
+  {
+    "id": "alg1_10",
+    "skill": "Algebra 1",
+    "difficulty": 2,
+    "question": "Solve: 2(x − 3) = x + 5",
+    "choices": ["8", "9", "10", "11"],
+    "answerIndex": 3,
+    "steps": [
+      "Distribute: 2x − 6 = x + 5.",
+      "Subtract x: x − 6 = 5.",
+      "Add 6: x = 11."
+    ]
+  },
+  {
+    "id": "alg1_11",
+    "skill": "Algebra 1",
+    "difficulty": 3,
+    "question": "Solve the system: y = 2x + 1 and y = -x + 10",
+    "choices": ["(3, 7)", "(2, 5)", "(4, 9)", "(1, 3)"],
+    "answerIndex": 0,
+    "steps": [
+      "Set the equations equal: 2x + 1 = −x + 10.",
+      "Add x to both sides: 3x + 1 = 10.",
+      "Subtract 1: 3x = 9.",
+      "Divide by 3: x = 3.",
+      "Plug in: y = 2(3) + 1 = 7.",
+      "Solution is (3, 7)."
+    ]
+  },
+  {
+    "id": "alg1_12",
+    "skill": "Algebra 1",
+    "difficulty": 3,
+    "question": "Solve: x^2 − 5x = 24",
+    "choices": ["x = 8 or -3", "x = 3 or -8", "x = 4 or -6", "x = 6 or -4"],
+    "answerIndex": 0,
+    "steps": [
+      "Rewrite: x^2 − 5x − 24 = 0.",
+      "Factor: (x − 8)(x + 3) = 0.",
+      "Set each factor to zero: x − 8 = 0 or x + 3 = 0.",
+      "So x = 8 or x = −3."
+    ]
+  },
+  {
+    "id": "alg1_13",
+    "skill": "Algebra 1",
+    "difficulty": 3,
+    "question": "A line has slope -3 and passes through (2, 5). What is its equation in slope-intercept form?",
+    "choices": ["y = -3x + 11", "y = -3x - 11", "y = 3x + 11", "y = 3x - 11"],
+    "answerIndex": 0,
+    "steps": [
+      "Use y = mx + b with m = −3.",
+      "Plug in point (2,5): 5 = −3(2) + b.",
+      "5 = −6 + b, so b = 11.",
+      "Equation: y = −3x + 11."
+    ]
+  },
+  {
+    "id": "alg1_14",
+    "skill": "Algebra 1",
+    "difficulty": 3,
+    "question": "Solve: |x − 4| = 9",
+    "choices": ["x = 13 or -5", "x = 5 or -13", "x = 9 or -9", "x = 4 or -4"],
+    "answerIndex": 0,
+    "steps": [
+      "Absolute value equation splits into two cases.",
+      "Case 1: x − 4 = 9 → x = 13.",
+      "Case 2: x − 4 = −9 → x = −5.",
+      "So x = 13 or x = −5."
+    ]
+  },
+  {
+    "id": "alg1_15",
+    "skill": "Algebra 1",
+    "difficulty": 3,
+    "question": "If g(x) = 2x^2 − 3x + 1, find g(-2).",
+    "choices": ["3", "9", "15", "19"],
+    "answerIndex": 2,
+    "steps": [
+      "Substitute x = −2.",
+      "g(−2) = 2(−2)^2 − 3(−2) + 1.",
+      "(−2)^2 = 4, so 2·4 = 8.",
+      "−3(−2) = +6.",
+      "8 + 6 + 1 = 15."
+    ]
+  },
+
+  {
+    "id": "geom_01",
+    "skill": "Geometry",
+    "difficulty": 1,
+    "question": "What is the sum of the interior angles of a triangle?",
+    "choices": ["90°", "180°", "270°", "360°"],
+    "answerIndex": 1,
+    "steps": [
+      "A basic geometry fact: interior angles of any triangle add to 180°.",
+      "So the sum is 180°."
+    ]
+  },
+  {
+    "id": "geom_02",
+    "skill": "Geometry",
+    "difficulty": 1,
+    "question": "A right triangle has legs 3 and 4. What is the hypotenuse?",
+    "choices": ["5", "6", "7", "8"],
+    "answerIndex": 0,
+    "steps": [
+      "Use Pythagorean theorem: a^2 + b^2 = c^2.",
+      "3^2 + 4^2 = 9 + 16 = 25.",
+      "c = √25 = 5."
+    ]
+  },
+  {
+    "id": "geom_03",
+    "skill": "Geometry",
+    "difficulty": 1,
+    "question": "What is the area of a triangle with base 10 and height 6?",
+    "choices": ["16", "30", "60", "120"],
+    "answerIndex": 1,
+    "steps": [
+      "Area of a triangle = (1/2)bh.",
+      "(1/2)·10·6 = 5·6 = 30."
+    ]
+  },
+  {
+    "id": "geom_04",
+    "skill": "Geometry",
+    "difficulty": 1,
+    "question": "What is the circumference of a circle with radius 5? (Use π ≈ 3.14)",
+    "choices": ["15.7", "31.4", "78.5", "157"],
+    "answerIndex": 1,
+    "steps": [
+      "Circumference C = 2πr.",
+      "C = 2(3.14)(5) = 31.4."
+    ]
+  },
+  {
+    "id": "geom_05",
+    "skill": "Geometry",
+    "difficulty": 1,
+    "question": "Two angles are complementary. One angle is 35°. What is the other?",
+    "choices": ["45°", "55°", "65°", "145°"],
+    "answerIndex": 1,
+    "steps": [
+      "Complementary angles add to 90°.",
+      "Other angle = 90° − 35° = 55°."
+    ]
+  },
+  {
+    "id": "geom_06",
+    "skill": "Geometry",
+    "difficulty": 2,
+    "question": "A rectangle has perimeter 50 and length 15. What is its width?",
+    "choices": ["5", "10", "15", "20"],
+    "answerIndex": 1,
+    "steps": [
+      "Perimeter P = 2(L + W).",
+      "50 = 2(15 + W).",
+      "Divide by 2: 25 = 15 + W.",
+      "Subtract 15: W = 10."
+    ]
+  },
+  {
+    "id": "geom_07",
+    "skill": "Geometry",
+    "difficulty": 2,
+    "question": "Find the area of a circle with radius 6. (Use π ≈ 3.14)",
+    "choices": ["37.68", "75.36", "113.04", "226.08"],
+    "answerIndex": 2,
+    "steps": [
+      "Area A = πr^2.",
+      "r^2 = 36.",
+      "A = 3.14 × 36 = 113.04."
+    ]
+  },
+  {
+    "id": "geom_08",
+    "skill": "Geometry",
+    "difficulty": 2,
+    "question": "A triangle has angles 40° and 65°. What is the third angle?",
+    "choices": ["55°", "65°", "75°", "85°"],
+    "answerIndex": 2,
+    "steps": [
+      "Angles in a triangle sum to 180°.",
+      "Third angle = 180 − (40 + 65) = 180 − 105 = 75°."
+    ]
+  },
+  {
+    "id": "geom_09",
+    "skill": "Geometry",
+    "difficulty": 2,
+    "question": "In a right triangle, one acute angle is 28°. What is the other acute angle?",
+    "choices": ["52°", "62°", "72°", "152°"],
+    "answerIndex": 1,
+    "steps": [
+      "A right triangle has one 90° angle.",
+      "The two acute angles add to 90°.",
+      "Other acute angle = 90° − 28° = 62°.",
+      "Re-check choices: 62° is listed.",
+      "So the answer is 62°."
+    ]
+  },
+  {
+    "id": "geom_10",
+    "skill": "Geometry",
+    "difficulty": 2,
+    "question": "A line intersects another line forming a linear pair. One angle is 118°. What is the other?",
+    "choices": ["52°", "62°", "118°", "242°"],
+    "answerIndex": 1,
+    "steps": [
+      "A linear pair sums to 180°.",
+      "Other angle = 180° − 118° = 62°."
+    ]
+  },
+  {
+    "id": "geom_11",
+    "skill": "Geometry",
+    "difficulty": 3,
+    "question": "Find the distance between points (−1, 2) and (5, 10).",
+    "choices": ["8", "10", "\u221a100", "\u221a52"],
+    "answerIndex": 2,
+    "steps": [
+      "Use distance formula: d = √((x2−x1)^2 + (y2−y1)^2).",
+      "Δx = 5 − (−1) = 6 and Δy = 10 − 2 = 8.",
+      "d = √(6^2 + 8^2) = √(36 + 64) = √100.",
+      "√100 = 10."
+    ]
+  },
+  {
+    "id": "geom_12",
+    "skill": "Geometry",
+    "difficulty": 3,
+    "question": "A cylinder has radius 3 and height 10. What is its volume? (Use π ≈ 3.14)",
+    "choices": ["94.2", "188.4", "282.6", "942"],
+    "answerIndex": 2,
+    "steps": [
+      "Volume of a cylinder: V = πr^2h.",
+      "r^2 = 9.",
+      "V = 3.14 × 9 × 10 = 3.14 × 90 = 282.6."
+    ]
+  },
+  {
+    "id": "geom_13",
+    "skill": "Geometry",
+    "difficulty": 3,
+    "question": "Two similar triangles have side ratio 3:5. If the smaller triangle’s area is 27, what is the larger triangle’s area?",
+    "choices": ["45", "75", "81", "125"],
+    "answerIndex": 1,
+    "steps": [
+      "For similar figures, areas scale by the square of the side ratio.",
+      "Side ratio small:large = 3:5, so area ratio = 3^2:5^2 = 9:25.",
+      "If 27 corresponds to 9 parts, then 1 part = 27/9 = 3.",
+      "Larger area = 25 parts = 25 × 3 = 75."
+    ]
+  },
+  {
+    "id": "geom_14",
+    "skill": "Geometry",
+    "difficulty": 3,
+    "question": "Find the area of a sector with central angle 60° in a circle of radius 12. (Use π ≈ 3.14)",
+    "choices": ["75.36", "94.2", "150.72", "226.08"],
+    "answerIndex": 0,
+    "steps": [
+      "Sector area = (θ/360) × πr^2.",
+      "πr^2 = 3.14 × 12^2 = 3.14 × 144 = 452.16.",
+      "θ/360 = 60/360 = 1/6.",
+      "Sector area = 452.16 ÷ 6 = 75.36."
+    ]
+  },
+  {
+    "id": "geom_15",
+    "skill": "Geometry",
+    "difficulty": 3,
+    "question": "In a triangle, sides are 7, 8, and 9. Is it a right triangle?",
+    "choices": ["Yes", "No", "Only if angles are acute", "Not enough information"],
+    "answerIndex": 1,
+    "steps": [
+      "For a right triangle, a^2 + b^2 must equal c^2 (with c the largest side).",
+      "Largest side is 9.",
+      "Compute: 7^2 + 8^2 = 49 + 64 = 113.",
+      "Compute: 9^2 = 81.",
+      "Since 113 ≠ 81, it is not a right triangle."
+    ]
+  },
+
+  {
+    "id": "alg2_01",
+    "skill": "Algebra 2",
+    "difficulty": 1,
+    "question": "Simplify: (x^4)/(x^2)",
+    "choices": ["x^2", "x^6", "x^8", "1/x^2"],
+    "answerIndex": 0,
+    "steps": [
+      "When dividing powers with the same base, subtract exponents.",
+      "x^4 / x^2 = x^(4−2) = x^2."
+    ]
+  },
+  {
+    "id": "alg2_02",
+    "skill": "Algebra 2",
+    "difficulty": 1,
+    "question": "Solve: x^2 − 16 = 0",
+    "choices": ["x = 4", "x = -4", "x = ±4", "x = 16"],
+    "answerIndex": 2,
+    "steps": [
+      "x^2 − 16 = 0 means x^2 = 16.",
+      "So x = 4 or x = −4.",
+      "Thus x = ±4."
+    ]
+  },
+  {
+    "id": "alg2_03",
+    "skill": "Algebra 2",
+    "difficulty": 1,
+    "question": "Find the y-intercept of y = 5x − 3",
+    "choices": ["-3", "3", "5", "0"],
+    "answerIndex": 0,
+    "steps": [
+      "The y-intercept is the value of y when x = 0.",
+      "y = 5(0) − 3 = −3.",
+      "So the y-intercept is −3."
+    ]
+  },
+  {
+    "id": "alg2_04",
+    "skill": "Algebra 2",
+    "difficulty": 1,
+    "question": "Simplify: (2x)(3x^2)",
+    "choices": ["5x^3", "6x^3", "6x^4", "x^4"],
+    "answerIndex": 1,
+    "steps": [
+      "Multiply coefficients: 2 × 3 = 6.",
+      "Multiply x terms: x · x^2 = x^3.",
+      "So (2x)(3x^2) = 6x^3."
+    ]
+  },
+  {
+    "id": "alg2_05",
+    "skill": "Algebra 2",
+    "difficulty": 1,
+    "question": "Solve: 2^x = 8",
+    "choices": ["2", "3", "4", "8"],
+    "answerIndex": 1,
+    "steps": [
+      "Rewrite 8 as a power of 2: 8 = 2^3.",
+      "So 2^x = 2^3.",
+      "Therefore x = 3."
+    ]
+  },
+  {
+    "id": "alg2_06",
+    "skill": "Algebra 2",
+    "difficulty": 2,
+    "question": "Solve: x^2 + 4x + 1 = 0 (nearest hundredth)",
+    "choices": ["x ≈ -3.73 or -0.27", "x ≈ 3.73 or 0.27", "x ≈ -4.00 or 1.00", "x ≈ -2.00 or -2.00"],
+    "answerIndex": 0,
+    "steps": [
+      "Use quadratic formula: x = (−b ± √(b^2 − 4ac)) / (2a).",
+      "Here a=1, b=4, c=1.",
+      "Discriminant: b^2 − 4ac = 16 − 4 = 12.",
+      "√12 ≈ 3.464.",
+      "x = (−4 ± 3.464)/2.",
+      "x ≈ (−0.536)/2 = −0.268 and x ≈ (−7.464)/2 = −3.732.",
+      "Nearest hundredth: x ≈ −0.27 or x ≈ −3.73."
+    ]
+  },
+  {
+    "id": "alg2_07",
+    "skill": "Algebra 2",
+    "difficulty": 2,
+    "question": "Simplify: (x^2 − 9)/(x − 3)",
+    "choices": ["x − 3", "x + 3", "x^2 − 3", "x^2 + 3"],
+    "answerIndex": 1,
+    "steps": [
+      "Factor the numerator: x^2 − 9 = (x−3)(x+3).",
+      "Cancel (x−3) with the denominator (for x ≠ 3).",
+      "Result is x + 3."
+    ]
+  },
+  {
+    "id": "alg2_08",
+    "skill": "Algebra 2",
+    "difficulty": 2,
+    "question": "If f(x) = 3x − 2 and g(x) = x^2, find (g ∘ f)(x).",
+    "choices": ["(3x − 2)^2", "3x^2 − 2", "x^2 − 6x + 4", "9x^2 − 4"],
+    "answerIndex": 0,
+    "steps": [
+      "(g ∘ f)(x) means g(f(x)).",
+      "First compute f(x) = 3x − 2.",
+      "Then g(u) = u^2, so g(f(x)) = (3x − 2)^2."
+    ]
+  },
+  {
+    "id": "alg2_09",
+    "skill": "Algebra 2",
+    "difficulty": 2,
+    "question": "Solve: log10(1000) = ?",
+    "choices": ["2", "3", "10", "100"],
+    "answerIndex": 1,
+    "steps": [
+      "log10(1000) asks: 10 to what power equals 1000?",
+      "10^3 = 1000.",
+      "So log10(1000) = 3."
+    ]
+  },
+  {
+    "id": "alg2_10",
+    "skill": "Algebra 2",
+    "difficulty": 2,
+    "question": "Solve: 3^(x+1) = 81",
+    "choices": ["2", "3", "4", "5"],
+    "answerIndex": 1,
+    "steps": [
+      "Rewrite 81 as a power of 3: 81 = 3^4.",
+      "So 3^(x+1) = 3^4.",
+      "Therefore x + 1 = 4.",
+      "So x = 3."
+    ]
+  },
+  {
+    "id": "alg2_11",
+    "skill": "Algebra 2",
+    "difficulty": 3,
+    "question": "Find the inverse of f(x) = (x − 5)/2",
+    "choices": ["f^{-1}(x) = 2x + 5", "f^{-1}(x) = (x − 5)/2", "f^{-1}(x) = 2x − 5", "f^{-1}(x) = (x + 5)/2"],
+    "answerIndex": 0,
+    "steps": [
+      "Let y = (x − 5)/2.",
+      "Swap x and y: x = (y − 5)/2.",
+      "Multiply by 2: 2x = y − 5.",
+      "Add 5: y = 2x + 5.",
+      "So f^{-1}(x) = 2x + 5."
+    ]
+  },
+  {
+    "id": "alg2_12",
+    "skill": "Algebra 2",
+    "difficulty": 3,
+    "question": "Solve: x^3 − 4x^2 − x + 4 = 0",
+    "choices": ["x = -1, 1, 4", "x = -4, 1, 4", "x = -1, 2, 2", "x = 0, 1, 4"],
+    "answerIndex": 0,
+    "steps": [
+      "Group terms: (x^3 − 4x^2) + (−x + 4).",
+      "Factor each group: x^2(x − 4) − 1(x − 4).",
+      "Factor out (x − 4): (x − 4)(x^2 − 1).",
+      "Factor x^2 − 1: (x − 1)(x + 1).",
+      "So solutions are x = 4, x = 1, x = −1."
+    ]
+  },
+  {
+    "id": "alg2_13",
+    "skill": "Algebra 2",
+    "difficulty": 3,
+    "question": "Solve: 2/(x − 1) + 3/(x + 1) = 1",
+    "choices": ["x = 0 or x = 5", "x = 1 or x = -1", "x = -5 or x = 5", "x = 0 only"],
+    "answerIndex": 0,
+    "steps": [
+      "Multiply both sides by (x−1)(x+1).",
+      "2(x+1) + 3(x−1) = 1(x^2 − 1).",
+      "Expand left: 2x+2 + 3x−3 = 5x − 1.",
+      "So 5x − 1 = x^2 − 1.",
+      "Add 1 to both sides: 5x = x^2.",
+      "Rearrange: x^2 − 5x = 0.",
+      "Factor: x(x − 5) = 0.",
+      "So x = 0 or x = 5 (both keep denominators nonzero)."
+    ]
+  },
+  {
+    "id": "alg2_14",
+    "skill": "Algebra 2",
+    "difficulty": 3,
+    "question": "Write 0.503503503... as a fraction in simplest form.",
+    "choices": ["5/99", "53/99", "503/999", "1/19"],
+    "answerIndex": 2,
+    "steps": [
+      "Let x = 0.503503503...",
+      "Multiply by 1000 (3 repeating digits): 1000x = 503.503503...",
+      "Subtract: 1000x − x = 503.503503... − 0.503503...",
+      "999x = 503.",
+      "x = 503/999.",
+      "503 and 999 share no common factor > 1, so it’s simplest."
+    ]
+  },
+  {
+    "id": "alg2_15",
+    "skill": "Algebra 2",
+    "difficulty": 3,
+    "question": "Given f(x)=x^2+2x and h(x)=x−3, simplify f(h(x)).",
+    "choices": ["x^2 − 4x + 3", "x^2 − 4x + 9", "x^2 + 4x + 3", "x^2 + 4x + 9"],
+    "answerIndex": 0,
+    "steps": [
+      "Compute h(x) = x − 3.",
+      "Substitute into f: f(h(x)) = (x−3)^2 + 2(x−3).",
+      "Expand: (x−3)^2 = x^2 − 6x + 9.",
+      "Add 2(x−3) = 2x − 6.",
+      "Combine: x^2 − 6x + 9 + 2x − 6 = x^2 − 4x + 3."
+    ]
+  },
+
+  {
+    "id": "precalc_01",
+    "skill": "Precalculus",
+    "difficulty": 1,
+    "question": "Convert 150° to radians.",
+    "choices": ["5\u03c0/6", "3\u03c0/4", "2\u03c0/3", "\u03c0/6"],
+    "answerIndex": 0,
+    "steps": [
+      "Use radians = degrees × (\u03c0/180).",
+      "150 × (\u03c0/180) = (150/180)\u03c0 = (5/6)\u03c0.",
+      "So 150° = 5\u03c0/6."
+    ]
+  },
+  {
+    "id": "precalc_02",
+    "skill": "Precalculus",
+    "difficulty": 1,
+    "question": "Evaluate: sin(\u03c0/2)",
+    "choices": ["0", "1", "-1", "\u221a2/2"],
+    "answerIndex": 1,
+    "steps": [
+      "On the unit circle, \u03c0/2 corresponds to the point (0,1).",
+      "Sine is the y-coordinate.",
+      "So sin(\u03c0/2) = 1."
+    ]
+  },
+  {
+    "id": "precalc_03",
+    "skill": "Precalculus",
+    "difficulty": 1,
+    "question": "Find the domain of f(x) = 1/(x − 4).",
+    "choices": ["All real numbers", "x \u2260 4", "x \u2265 4", "x \u2264 4"],
+    "answerIndex": 1,
+    "steps": [
+      "A rational function is undefined when the denominator is 0.",
+      "x − 4 = 0 when x = 4.",
+      "So the domain is all real numbers except 4 (x \u2260 4)."
+    ]
+  },
+  {
+    "id": "precalc_04",
+    "skill": "Precalculus",
+    "difficulty": 1,
+    "question": "Simplify: log_a(a^7)",
+    "choices": ["7", "a", "a^7", "1/7"],
+    "answerIndex": 0,
+    "steps": [
+      "log_a(a^k) = k (for a>0, a≠1).",
+      "So log_a(a^7) = 7."
+    ]
+  },
+  {
+    "id": "precalc_05",
+    "skill": "Precalculus",
+    "difficulty": 1,
+    "question": "If f(x) = x^2 and x = -3, find f(x).",
+    "choices": ["-9", "0", "9", "-3"],
+    "answerIndex": 2,
+    "steps": [
+      "Substitute x = −3 into f(x) = x^2.",
+      "f(−3) = (−3)^2 = 9."
+    ]
+  },
+  {
+    "id": "precalc_06",
+    "skill": "Precalculus",
+    "difficulty": 2,
+    "question": "Solve: 2sin(\u03b8) = 1 for 0 \u2264 \u03b8 < 2\u03c0",
+    "choices": ["\u03b8 = \u03c0/6, 5\u03c0/6", "\u03b8 = \u03c0/3, 2\u03c0/3", "\u03b8 = \u03c0/4, 3\u03c0/4", "\u03b8 = \u03c0/2, 3\u03c0/2"],
+    "answerIndex": 0,
+    "steps": [
+      "2sin(\u03b8)=1 means sin(\u03b8)=1/2.",
+      "On the unit circle, sin is 1/2 at \u03b8 = \u03c0/6 and 5\u03c0/6.",
+      "So \u03b8 = \u03c0/6, 5\u03c0/6."
+    ]
+  },
+  {
+    "id": "precalc_07",
+    "skill": "Precalculus",
+    "difficulty": 2,
+    "question": "Find the amplitude of y = 3cos(x).",
+    "choices": ["1", "2", "3", "6"],
+    "answerIndex": 2,
+    "steps": [
+      "For y = A cos(x), amplitude is |A|.",
+      "Here A = 3.",
+      "Amplitude = 3."
+    ]
+  },
+  {
+    "id": "precalc_08",
+    "skill": "Precalculus",
+    "difficulty": 2,
+    "question": "Solve: e^x = 20 (nearest hundredth)",
+    "choices": ["x \u2248 2.30", "x \u2248 3.00", "x \u2248 3.46", "x \u2248 20.00"],
+    "answerIndex": 1,
+    "steps": [
+      "Take natural log of both sides.",
+      "x = ln(20).",
+      "ln(20) \u2248 2.9957.",
+      "Nearest hundredth: x \u2248 3.00."
+    ]
+  },
+  {
+    "id": "precalc_09",
+    "skill": "Precalculus",
+    "difficulty": 2,
+    "question": "Find the period of y = sin(2x).",
+    "choices": ["\u03c0", "2\u03c0", "\u03c0/2", "4\u03c0"],
+    "answerIndex": 0,
+    "steps": [
+      "For y = sin(bx), period = 2\u03c0/|b|.",
+      "Here b = 2.",
+      "Period = 2\u03c0/2 = \u03c0."
+    ]
+  },
+  {
+    "id": "precalc_10",
+    "skill": "Precalculus",
+    "difficulty": 2,
+    "question": "Simplify: (1 − cos^2 x)",
+    "choices": ["sin^2 x", "cos^2 x", "tan^2 x", "1"],
+    "answerIndex": 0,
+    "steps": [
+      "Use the Pythagorean identity: sin^2 x + cos^2 x = 1.",
+      "Rearrange: 1 − cos^2 x = sin^2 x."
+    ]
+  },
+  {
+    "id": "precalc_11",
+    "skill": "Precalculus",
+    "difficulty": 3,
+    "question": "Solve: 2cos(\u03b8) + 1 = 0 for 0 \u2264 \u03b8 < 2\u03c0",
+    "choices": ["\u03b8 = 2\u03c0/3, 4\u03c0/3", "\u03b8 = \u03c0/3, 5\u03c0/3", "\u03b8 = \u03c0/6, 11\u03c0/6", "\u03b8 = \u03c0/2, 3\u03c0/2"],
+    "answerIndex": 0,
+    "steps": [
+      "2cos(\u03b8)+1=0 means cos(\u03b8) = −1/2.",
+      "Cosine is −1/2 at \u03b8 = 2\u03c0/3 and 4\u03c0/3.",
+      "So \u03b8 = 2\u03c0/3, 4\u03c0/3."
+    ]
+  },
+  {
+    "id": "precalc_12",
+    "skill": "Precalculus",
+    "difficulty": 3,
+    "question": "Find the exact value of tan(225°).",
+    "choices": ["-1", "0", "1", "\u221a3"],
+    "answerIndex": 2,
+    "steps": [
+      "225° = 180° + 45° (Quadrant III).",
+      "In Quadrant III, tan is positive.",
+      "tan(45°)=1, so tan(225°)=1."
+    ]
+  },
+  {
+    "id": "precalc_13",
+    "skill": "Precalculus",
+    "difficulty": 3,
+    "question": "Given f(x)=\u221a(x+1), find f^{-1}(x).",
+    "choices": ["x^2 − 1", "(x − 1)^2", "x^2 + 1", "\u221ax − 1"],
+    "answerIndex": 0,
+    "steps": [
+      "Let y = \u221a(x+1).",
+      "Square both sides: y^2 = x + 1.",
+      "Solve for x: x = y^2 − 1.",
+      "Swap variables: f^{-1}(x) = x^2 − 1."
+    ]
+  },
+  {
+    "id": "precalc_14",
+    "skill": "Precalculus",
+    "difficulty": 3,
+    "question": "Solve: 2^{2x} = 32",
+    "choices": ["x = 5/2", "x = 2", "x = 1/2", "x = 3"],
+    "answerIndex": 0,
+    "steps": [
+      "Rewrite 32 as a power of 2: 32 = 2^5.",
+      "So 2^{2x} = 2^5.",
+      "Equate exponents: 2x = 5.",
+      "x = 5/2."
+    ]
+  },
+  {
+    "id": "precalc_15",
+    "skill": "Precalculus",
+    "difficulty": 3,
+    "question": "Find the horizontal asymptote of f(x) = (3x^2 + 1)/(x^2 − 4).",
+    "choices": ["y = 0", "y = 3", "y = 1/3", "No horizontal asymptote"],
+    "answerIndex": 1,
+    "steps": [
+      "Degrees of numerator and denominator are equal (both 2).",
+      "Horizontal asymptote is ratio of leading coefficients: 3/1 = 3.",
+      "So the horizontal asymptote is y = 3."
+    ]
+  },
+
+  {
+    "id": "calc_01",
+    "skill": "Calculus",
+    "difficulty": 1,
+    "question": "Evaluate: lim_{x\u21922} (x + 5)",
+    "choices": ["5", "7", "10", "12"],
+    "answerIndex": 1,
+    "steps": [
+      "This function is continuous, so substitute x = 2.",
+      "2 + 5 = 7.",
+      "So the limit is 7."
+    ]
+  },
+  {
+    "id": "calc_02",
+    "skill": "Calculus",
+    "difficulty": 1,
+    "question": "Find d/dx of x^3.",
+    "choices": ["x^2", "2x", "3x^2", "3x"],
+    "answerIndex": 2,
+    "steps": [
+      "Use the power rule: d/dx(x^n) = n x^{n−1}.",
+      "Here n=3.",
+      "Derivative is 3x^2."
+    ]
+  },
+  {
+    "id": "calc_03",
+    "skill": "Calculus",
+    "difficulty": 1,
+    "question": "Find d/dx of 5x.",
+    "choices": ["0", "5", "x", "5x"],
+    "answerIndex": 1,
+    "steps": [
+      "Derivative of ax is a.",
+      "So d/dx(5x) = 5."
+    ]
+  },
+  {
+    "id": "calc_04",
+    "skill": "Calculus",
+    "difficulty": 1,
+    "question": "Evaluate: \u222b 3 dx",
+    "choices": ["3x + C", "x^3 + C", "3 + C", "1/x + C"],
+    "answerIndex": 0,
+    "steps": [
+      "Integral of a constant k is kx + C.",
+      "So \u222b 3 dx = 3x + C."
+    ]
+  },
+  {
+    "id": "calc_05",
+    "skill": "Calculus",
+    "difficulty": 1,
+    "question": "Evaluate: \u222b x dx",
+    "choices": ["x^2 + C", "(1/2)x^2 + C", "ln|x| + C", "1/x + C"],
+    "answerIndex": 1,
+    "steps": [
+      "Use the power rule for integrals: \u222b x^n dx = x^{n+1}/(n+1) + C.",
+      "Here n = 1.",
+      "\u222b x dx = x^2/2 + C."
+    ]
+  },
+  {
+    "id": "calc_06",
+    "skill": "Calculus",
+    "difficulty": 2,
+    "question": "Evaluate: lim_{x\u21923} (x^2 − 9)/(x − 3)",
+    "choices": ["0", "3", "6", "9"],
+    "answerIndex": 2,
+    "steps": [
+      "Direct substitution gives 0/0, so factor.",
+      "x^2 − 9 = (x−3)(x+3).",
+      "Cancel (x−3) with denominator (x\u22603).",
+      "Limit becomes lim_{x\u21923} (x+3) = 6."
+    ]
+  },
+  {
+    "id": "calc_07",
+    "skill": "Calculus",
+    "difficulty": 2,
+    "question": "Find d/dx of (x^2 + 4x + 1).",
+    "choices": ["2x + 4", "2x + 1", "x^2 + 4", "2x + 4x"],
+    "answerIndex": 0,
+    "steps": [
+      "Differentiate term-by-term.",
+      "d/dx(x^2) = 2x.",
+      "d/dx(4x) = 4.",
+      "d/dx(1) = 0.",
+      "So derivative is 2x + 4."
+    ]
+  },
+  {
+    "id": "calc_08",
+    "skill": "Calculus",
+    "difficulty": 2,
+    "question": "Find d/dx of (x^2)(x^3).",
+    "choices": ["5x^4", "x^5", "6x^5", "5x^6"],
+    "answerIndex": 0,
+    "steps": [
+      "First simplify: (x^2)(x^3) = x^5.",
+      "Now differentiate: d/dx(x^5) = 5x^4.",
+      "So the derivative is 5x^4."
+    ]
+  },
+  {
+    "id": "calc_09",
+    "skill": "Calculus",
+    "difficulty": 2,
+    "question": "Evaluate: \u222b 2x dx",
+    "choices": ["x^2 + C", "2x^2 + C", "x + C", "ln|x| + C"],
+    "answerIndex": 0,
+    "steps": [
+      "Use power rule for integrals.",
+      "\u222b 2x dx = 2 \u222b x dx = 2(x^2/2) + C = x^2 + C."
+    ]
+  },
+  {
+    "id": "calc_10",
+    "skill": "Calculus",
+    "difficulty": 2,
+    "question": "Evaluate: \u222b (6x^2) dx",
+    "choices": ["2x^3 + C", "6x^3 + C", "3x^2 + C", "x^6 + C"],
+    "answerIndex": 0,
+    "steps": [
+      "\u222b 6x^2 dx = 6 \u222b x^2 dx.",
+      "\u222b x^2 dx = x^3/3.",
+      "So 6(x^3/3) = 2x^3 + C."
+    ]
+  },
+  {
+    "id": "calc_11",
+    "skill": "Calculus",
+    "difficulty": 3,
+    "question": "Find d/dx of (x^3 − 2x) / x.",
+    "choices": ["2", "2x", "2x − 2/x", "2x + 2/x"],
+    "answerIndex": 1,
+    "steps": [
+      "Simplify first: (x^3 − 2x)/x = x^2 − 2.",
+      "Differentiate: d/dx(x^2 − 2) = 2x.",
+      "So the derivative is 2x."
+    ]
+  },
+  {
+    "id": "calc_12",
+    "skill": "Calculus",
+    "difficulty": 3,
+    "question": "Evaluate: lim_{x\u21920} (sin x)/x",
+    "choices": ["0", "1", "Does not exist", "\u221e"],
+    "answerIndex": 1,
+    "steps": [
+      "This is a standard trig limit.",
+      "lim_{x\u21920} (sin x)/x = 1."
+    ]
+  },
+  {
+    "id": "calc_13",
+    "skill": "Calculus",
+    "difficulty": 3,
+    "question": "Find \u222b (1/x) dx",
+    "choices": ["x + C", "ln|x| + C", "1/x^2 + C", "e^x + C"],
+    "answerIndex": 1,
+    "steps": [
+      "The derivative of ln|x| is 1/x.",
+      "So \u222b (1/x) dx = ln|x| + C."
+    ]
+  },
+  {
+    "id": "calc_14",
+    "skill": "Calculus",
+    "difficulty": 3,
+    "question": "Find d/dx of sin(x).",
+    "choices": ["cos(x)", "-cos(x)", "sin(x)", "-sin(x)"],
+    "answerIndex": 0,
+    "steps": [
+      "A basic derivative rule: d/dx(sin x) = cos x.",
+      "So the derivative is cos(x)."
+    ]
+  },
+  {
+    "id": "calc_15",
+    "skill": "Calculus",
+    "difficulty": 3,
+    "question": "Evaluate: \u222b cos(x) dx",
+    "choices": ["sin(x) + C", "-sin(x) + C", "cos(x) + C", "-cos(x) + C"],
+    "answerIndex": 0,
+    "steps": [
+      "Since d/dx(sin x) = cos x, the integral reverses that.",
+      "\u222b cos(x) dx = sin(x) + C."
+    ]
   }
 ]

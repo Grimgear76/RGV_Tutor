@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../app_state.dart';
@@ -69,6 +70,31 @@ class _PracticeScreenState extends State<PracticeScreen> with SingleTickerProvid
     });
   }
 
+  bool _looksLikeMath(String text) {
+    return text.contains('∫') ||
+        text.contains('lim') ||
+        text.contains('π') ||
+        text.contains('→') ||
+        text.contains('^') ||
+        text.contains('_') ||
+        text.contains('sin') ||
+        text.contains('cos') ||
+        text.contains('tan') ||
+        text.contains('ln') ||
+        text.contains('e^') ||
+        text.contains('d/dx');
+  }
+
+  TextStyle _problemTextStyle(BuildContext context, String text) {
+    final base = Theme.of(context).textTheme.titleLarge?.copyWith(
+          fontWeight: FontWeight.w900,
+          height: 1.25,
+        );
+
+    if (!_looksLikeMath(text)) return base ?? const TextStyle();
+    return GoogleFonts.robotoMono(textStyle: base);
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = context.watch<AppState>();
@@ -90,176 +116,189 @@ class _PracticeScreenState extends State<PracticeScreen> with SingleTickerProvid
           children: [
             Padding(
               padding: const EdgeInsets.all(18),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  XpBar(value: state.levelProgress, level: state.level),
-                  const SizedBox(height: 16),
-                  Row(
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final maxQuestionHeight = (constraints.maxHeight * 0.30).clamp(140.0, 240.0);
+
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: Text(
-                          problem.skill,
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                fontWeight: FontWeight.w800,
-                              ),
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(999),
-                          color: Theme.of(context).colorScheme.secondaryContainer,
-                        ),
-                        child: Text(
-                          'Difficulty ${problem.difficulty}',
-                          style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                                fontWeight: FontWeight.w800,
-                              ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 14),
-                  AnimatedBuilder(
-                    animation: _shakeAnim,
-                    builder: (context, child) {
-                      return Transform.translate(
-                        offset: Offset(_shakeAnim.value, 0),
-                        child: child,
-                      );
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(18),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surfaceContainerHighest,
-                        borderRadius: BorderRadius.circular(22),
-                      ),
-                      child: Text(
-                        problem.question,
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              fontWeight: FontWeight.w900,
+                      XpBar(value: state.levelProgress, level: state.level),
+                      const SizedBox(height: 16),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              problem.skill,
+                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    fontWeight: FontWeight.w800,
+                                  ),
                             ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 14),
-                  Expanded(
-                    child: ListView.separated(
-                      itemCount: problem.choices.length,
-                      separatorBuilder: (_, __) => const SizedBox(height: 10),
-                      itemBuilder: (context, idx) {
-                        final selected = _selected == idx;
-                        final isCorrectChoice = idx == problem.answerIndex;
-                        final showCorrect = answered && isCorrectChoice;
-                        final showWrong = answered && selected && !isCorrectChoice;
-
-                        Color? bg;
-                        Color? fg;
-                        if (showCorrect) {
-                          bg = Theme.of(context).colorScheme.primaryContainer;
-                          fg = Theme.of(context).colorScheme.onPrimaryContainer;
-                        } else if (showWrong) {
-                          bg = Theme.of(context).colorScheme.errorContainer;
-                          fg = Theme.of(context).colorScheme.onErrorContainer;
-                        } else if (selected) {
-                          bg = Theme.of(context).colorScheme.secondaryContainer;
-                          fg = Theme.of(context).colorScheme.onSecondaryContainer;
-                        }
-
-                        return InkWell(
-                          borderRadius: BorderRadius.circular(18),
-                          onTap: () => _onChoiceTap(state, idx),
-                          child: Ink(
-                            padding: const EdgeInsets.all(16),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                             decoration: BoxDecoration(
-                              color: bg ?? Theme.of(context).colorScheme.surfaceContainerHighest,
-                              borderRadius: BorderRadius.circular(18),
-                              border: Border.all(
-                                color: selected
-                                    ? Theme.of(context).colorScheme.primary.withOpacity(0.4)
-                                    : Colors.transparent,
-                              ),
+                              borderRadius: BorderRadius.circular(999),
+                              color: Theme.of(context).colorScheme.secondaryContainer,
                             ),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    problem.choices[idx],
-                                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            child: Text(
+                              'Difficulty ${problem.difficulty}',
+                              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 14),
+                      AnimatedBuilder(
+                        animation: _shakeAnim,
+                        builder: (context, child) {
+                          return Transform.translate(
+                            offset: Offset(_shakeAnim.value, 0),
+                            child: child,
+                          );
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          constraints: BoxConstraints(maxHeight: maxQuestionHeight),
+                          padding: const EdgeInsets.all(18),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                            borderRadius: BorderRadius.circular(22),
+                          ),
+                          child: SingleChildScrollView(
+                            child: Text(
+                              problem.question,
+                              textAlign: TextAlign.start,
+                              style: _problemTextStyle(context, problem.question),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 14),
+                      Expanded(
+                        child: ListView.separated(
+                          itemCount: problem.choices.length,
+                          separatorBuilder: (_, __) => const SizedBox(height: 10),
+                          itemBuilder: (context, idx) {
+                            final selected = _selected == idx;
+                            final isCorrectChoice = idx == problem.answerIndex;
+                            final showCorrect = answered && isCorrectChoice;
+                            final showWrong = answered && selected && !isCorrectChoice;
+
+                            Color? bg;
+                            Color? fg;
+                            if (showCorrect) {
+                              bg = Theme.of(context).colorScheme.primaryContainer;
+                              fg = Theme.of(context).colorScheme.onPrimaryContainer;
+                            } else if (showWrong) {
+                              bg = Theme.of(context).colorScheme.errorContainer;
+                              fg = Theme.of(context).colorScheme.onErrorContainer;
+                            } else if (selected) {
+                              bg = Theme.of(context).colorScheme.secondaryContainer;
+                              fg = Theme.of(context).colorScheme.onSecondaryContainer;
+                            }
+
+                            final choice = problem.choices[idx];
+
+                            return InkWell(
+                              borderRadius: BorderRadius.circular(18),
+                              onTap: () => _onChoiceTap(state, idx),
+                              child: Ink(
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  color: bg ?? Theme.of(context).colorScheme.surfaceContainerHighest,
+                                  borderRadius: BorderRadius.circular(18),
+                                  border: Border.all(
+                                    color: selected
+                                        ? Theme.of(context).colorScheme.primary.withOpacity(0.4)
+                                        : Colors.transparent,
+                                  ),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        choice,
+                                        style: _problemTextStyle(context, choice).copyWith(
                                           fontWeight: FontWeight.w800,
                                           color: fg,
                                         ),
-                                  ),
+                                      ),
+                                    ),
+                                    if (showCorrect)
+                                      Icon(Icons.check_circle, color: fg)
+                                    else if (showWrong)
+                                      Icon(Icons.cancel, color: fg)
+                                  ],
                                 ),
-                                if (showCorrect)
-                                  Icon(Icons.check_circle, color: fg)
-                                else if (showWrong)
-                                  Icon(Icons.cancel, color: fg)
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: FilledButton.tonal(
-                          onPressed: answered ? () => setState(() => _showSteps = !_showSteps) : null,
-                          child: Text(_showSteps ? 'Hide steps' : 'Show steps'),
+                              ),
+                            );
+                          },
                         ),
                       ),
-                      const SizedBox(width: 12),
-                      FilledButton(
-                        onPressed: answered ? () {
-                          setState(() {
-                            _selected = null;
-                            _showSteps = false;
-                          });
-                          state.next();
-                        } : null,
-                        child: const Text('Next'),
-                      ),
-                    ],
-                  ),
-                  if (_showSteps) ...[
-                    const SizedBox(height: 12),
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(14),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surfaceContainerHighest,
-                        borderRadius: BorderRadius.circular(18),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      const SizedBox(height: 10),
+                      Row(
                         children: [
-                          Text(
-                            'Steps',
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  fontWeight: FontWeight.w900,
-                                ),
+                          Expanded(
+                            child: FilledButton.tonal(
+                              onPressed: answered ? () => setState(() => _showSteps = !_showSteps) : null,
+                              child: Text(_showSteps ? 'Hide steps' : 'Show steps'),
+                            ),
                           ),
-                          const SizedBox(height: 8),
-                          for (final s in problem.steps)
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 6),
-                              child: Text(
-                                '• $s',
-                                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                              ),
-                            )
+                          const SizedBox(width: 12),
+                          FilledButton(
+                            onPressed: answered
+                                ? () {
+                                    setState(() {
+                                      _selected = null;
+                                      _showSteps = false;
+                                    });
+                                    state.next();
+                                  }
+                                : null,
+                            child: const Text('Next'),
+                          ),
                         ],
                       ),
-                    ),
-                  ]
-                ],
+                      if (_showSteps) ...[
+                        const SizedBox(height: 12),
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(14),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                            borderRadius: BorderRadius.circular(18),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Steps',
+                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                      fontWeight: FontWeight.w900,
+                                    ),
+                              ),
+                              const SizedBox(height: 8),
+                              for (final s in problem.steps)
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 6),
+                                  child: Text(
+                                    '• $s',
+                                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                          height: 1.25,
+                                        ),
+                                  ),
+                                )
+                            ],
+                          ),
+                        ),
+                      ]
+                    ],
+                  );
+                },
               ),
             ),
             FeedbackBurst(

@@ -1,13 +1,17 @@
+import 'dart:math';
+
 import '../models/problem.dart';
 
 class Recommender {
-  const Recommender({
+  Recommender({
     this.learnRate = 0.20,
     this.slipRate = 0.15,
-  });
+    Random? random,
+  }) : _random = random ?? Random();
 
   final double learnRate;
   final double slipRate;
+  final Random _random;
 
   double updateMastery({required double mastery, required bool correct}) {
     final m = mastery.clamp(0.0, 1.0);
@@ -22,12 +26,17 @@ class Recommender {
     required Map<String, double> masteryBySkill,
     required Set<String> seenProblemIds,
     String? forcedSkill,
+    int? forcedDifficulty,
   }) {
     final skills = all.map((p) => p.skill).toSet().toList()..sort();
 
     final targetSkill = forcedSkill ?? _pickTargetSkill(skills, masteryBySkill);
     final targetMastery = (masteryBySkill[targetSkill] ?? 0.35).clamp(0.0, 1.0);
-    final desiredDifficulty = (1 + (targetMastery * 4)).round().clamp(1, 5);
+    final desiredDifficulty = (forcedDifficulty ?? (1 + (targetMastery * 4)).round()).clamp(1, 5);
+
+    if (targetSkill == 'Equations' && desiredDifficulty <= 2) {
+      return _generateEquationProblem(difficulty: desiredDifficulty);
+    }
 
     final candidates = all
         .where((p) => p.skill == targetSkill)
@@ -47,6 +56,42 @@ class Recommender {
         ));
 
     return candidates.first;
+  }
+
+  Problem _generateEquationProblem({required int difficulty}) {
+    final id = 'gen_eq_${DateTime.now().microsecondsSinceEpoch}_${_random.nextInt(1 << 32)}';
+
+    final a = difficulty == 1 ? 1 : _random.nextInt(4) + 2;
+    final x = _random.nextInt(11) - 5;
+    final b = _random.nextInt(13) - 6;
+    final c = a * x + b;
+
+    final question = a == 1 ? 'Solve for x: x + $b = $c' : 'Solve for x: ${a}x + $b = $c';
+
+    final choiceSet = <int>{x};
+    while (choiceSet.length < 4) {
+      final delta = _random.nextInt(9) - 4;
+      final candidate = x + (delta == 0 ? 2 : delta);
+      choiceSet.add(candidate);
+    }
+
+    final choices = choiceSet.toList()..shuffle(_random);
+    final answerIndex = choices.indexOf(x);
+
+    final steps = <String>[
+      'Subtract $b from both sides: ${a == 1 ? 'x' : '${a}x'} = ${c - b}.',
+      if (a != 1) 'Divide both sides by $a: x = $x.' else 'So x = $x.',
+    ];
+
+    return Problem(
+      id: id,
+      skill: 'Equations',
+      difficulty: difficulty,
+      question: question,
+      choices: choices.map((v) => '$v').toList(growable: false),
+      answerIndex: answerIndex,
+      steps: steps,
+    );
   }
 
   String _pickTargetSkill(List<String> skills, Map<String, double> masteryBySkill) {
