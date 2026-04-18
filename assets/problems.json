@@ -1,0 +1,65 @@
+[
+  {
+    "id": "int_add_01",
+    "skill": "Integers",
+    "difficulty": 1,
+    "question": "What is -3 + 8?",
+    "choices": ["-11", "5", "11", "-5"],
+    "answerIndex": 1,
+    "steps": [
+      "Start at -3 on the number line.",
+      "Move 8 steps to the right.",
+      "You land on 5."
+    ]
+  },
+  {
+    "id": "frac_add_01",
+    "skill": "Fractions",
+    "difficulty": 2,
+    "question": "What is 1/4 + 1/2?",
+    "choices": ["1/6", "2/4", "3/4", "1"],
+    "answerIndex": 2,
+    "steps": [
+      "Rewrite 1/2 as 2/4.",
+      "Add: 1/4 + 2/4 = 3/4.",
+      "So the answer is 3/4."
+    ]
+  },
+  {
+    "id": "ratio_01",
+    "skill": "Ratios & Proportions",
+    "difficulty": 2,
+    "question": "A recipe uses 2 cups of flour for every 3 cups of water. If you use 6 cups of water, how many cups of flour do you need?",
+    "choices": ["2", "3", "4", "6"],
+    "answerIndex": 2,
+    "steps": [
+      "The ratio flour:water is 2:3.",
+      "6 is 2 times 3, so multiply flour by 2.",
+      "2 × 2 = 4 cups of flour."
+    ]
+  },
+  {
+    "id": "eq_01",
+    "skill": "Equations",
+    "difficulty": 3,
+    "question": "Solve for x: 2x + 3 = 11",
+    "choices": ["4", "5", "6", "7"],
+    "answerIndex": 0,
+    "steps": [
+      "Subtract 3 from both sides: 2x = 8.",
+      "Divide both sides by 2: x = 4."
+    ]
+  },
+  {
+    "id": "geom_area_01",
+    "skill": "Geometry",
+    "difficulty": 3,
+    "question": "What is the area of a rectangle with length 9 and width 4?",
+    "choices": ["13", "18", "36", "40"],
+    "answerIndex": 2,
+    "steps": [
+      "Area of a rectangle = length × width.",
+      "9 × 4 = 36."
+    ]
+  }
+]
