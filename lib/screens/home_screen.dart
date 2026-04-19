@@ -18,12 +18,12 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<AppState>();
-    final bookState = context.watch<BookLibraryState>();
-    final colorScheme = Theme.of(context).colorScheme;
+    context.watch<BookLibraryState>();
     final subject = state.subject;
     final practiceEnabled =
         subject == Subject.math || subject == Subject.reading || subject == Subject.science || subject == Subject.history;
     final currentUser = state.currentUser;
+    final customSubjects = [...state.personalCategories]..sort((a, b) => a.name.compareTo(b.name));
 
     return Scaffold(
       body: SafeArea(
@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                         const SizedBox(width: 10),
                         Expanded(
                           child: Text(
-                            'RGV Math Coach',
+                            'RGV Tutor',
                             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                                   fontWeight: FontWeight.w900,
                                 ),
@@ -75,13 +75,6 @@ class HomeScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                     ],
-                    Text(
-                      'Pick a subject and practice ${bookState.mode == LibraryMode.online ? 'online' : 'offline'}.',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: colorScheme.onSurfaceVariant,
-                            fontWeight: FontWeight.w600,
-                          ),
-                    ),
                     const SizedBox(height: 18),
                     Text(
                       'Choose a subject',
@@ -104,6 +97,21 @@ class HomeScreen extends StatelessWidget {
                             selected: s == subject,
                             onTap: () => state.setSubject(s),
                           ),
+                        for (final category in customSubjects)
+                          _CustomSubjectCard(
+                            title: category.name,
+                            subtitle: '${category.questions.length} card${category.questions.length == 1 ? '' : 's'}',
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) => PersonalCategoryScreen(categoryId: category.id),
+                                ),
+                              );
+                            },
+                          ),
+                        _CreateSubjectCard(
+                          onTap: () => _showCreateSubjectDialog(context),
+                        ),
                       ],
                     ),
                     const SizedBox(height: 18),
@@ -152,17 +160,10 @@ class HomeScreen extends StatelessWidget {
                         crossAxisSpacing: 12,
                         childAspectRatio: 1.15,
                         children: [
-                          _PersonalQuestionsCard(
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(builder: (_) => const PersonalQuestionsScreen()),
-                              );
-                            },
-                          ),
                           for (final skill in state.skills)
                             _SkillCard(
                               skill: skill,
-                              mastery: state.masteryFor(skill),
+                              completion: state.completionForSkill(skill),
                               onTap: () {
                                 state.startSkill(skill);
                                 Navigator.of(context).push(
@@ -274,8 +275,53 @@ class _SubjectCard extends StatelessWidget {
   }
 }
 
-class _PersonalQuestionsCard extends StatelessWidget {
-  const _PersonalQuestionsCard({required this.onTap});
+Future<void> _showCreateSubjectDialog(BuildContext context) async {
+  final controller = TextEditingController();
+  final result = await showDialog<String>(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: const Text('Create subject'),
+        content: TextField(
+          controller: controller,
+          decoration: const InputDecoration(
+            labelText: 'Subject name',
+            hintText: 'e.g. Biology',
+          ),
+          textInputAction: TextInputAction.done,
+          autofocus: true,
+          onSubmitted: (value) => Navigator.of(context).pop(value),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Cancel'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(context).pop(controller.text),
+            child: const Text('Create'),
+          ),
+        ],
+      );
+    },
+  );
+
+  if (result == null) return;
+  final trimmed = result.trim();
+  if (trimmed.isEmpty) return;
+
+  if (!context.mounted) return;
+  final state = context.read<AppState>();
+  final id = state.createPersonalCategory(trimmed);
+  if (id == null) return;
+
+  Navigator.of(context).push(
+    MaterialPageRoute(builder: (_) => PersonalCategoryScreen(categoryId: id)),
+  );
+}
+
+class _CreateSubjectCard extends StatelessWidget {
+  const _CreateSubjectCard({required this.onTap});
 
   final VoidCallback onTap;
 
@@ -305,11 +351,11 @@ class _PersonalQuestionsCard extends StatelessWidget {
                   color: accent.withOpacity(0.18),
                   borderRadius: BorderRadius.circular(16),
                 ),
-                child: Icon(Icons.create_rounded, color: accent),
+                child: Icon(Icons.add_rounded, color: accent),
               ),
               const Spacer(),
               Text(
-                'Personal\nQuestions',
+                'Create\nSubject',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w900,
                     ),
@@ -330,11 +376,71 @@ class _PersonalQuestionsCard extends StatelessWidget {
   }
 }
 
+class _CustomSubjectCard extends StatelessWidget {
+  const _CustomSubjectCard({required this.title, required this.subtitle, required this.onTap});
+
+  final String title;
+  final String subtitle;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final accent = const Color(0xFF8B5CF6);
+
+    return Material(
+      color: accent.withOpacity(0.12),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(22),
+        side: BorderSide(color: accent.withOpacity(0.45), width: 2),
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                  color: accent.withOpacity(0.18),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Icon(Icons.auto_awesome_rounded, color: accent),
+              ),
+              const Spacer(),
+              Text(
+                title,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w900,
+                    ),
+              ),
+              const SizedBox(height: 6),
+              Text(
+                subtitle,
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                      fontWeight: FontWeight.w700,
+                    ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _SkillCard extends StatelessWidget {
-  const _SkillCard({required this.skill, required this.mastery, required this.onTap});
+  const _SkillCard({required this.skill, required this.completion, required this.onTap});
 
   final String skill;
-  final double mastery;
+  final double completion;
   final VoidCallback onTap;
 
   @override
@@ -369,7 +475,7 @@ class _SkillCard extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(999),
                 child: LinearProgressIndicator(
-                  value: mastery.clamp(0.0, 1.0),
+                  value: completion.clamp(0.0, 1.0),
                   minHeight: 10,
                   backgroundColor: colorScheme.surface,
                   valueColor: AlwaysStoppedAnimation(colorScheme.tertiary),
@@ -377,7 +483,7 @@ class _SkillCard extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                '${(mastery * 100).round()}% mastery',
+                '${(completion * 100).round()}% complete',
                 style: Theme.of(context).textTheme.labelLarge?.copyWith(
                       color: colorScheme.onSurfaceVariant,
                       fontWeight: FontWeight.w700,

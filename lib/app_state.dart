@@ -102,9 +102,9 @@ class AppState extends ChangeNotifier {
 
   List<PersonalCategory> get personalCategories => personalBank.categories;
 
-  void createPersonalCategory(String name) {
+  String? createPersonalCategory(String name) {
     final trimmed = name.trim();
-    if (trimmed.isEmpty) return;
+    if (trimmed.isEmpty) return null;
 
     final category = PersonalCategory(
       id: DateTime.now().microsecondsSinceEpoch.toString(),
@@ -115,6 +115,7 @@ class AppState extends ChangeNotifier {
     _updatePersonalBank(
       personalBank.copyWith(categories: [...personalCategories, category]),
     );
+    return category.id;
   }
 
   void renamePersonalCategory({required String categoryId, required String name}) {
@@ -298,9 +299,66 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<String> get skills => activeProblems.map((p) => p.skill).toSet().toList()..sort();
+  List<String> get skills {
+    final unique = activeProblems.map((p) => p.skill).toSet();
 
-  double masteryFor(String skill) => (masteryBySkill[skill] ?? 0.35).clamp(0.0, 1.0);
+    if (subject == Subject.math) {
+      const preferred = [
+        'Elementary',
+        'Middle School',
+        'Integers',
+        'Fractions',
+        'Ratios & Proportions',
+        'Pre-Algebra',
+        'Algebra 1',
+        'Equations',
+        'Geometry',
+        'Algebra 2',
+        'Precalculus',
+        'Calculus',
+      ];
+
+      final minDifficultyBySkill = <String, int>{};
+      for (final problem in activeProblems) {
+        final prev = minDifficultyBySkill[problem.skill];
+        if (prev == null || problem.difficulty < prev) {
+          minDifficultyBySkill[problem.skill] = problem.difficulty;
+        }
+      }
+
+      final list = unique.toList(growable: false);
+      list.sort((a, b) {
+        final preferredA = preferred.indexOf(a);
+        final preferredB = preferred.indexOf(b);
+        if (preferredA != -1 || preferredB != -1) {
+          if (preferredA == -1) return 1;
+          if (preferredB == -1) return -1;
+          final cmp = preferredA.compareTo(preferredB);
+          if (cmp != 0) return cmp;
+        }
+
+        final da = minDifficultyBySkill[a] ?? 999;
+        final db = minDifficultyBySkill[b] ?? 999;
+        final cmp = da.compareTo(db);
+        if (cmp != 0) return cmp;
+        return a.compareTo(b);
+      });
+      return list;
+    }
+
+    final list = unique.toList(growable: false);
+    list.sort();
+    return list;
+  }
+
+  double masteryFor(String skill) => (masteryBySkill[skill] ?? 0.0).clamp(0.0, 1.0);
+
+  double completionForSkill(String skill) {
+    final pool = activeProblems.where((p) => p.skill == skill).toList(growable: false);
+    if (pool.isEmpty) return 0.0;
+    final seen = pool.where((p) => seenProblemIds.contains(p.id)).length;
+    return (seen / pool.length).clamp(0.0, 1.0);
+  }
 
   double progressForSkillDifficulty(String skill, int difficulty) {
     final pool = activeProblems

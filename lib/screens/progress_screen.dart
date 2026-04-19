@@ -74,7 +74,7 @@ class ProgressScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             for (final skill in state.skills) ...[
-              MasteryBar(skill: skill, value: state.masteryFor(skill)),
+              MasteryBar(skill: skill, value: state.completionForSkill(skill)),
               const SizedBox(height: 12),
             ]
           ],
