@@ -10,14 +10,15 @@ class ProgressScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<AppState>();
+    final label = state.subject.label;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Progress'),
+        title: Text('$label progress'),
         actions: [
           IconButton(
             tooltip: 'Reset',
-            onPressed: () => state.reset(),
+            onPressed: () => state.resetProgress(subject: state.subject),
             icon: const Icon(Icons.refresh_rounded),
           ),
         ],

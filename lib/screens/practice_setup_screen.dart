@@ -22,7 +22,7 @@ class _PracticeSetupScreenState extends State<PracticeSetupScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Math setup'),
+        title: Text('${state.subject.label} setup'),
       ),
       body: SafeArea(
         child: Padding(

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import '../models/problem.dart';
+import '../models/subject.dart';
 
 class Recommender {
   Recommender({
@@ -85,6 +86,7 @@ class Recommender {
 
     return Problem(
       id: id,
+      subject: Subject.math,
       skill: 'Equations',
       difficulty: difficulty,
       question: question,

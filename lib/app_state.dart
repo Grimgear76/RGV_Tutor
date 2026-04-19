@@ -46,6 +46,9 @@ class AppState extends ChangeNotifier {
 
   Subject subject = Subject.math;
 
+  List<Problem> get activeProblems =>
+      problems.where((p) => p.subject == subject).toList(growable: false);
+
   List<AppUser> users = const [];
   AppUser? currentUser;
 
@@ -82,7 +85,7 @@ class AppState extends ChangeNotifier {
     streak = (_box.get(_streakKey, defaultValue: 0) as int);
 
     current = recommender.recommend(
-      all: problems,
+      all: activeProblems,
       masteryBySkill: masteryBySkill,
       seenProblemIds: seenProblemIds,
     );
@@ -278,15 +281,29 @@ class AppState extends ChangeNotifier {
     if (subject == next) return;
     subject = next;
     _box.put(_subjectKey, subject.id);
+
+    practiceSkill = null;
+    practiceDifficulty = null;
+    practiceQuestionsDoneInDifficulty = 0;
+    lastCorrect = null;
+    _attemptsOnCurrentProblem = 0;
+    current = recommender.recommend(
+      all: activeProblems,
+      masteryBySkill: masteryBySkill,
+      seenProblemIds: seenProblemIds,
+    );
+
     notifyListeners();
   }
 
-  List<String> get skills => problems.map((p) => p.skill).toSet().toList()..sort();
+  List<String> get skills => activeProblems.map((p) => p.skill).toSet().toList()..sort();
 
   double masteryFor(String skill) => (masteryBySkill[skill] ?? 0.35).clamp(0.0, 1.0);
 
   double progressForSkillDifficulty(String skill, int difficulty) {
-    final pool = problems.where((p) => p.skill == skill && p.difficulty == difficulty).toList(growable: false);
+    final pool = activeProblems
+        .where((p) => p.skill == skill && p.difficulty == difficulty)
+        .toList(growable: false);
     if (pool.isEmpty) return 0.0;
     final seen = pool.where((p) => seenProblemIds.contains(p.id)).length;
     return (seen / pool.length).clamp(0.0, 1.0);
@@ -301,7 +318,7 @@ class AppState extends ChangeNotifier {
     practiceDifficulty = null;
     practiceQuestionsDoneInDifficulty = 0;
     current = recommender.recommend(
-      all: problems,
+      all: activeProblems,
       masteryBySkill: masteryBySkill,
       seenProblemIds: seenProblemIds,
       forcedSkill: skill,
@@ -316,7 +333,7 @@ class AppState extends ChangeNotifier {
     practiceDifficulty = difficulty;
     practiceQuestionsDoneInDifficulty = 0;
     current = recommender.recommend(
-      all: problems,
+      all: activeProblems,
       masteryBySkill: masteryBySkill,
       seenProblemIds: seenProblemIds,
       forcedSkill: skill,
@@ -383,7 +400,7 @@ class AppState extends ChangeNotifier {
     final forcedSkill = wrongStreak >= 2 ? _prereqSkill(problem.skill) : practiceSkill;
 
     current = recommender.recommend(
-      all: problems,
+      all: activeProblems,
       masteryBySkill: masteryBySkill,
       seenProblemIds: seenProblemIds,
       forcedSkill: forcedSkill,
@@ -403,6 +420,52 @@ class AppState extends ChangeNotifier {
   double? get difficultyProgress {
     if (practiceDifficulty == null) return null;
     return (practiceQuestionsDoneInDifficulty / practiceQuestionsPerDifficulty).clamp(0.0, 1.0);
+  }
+
+  Future<void> resetProgress({Subject? subject}) async {
+    final target = subject;
+    if (target == null) {
+      masteryBySkill.clear();
+      seenProblemIds.clear();
+      wrongStreakBySkill.clear();
+      xp = 0;
+      streak = 0;
+      lastCorrect = null;
+      practiceSkill = null;
+      practiceDifficulty = null;
+      practiceQuestionsDoneInDifficulty = 0;
+      _attemptsOnCurrentProblem = 0;
+
+      await _box.delete(_masteryKey);
+      await _box.delete(_seenKey);
+      await _box.delete(_wrongStreakBySkillKey);
+      await _box.delete(_xpKey);
+      await _box.delete(_streakKey);
+    } else {
+      final targetSkills = problems
+          .where((p) => p.subject == target)
+          .map((p) => p.skill)
+          .toSet();
+
+      masteryBySkill.removeWhere((skill, _) => targetSkills.contains(skill));
+      wrongStreakBySkill.removeWhere((skill, _) => targetSkills.contains(skill));
+      seenProblemIds.removeWhere((id) => problems.any((p) => p.id == id && p.subject == target));
+
+      lastCorrect = null;
+      practiceSkill = null;
+      practiceDifficulty = null;
+      practiceQuestionsDoneInDifficulty = 0;
+      _attemptsOnCurrentProblem = 0;
+
+      _persist();
+    }
+
+    current = recommender.recommend(
+      all: activeProblems,
+      masteryBySkill: masteryBySkill,
+      seenProblemIds: seenProblemIds,
+    );
+    notifyListeners();
   }
 
   int _xpGain({required Problem problem, required double masteryBefore}) {
@@ -435,7 +498,7 @@ class AppState extends ChangeNotifier {
     personalBankByUser.clear();
 
     current = recommender.recommend(
-      all: problems,
+      all: activeProblems,
       masteryBySkill: masteryBySkill,
       seenProblemIds: seenProblemIds,
     );
