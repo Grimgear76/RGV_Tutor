@@ -7,6 +7,7 @@ import 'book_library_state.dart';
 import 'data/problem_bank.dart';
 import 'recommendation/recommender.dart';
 import 'screens/home_screen.dart';
+import 'screens/auth_screen.dart';
 import 'app_navigator.dart';
 import 'widgets/helper_bot.dart';
 
@@ -62,6 +63,14 @@ class App extends StatelessWidget {
       title: 'RGV Tutor',
       theme: base.copyWith(
         textTheme: textTheme,
+        inputDecorationTheme: InputDecorationTheme(
+          filled: true,
+          fillColor: base.colorScheme.surfaceContainerHighest,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: BorderSide.none,
+          ),
+        ),
         appBarTheme: AppBarTheme(
           centerTitle: false,
           titleTextStyle: textTheme.titleLarge?.copyWith(
@@ -76,21 +85,22 @@ class App extends StatelessWidget {
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           ),
         ),
-        cardTheme: CardThemeData(
+        cardTheme: CardTheme(
           elevation: 0,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
         ),
       ),
       builder: (context, child) {
         final content = child ?? const SizedBox.shrink();
+        final state = context.watch<AppState>();
         return Stack(
           children: [
             content,
-            const HelperBotLauncher(),
+            if (state.currentUser != null) const HelperBotLauncher(),
           ],
         );
       },
-      home: const HomeScreen(),
+      home: const AuthScreen(startInCreateAccount: true),
     );
   }
 }

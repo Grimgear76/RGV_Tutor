@@ -3,16 +3,19 @@ import 'package:provider/provider.dart';
 
 import '../app_state.dart';
 import '../widgets/rgv_logo.dart';
+import 'home_screen.dart';
 
 class AuthScreen extends StatefulWidget {
-  const AuthScreen({super.key});
+  const AuthScreen({super.key, this.startInCreateAccount = false});
+
+  final bool startInCreateAccount;
 
   @override
   State<AuthScreen> createState() => _AuthScreenState();
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-  bool isLogin = true;
+  late bool isLogin;
   String? error;
 
   final nameController = TextEditingController();
@@ -20,6 +23,12 @@ class _AuthScreenState extends State<AuthScreen> {
   final passwordController = TextEditingController();
   final ageController = TextEditingController();
   final gradeController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    isLogin = !widget.startInCreateAccount;
+  }
 
   @override
   void dispose() {
@@ -31,7 +40,7 @@ class _AuthScreenState extends State<AuthScreen> {
     super.dispose();
   }
 
-  void submit() {
+  Future<void> submit() async {
     final state = context.read<AppState>();
 
     setState(() => error = null);
@@ -43,7 +52,12 @@ class _AuthScreenState extends State<AuthScreen> {
       );
       if (message != null) {
         setState(() => error = message);
+        return;
       }
+      if (!mounted) return;
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (_) => const HomeScreen()),
+      );
       return;
     }
 
@@ -62,7 +76,13 @@ class _AuthScreenState extends State<AuthScreen> {
     );
     if (message != null) {
       setState(() => error = message);
+      return;
     }
+
+    if (!mounted) return;
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (_) => const HomeScreen()),
+    );
   }
 
   @override
@@ -71,122 +91,171 @@ class _AuthScreenState extends State<AuthScreen> {
 
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(18),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  const RgvTutorLogo(size: 46),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Text(
-                      'RGV Tutor',
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                            fontWeight: FontWeight.w900,
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                colorScheme.primary.withOpacity(0.14),
+                colorScheme.secondary.withOpacity(0.10),
+                colorScheme.surface,
+              ],
+            ),
+          ),
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 520),
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(18),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        const RgvTutorLogo(size: 46),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Text(
+                            'RGV Tutor',
+                            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                  fontWeight: FontWeight.w900,
+                                ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      'Learn offline—Math, Reading, Science, and History.',
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: colorScheme.onSurfaceVariant,
+                            fontWeight: FontWeight.w600,
                           ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
-              Text(
-                'Learn offline—Math, Reading, Science, and History.',
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: colorScheme.onSurfaceVariant,
-                      fontWeight: FontWeight.w600,
-                    ),
-              ),
-              const SizedBox(height: 18),
-              _ModeToggle(
-                isLogin: isLogin,
-                onChanged: (next) => setState(() {
-                  isLogin = next;
-                  error = null;
-                }),
-              ),
-              const SizedBox(height: 18),
-              if (!isLogin) ...[
-                TextField(
-                  controller: nameController,
-                  textInputAction: TextInputAction.next,
-                  decoration: const InputDecoration(labelText: 'Name'),
-                ),
-                const SizedBox(height: 12),
-              ],
-              TextField(
-                controller: usernameController,
-                textInputAction: TextInputAction.next,
-                decoration: const InputDecoration(labelText: 'Username'),
-              ),
-              const SizedBox(height: 12),
-              TextField(
-                controller: passwordController,
-                obscureText: true,
-                textInputAction: isLogin ? TextInputAction.done : TextInputAction.next,
-                onSubmitted: (_) => isLogin ? submit() : null,
-                decoration: const InputDecoration(labelText: 'Password'),
-              ),
-              if (!isLogin) ...[
-                const SizedBox(height: 12),
-                TextField(
-                  controller: ageController,
-                  keyboardType: TextInputType.number,
-                  textInputAction: TextInputAction.next,
-                  decoration: const InputDecoration(labelText: 'Age'),
-                ),
-                const SizedBox(height: 12),
-                TextField(
-                  controller: gradeController,
-                  textInputAction: TextInputAction.done,
-                  onSubmitted: (_) => submit(),
-                  decoration: const InputDecoration(labelText: 'Grade level'),
-                ),
-              ],
-              if (error != null) ...[
-                const SizedBox(height: 14),
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: colorScheme.errorContainer,
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Text(
-                    error!,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: colorScheme.onErrorContainer,
-                          fontWeight: FontWeight.w700,
+                    const SizedBox(height: 18),
+                    Card(
+                      color: colorScheme.surface,
+                      child: Padding(
+                        padding: const EdgeInsets.all(18),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _ModeToggle(
+                              isLogin: isLogin,
+                              onChanged: (next) => setState(() {
+                                isLogin = next;
+                                error = null;
+                              }),
+                            ),
+                            const SizedBox(height: 18),
+                            if (!isLogin) ...[
+                              TextField(
+                                controller: nameController,
+                                textInputAction: TextInputAction.next,
+                                decoration: const InputDecoration(
+                                  labelText: 'Name',
+                                  prefixIcon: Icon(Icons.person_outline_rounded),
+                                ),
+                              ),
+                              const SizedBox(height: 12),
+                            ],
+                            TextField(
+                              controller: usernameController,
+                              textInputAction: TextInputAction.next,
+                              decoration: const InputDecoration(
+                                labelText: 'Username',
+                                prefixIcon: Icon(Icons.alternate_email_rounded),
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            TextField(
+                              controller: passwordController,
+                              obscureText: true,
+                              textInputAction: isLogin ? TextInputAction.done : TextInputAction.next,
+                              onSubmitted: (_) => isLogin ? submit() : null,
+                              decoration: const InputDecoration(
+                                labelText: 'Password',
+                                prefixIcon: Icon(Icons.lock_outline_rounded),
+                              ),
+                            ),
+                            if (!isLogin) ...[
+                              const SizedBox(height: 12),
+                              TextField(
+                                controller: ageController,
+                                keyboardType: TextInputType.number,
+                                textInputAction: TextInputAction.next,
+                                decoration: const InputDecoration(
+                                  labelText: 'Age',
+                                  prefixIcon: Icon(Icons.cake_outlined),
+                                ),
+                              ),
+                              const SizedBox(height: 12),
+                              TextField(
+                                controller: gradeController,
+                                textInputAction: TextInputAction.done,
+                                onSubmitted: (_) => submit(),
+                                decoration: const InputDecoration(
+                                  labelText: 'Grade level',
+                                  prefixIcon: Icon(Icons.school_outlined),
+                                ),
+                              ),
+                            ],
+                            if (error != null) ...[
+                              const SizedBox(height: 14),
+                              Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                  color: colorScheme.errorContainer,
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                child: Text(
+                                  error!,
+                                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                        color: colorScheme.onErrorContainer,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                ),
+                              ),
+                            ],
+                            const SizedBox(height: 16),
+                            SizedBox(
+                              width: double.infinity,
+                              child: FilledButton(
+                                onPressed: () => submit(),
+                                child: Text(isLogin ? 'Sign in' : 'Create account'),
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            SizedBox(
+                              width: double.infinity,
+                              child: FilledButton.tonal(
+                                onPressed: () {
+                                  context.read<AppState>().signInAsGuest();
+                                  Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(builder: (_) => const HomeScreen()),
+                                  );
+                                },
+                                child: const Text('Continue as guest'),
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            Text(
+                              'Note: accounts are stored locally on this device.',
+                              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                                    color: colorScheme.onSurfaceVariant,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                            ),
+                          ],
                         ),
-                  ),
-                ),
-              ],
-              const SizedBox(height: 16),
-              SizedBox(
-                width: double.infinity,
-                child: FilledButton(
-                  onPressed: submit,
-                  child: Text(isLogin ? 'Sign in' : 'Create account'),
-                ),
-              ),
-              const SizedBox(height: 12),
-              SizedBox(
-                width: double.infinity,
-                child: FilledButton.tonal(
-                  onPressed: () => context.read<AppState>().signInAsGuest(),
-                  child: const Text('Continue as guest'),
-                ),
-              ),
-              const SizedBox(height: 12),
-              Text(
-                'Note: accounts are stored locally on this device.',
-                style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                      color: colorScheme.onSurfaceVariant,
-                      fontWeight: FontWeight.w700,
+                      ),
                     ),
+                  ],
+                ),
               ),
-            ],
+            ),
           ),
         ),
       ),

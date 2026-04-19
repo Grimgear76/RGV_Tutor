@@ -67,7 +67,14 @@ class PersonalSectionScreen extends StatelessWidget {
                   final question = section.questions[index];
                   return _QuestionTile(
                     question: question,
-                    onTap: null,
+                    onTap: locked
+                        ? null
+                        : () => _showEditSectionQuestionDialog(
+                              context,
+                              categoryId: category.id,
+                              sectionId: section.id,
+                              question: question,
+                            ),
                     onDelete: locked
                         ? null
                         : () => context.read<AppState>().deleteSectionQuestion(
@@ -366,6 +373,63 @@ Future<void> _showCreateSectionQuestionDialog(
   context.read<AppState>().createSectionQuestion(
         categoryId: categoryId,
         sectionId: sectionId,
+        question: questionController.text,
+        answer: answerController.text,
+        explanation: explanationController.text,
+        incorrectAnswers: [wrong1Controller.text, wrong2Controller.text, wrong3Controller.text],
+      );
+}
+
+Future<void> _showEditSectionQuestionDialog(
+  BuildContext context, {
+  required String categoryId,
+  required String sectionId,
+  required PersonalQuestion question,
+}) async {
+  final questionController = TextEditingController(text: question.question);
+  final answerController = TextEditingController(text: question.answer);
+  final explanationController = TextEditingController(text: question.explanation);
+  final wrong1Controller = TextEditingController(text: question.incorrectAnswers.length > 0 ? question.incorrectAnswers[0] : '');
+  final wrong2Controller = TextEditingController(text: question.incorrectAnswers.length > 1 ? question.incorrectAnswers[1] : '');
+  final wrong3Controller = TextEditingController(text: question.incorrectAnswers.length > 2 ? question.incorrectAnswers[2] : '');
+
+  final result = await showDialog<bool>(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: const Text('Edit question'),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(controller: questionController, decoration: const InputDecoration(labelText: 'Question')),
+              const SizedBox(height: 10),
+              TextField(controller: answerController, decoration: const InputDecoration(labelText: 'Answer')),
+              const SizedBox(height: 10),
+              TextField(controller: explanationController, decoration: const InputDecoration(labelText: 'Explanation (optional)')),
+              const SizedBox(height: 10),
+              TextField(controller: wrong1Controller, decoration: const InputDecoration(labelText: 'Incorrect answer 1 (optional)')),
+              const SizedBox(height: 10),
+              TextField(controller: wrong2Controller, decoration: const InputDecoration(labelText: 'Incorrect answer 2 (optional)')),
+              const SizedBox(height: 10),
+              TextField(controller: wrong3Controller, decoration: const InputDecoration(labelText: 'Incorrect answer 3 (optional)')),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.of(context).pop(false), child: const Text('Cancel')),
+          FilledButton(onPressed: () => Navigator.of(context).pop(true), child: const Text('Save')),
+        ],
+      );
+    },
+  );
+
+  if (result != true) return;
+  if (!context.mounted) return;
+  context.read<AppState>().updateSectionQuestion(
+        categoryId: categoryId,
+        sectionId: sectionId,
+        questionId: question.id,
         question: questionController.text,
         answer: answerController.text,
         explanation: explanationController.text,
