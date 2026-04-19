@@ -1,6 +1,6 @@
 # RGV Tutor
 
-RGV Tutor is an offline-first Flutter app for learning and study support. It offers short multiple-choice problems, tracks mastery per skill, recommends what to practice next, and includes a Book Hub for reading curated learning materials. An optional in-app “Helper Bot” can connect to a local Ollama model for extra guidance with support for Calendar/Planning and custom Quizzes/Flashcard creation + sharing.
+RGV Tutor is an offline-first Flutter app for learning and study support. It offers short multiple-choice problems, tracks mastery per skill, recommends what to practice next, and includes a Book Hub for reading curated learning materials. An optional in-app “Helper Bot” can connect to a local Ollama model for extra guidance without the use of API Tokens/Keys with support for Calendar/Planning and custom Quizzes/Flashcard creation + sharing.
 
 ![RGV Tutor home screen](<Screenshot 2026-04-19 024910.png>)
 
