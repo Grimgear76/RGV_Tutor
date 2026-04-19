@@ -118,6 +118,7 @@ class _PersonalPracticeScreenState extends State<PersonalPracticeScreen> {
         .where((row) => row.trim().isNotEmpty)
         .toList(growable: false);
     options.shuffle(Random(question.id.hashCode));
+    final hasExplanation = question.explanation.trim().isNotEmpty;
     final correctIndex = options.indexWhere((row) => row.toLowerCase() == question.answer.toLowerCase());
 
     return Scaffold(
@@ -425,35 +426,56 @@ class _PersonalPracticeScreenState extends State<PersonalPracticeScreen> {
                 top: false,
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(18, 10, 18, 18),
-                  child: Material(
-                    color: Theme.of(context).colorScheme.surface,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6),
-                      child: SegmentedButton<PersonalPracticeMode>(
-                        segments: const [
-                          ButtonSegment(
-                            value: PersonalPracticeMode.quiz,
-                            label: Text('Quiz'),
-                            icon: Icon(Icons.quiz_rounded),
-                          ),
-                          ButtonSegment(
-                            value: PersonalPracticeMode.flashcards,
-                            label: Text('Flashcards'),
-                            icon: Icon(Icons.style_rounded),
-                          ),
-                        ],
-                        selected: {_mode},
-                        onSelectionChanged: (selection) {
-                          final next = selection.first;
-                          _setMode(next);
-                        },
+                    child: Material(
+                      color: Theme.of(context).colorScheme.surface,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(6),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: SegmentedButton<PersonalPracticeMode>(
+                                segments: const [
+                                  ButtonSegment(
+                                    value: PersonalPracticeMode.quiz,
+                                    label: Text('Quiz'),
+                                    icon: Icon(Icons.quiz_rounded),
+                                  ),
+                                  ButtonSegment(
+                                    value: PersonalPracticeMode.flashcards,
+                                    label: Text('Flashcards'),
+                                    icon: Icon(Icons.style_rounded),
+                                  ),
+                                ],
+                                selected: {_mode},
+                                onSelectionChanged: (selection) {
+                                  final next = selection.first;
+                                  _setMode(next);
+                                },
+                              ),
+                            ),
+                            if (_mode == PersonalPracticeMode.flashcards)
+                              IconButton(
+                                tooltip: 'Show explanation',
+                                onPressed: hasExplanation
+                                    ? () {
+                                        setState(() {
+                                          _flipped = true;
+                                          _showExplanation = true;
+                                        });
+                                        state.markPersonalQuestionSeen(question.id);
+                                        state.markPersonalFlashcardSeen(sectionId: sectionId, questionId: question.id);
+                                      }
+                                    : null,
+                                icon: const Icon(Icons.info_outline_rounded),
+                              ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
           ],
         ),
       ),

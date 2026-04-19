@@ -29,6 +29,7 @@ class AppState extends ChangeNotifier {
   static const _personalFlashSeenBySectionKey = 'seenPersonalFlashcardIdsBySection';
   static const _personalQuizAnsweredBySectionKey = 'personalQuizAnsweredBySection';
   static const _personalQuizCorrectBySectionKey = 'personalQuizCorrectBySection';
+  static const _plannerItemsByUserKey = 'plannerItemsByUser';
   static const _guestUsername = '__guest__';
 
   late final Box _box;
@@ -66,6 +67,7 @@ class AppState extends ChangeNotifier {
   AppUser? currentUser;
 
   Map<String, PersonalBank> personalBankByUser = {};
+  Map<String, List<Map<String, dynamic>>> plannerItemsByUser = {};
 
   bool get isSignedIn => currentUser != null;
 
@@ -105,6 +107,10 @@ class AppState extends ChangeNotifier {
       _box.get(_personalBankByUserKey, defaultValue: const <String, dynamic>{}),
     );
 
+    plannerItemsByUser = _loadPlannerItems(
+      _box.get(_plannerItemsByUserKey, defaultValue: const <String, dynamic>{}),
+    );
+
     _migrateSubjectQuestionsToSections();
 
     xp = (_box.get(_xpKey, defaultValue: 0) as int);
@@ -117,6 +123,123 @@ class AppState extends ChangeNotifier {
     );
 
     notifyListeners();
+  }
+
+  Map<String, List<Map<String, dynamic>>> _loadPlannerItems(dynamic raw) {
+    if (raw is! Map) return {};
+
+    final next = <String, List<Map<String, dynamic>>>{};
+    for (final entry in raw.entries) {
+      final key = entry.key;
+      final value = entry.value;
+      if (key is! String) continue;
+      if (value is! List) continue;
+
+      next[key] = value
+          .whereType<Map>()
+          .map((row) => Map<String, dynamic>.from(row))
+          .toList(growable: false);
+    }
+    return next;
+  }
+
+  List<Map<String, dynamic>> plannerItemsForDate(DateTime date) {
+    final items = plannerItemsByUser[_activeUsername] ?? const <Map<String, dynamic>>[];
+    final key = _dateKey(date);
+    final selected = items.where((item) => item['date'] == key).toList(growable: true);
+    selected.sort((a, b) {
+      final doneA = (a['done'] as bool?) ?? false;
+      final doneB = (b['done'] as bool?) ?? false;
+      if (doneA != doneB) return doneA ? 1 : -1;
+
+      final timeA = a['timeMinutes'] as int?;
+      final timeB = b['timeMinutes'] as int?;
+      if (timeA != null || timeB != null) {
+        final cmp = (timeA ?? 1 << 30).compareTo(timeB ?? 1 << 30);
+        if (cmp != 0) return cmp;
+      }
+
+      final titleA = (a['title'] as String?) ?? '';
+      final titleB = (b['title'] as String?) ?? '';
+      return titleA.compareTo(titleB);
+    });
+    return selected.toList(growable: false);
+  }
+
+  int plannerCountForDate(DateTime date) {
+    final items = plannerItemsForDate(date);
+    return items.where((item) => (item['done'] as bool?) != true).length;
+  }
+
+  void addPlannerItem({
+    required DateTime date,
+    required String title,
+    int? timeMinutes,
+    int? colorValue,
+  }) {
+    final trimmed = title.trim();
+    if (trimmed.isEmpty) return;
+
+    final username = _activeUsername;
+    final current = plannerItemsByUser[username] ?? const <Map<String, dynamic>>[];
+    final next = [
+      ...current,
+      {
+        'id': DateTime.now().microsecondsSinceEpoch.toString(),
+        'date': _dateKey(date),
+        'title': trimmed,
+        if (timeMinutes != null) 'timeMinutes': timeMinutes,
+        if (colorValue != null) 'colorValue': colorValue,
+        'done': false,
+      },
+    ];
+    plannerItemsByUser = {
+      ...plannerItemsByUser,
+      username: next,
+    };
+    _persistPlannerItems();
+    notifyListeners();
+  }
+
+  void togglePlannerItemDone({required String itemId, required bool done}) {
+    final username = _activeUsername;
+    final current = plannerItemsByUser[username];
+    if (current == null) return;
+
+    final next = current
+        .map((item) => item['id'] == itemId ? {...item, 'done': done} : item)
+        .toList(growable: false);
+    plannerItemsByUser = {
+      ...plannerItemsByUser,
+      username: next,
+    };
+    _persistPlannerItems();
+    notifyListeners();
+  }
+
+  void deletePlannerItem(String itemId) {
+    final username = _activeUsername;
+    final current = plannerItemsByUser[username];
+    if (current == null) return;
+
+    final next = current.where((item) => item['id'] != itemId).toList(growable: false);
+    plannerItemsByUser = {
+      ...plannerItemsByUser,
+      username: next,
+    };
+    _persistPlannerItems();
+    notifyListeners();
+  }
+
+  void _persistPlannerItems() {
+    _box.put(_plannerItemsByUserKey, plannerItemsByUser);
+  }
+
+  String _dateKey(DateTime date) {
+    final y = date.year.toString().padLeft(4, '0');
+    final m = date.month.toString().padLeft(2, '0');
+    final d = date.day.toString().padLeft(2, '0');
+    return '$y-$m-$d';
   }
 
   void _migrateSubjectQuestionsToSections() {
@@ -358,7 +481,33 @@ class AppState extends ChangeNotifier {
     required String explanation,
     required List<String> incorrectAnswers,
   }) {
-    return;
+    final q = question.trim();
+    final a = answer.trim();
+    final e = explanation.trim();
+    final incorrect = incorrectAnswers
+        .map((row) => row.trim())
+        .where((row) => row.isNotEmpty)
+        .where((row) => row.toLowerCase() != a.toLowerCase())
+        .toSet()
+        .toList(growable: false)
+        .take(3)
+        .toList(growable: false);
+    if (q.isEmpty || a.isEmpty) return;
+
+    final next = PersonalQuestion(
+      id: DateTime.now().microsecondsSinceEpoch.toString(),
+      question: q,
+      answer: a,
+      explanation: e,
+      incorrectAnswers: incorrect,
+    );
+
+    final categories = personalCategories.map((c) {
+      if (c.id != categoryId) return c;
+      return c.copyWith(questions: [...c.questions, next]);
+    }).toList(growable: false);
+
+    _updatePersonalBank(personalBank.copyWith(categories: categories));
   }
 
   String? createPersonalSection({required String categoryId, required String name}) {
@@ -467,11 +616,96 @@ class AppState extends ChangeNotifier {
     required String explanation,
     required List<String> incorrectAnswers,
   }) {
-    return;
+    final q = question.trim();
+    final a = answer.trim();
+    final e = explanation.trim();
+    final incorrect = incorrectAnswers
+        .map((row) => row.trim())
+        .where((row) => row.isNotEmpty)
+        .where((row) => row.toLowerCase() != a.toLowerCase())
+        .toSet()
+        .toList(growable: false)
+        .take(3)
+        .toList(growable: false);
+    if (q.isEmpty || a.isEmpty) return;
+
+    final categories = personalCategories.map((c) {
+      if (c.id != categoryId) return c;
+      return c.copyWith(
+        questions: c.questions
+            .map((existing) {
+              if (existing.id != questionId) return existing;
+              return existing.copyWith(
+                question: q,
+                answer: a,
+                explanation: e,
+                incorrectAnswers: incorrect,
+              );
+            })
+            .toList(growable: false),
+      );
+    }).toList(growable: false);
+
+    _updatePersonalBank(personalBank.copyWith(categories: categories));
   }
 
   void deletePersonalQuestion({required String categoryId, required String questionId}) {
-    return;
+    final categories = personalCategories.map((c) {
+      if (c.id != categoryId) return c;
+      return c.copyWith(
+        questions: c.questions.where((q) => q.id != questionId).toList(growable: false),
+      );
+    }).toList(growable: false);
+
+    _updatePersonalBank(personalBank.copyWith(categories: categories));
+  }
+
+  void updateSectionQuestion({
+    required String categoryId,
+    required String sectionId,
+    required String questionId,
+    required String question,
+    required String answer,
+    required String explanation,
+    required List<String> incorrectAnswers,
+  }) {
+    final q = question.trim();
+    final a = answer.trim();
+    final e = explanation.trim();
+    final incorrect = incorrectAnswers
+        .map((row) => row.trim())
+        .where((row) => row.isNotEmpty)
+        .where((row) => row.toLowerCase() != a.toLowerCase())
+        .toSet()
+        .toList(growable: false)
+        .take(3)
+        .toList(growable: false);
+    if (q.isEmpty || a.isEmpty) return;
+
+    final categories = personalCategories.map((c) {
+      if (c.id != categoryId) return c;
+      final sections = c.sections
+          .map((s) {
+            if (s.id != sectionId) return s;
+            return s.copyWith(
+              questions: s.questions
+                  .map((existing) {
+                    if (existing.id != questionId) return existing;
+                    return existing.copyWith(
+                      question: q,
+                      answer: a,
+                      explanation: e,
+                      incorrectAnswers: incorrect,
+                    );
+                  })
+                  .toList(growable: false),
+            );
+          })
+          .toList(growable: false);
+      return c.copyWith(sections: sections);
+    }).toList(growable: false);
+
+    _updatePersonalBank(personalBank.copyWith(categories: categories));
   }
 
   String? signUp({

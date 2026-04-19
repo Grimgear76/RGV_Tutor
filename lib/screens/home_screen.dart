@@ -15,6 +15,8 @@ import 'personal_questions_screen.dart';
 import 'personal_practice_screen.dart';
 import 'subject_import_screen.dart';
 import 'custom_subject_progress_screen.dart';
+import 'planner_screen.dart';
+import 'auth_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -55,18 +57,28 @@ class HomeScreen extends StatelessWidget {
                                 ),
                           ),
                         ),
-                          IconButton(
-                            tooltip: 'Books',
-                            onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(builder: (_) => const BookHubScreen()),
-                              );
-                            },
-                            icon: const Icon(Icons.library_books_rounded),
-                          ),
-                          const LibraryModeToggle(compact: true),
-                        ],
-                      ),
+                        IconButton(
+                          tooltip: 'Books',
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(builder: (_) => const BookHubScreen()),
+                            );
+                          },
+                          icon: const Icon(Icons.library_books_rounded),
+                        ),
+                        IconButton(
+                          tooltip: 'Sign out',
+                          onPressed: () {
+                            context.read<AppState>().signOut();
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(builder: (_) => const AuthScreen(startInCreateAccount: true)),
+                            );
+                          },
+                          icon: const Icon(Icons.logout_rounded),
+                        ),
+                        const LibraryModeToggle(compact: true),
+                      ],
+                    ),
                     const SizedBox(height: 14),
                     if (currentUser != null) ...[
                       Text(
@@ -119,6 +131,13 @@ class HomeScreen extends StatelessWidget {
                         ),
                         _CreateSubjectCard(
                           onTap: () => _showCreateSubjectDialog(context),
+                        ),
+                        _PlannerCard(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(builder: (_) => const PlannerScreen()),
+                            );
+                          },
                         ),
                       ],
                     ),
@@ -590,6 +609,62 @@ class _SkillCard extends StatelessWidget {
               const SizedBox(height: 8),
               Text(
                 '${(completion * 100).round()}% complete',
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                      fontWeight: FontWeight.w700,
+                    ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _PlannerCard extends StatelessWidget {
+  const _PlannerCard({required this.onTap});
+
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final accent = const Color(0xFFEF4444);
+
+    return Material(
+      color: accent.withOpacity(0.12),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(22),
+        side: BorderSide(color: accent.withOpacity(0.45), width: 2),
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                  color: accent.withOpacity(0.18),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Icon(Icons.calendar_month_rounded, color: accent),
+              ),
+              const Spacer(),
+              Text(
+                'Calendar',
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w900,
+                    ),
+              ),
+              const SizedBox(height: 6),
+              Text(
+                'Plan your week',
                 style: Theme.of(context).textTheme.labelLarge?.copyWith(
                       color: colorScheme.onSurfaceVariant,
                       fontWeight: FontWeight.w700,
