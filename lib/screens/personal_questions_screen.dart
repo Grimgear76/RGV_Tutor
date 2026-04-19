@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../app_state.dart';
 import '../models/personal_bank.dart';
+import 'personal_practice_screen.dart';
 
 class PersonalQuestionsScreen extends StatelessWidget {
   const PersonalQuestionsScreen({super.key});
@@ -87,6 +88,19 @@ class PersonalCategoryScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(category.name),
         actions: [
+          IconButton(
+            tooltip: 'Practice',
+            onPressed: category.questions.isEmpty
+                ? null
+                : () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => PersonalPracticeScreen(categoryId: category.id),
+                      ),
+                    );
+                  },
+            icon: const Icon(Icons.play_arrow_rounded),
+          ),
           IconButton(
             tooltip: 'Rename',
             onPressed: () => _showRenameCategoryDialog(context, category),
