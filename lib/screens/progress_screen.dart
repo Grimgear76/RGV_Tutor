@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../app_state.dart';
 import '../models/subject.dart';
+import '../widgets/helper_bot.dart';
 import '../widgets/mastery_bar.dart';
 
 class ProgressScreen extends StatelessWidget {
@@ -13,21 +14,23 @@ class ProgressScreen extends StatelessWidget {
     final state = context.watch<AppState>();
     final label = state.subject.label;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('$label progress'),
-        actions: [
-          IconButton(
-            tooltip: 'Reset',
-            onPressed: () => state.resetProgress(subject: state.subject),
-            icon: const Icon(Icons.refresh_rounded),
-          ),
-        ],
-      ),
-      body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.all(18),
-          children: [
+    return HelperBotPlacement(
+      corner: HelperBotCorner.bottomLeft,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('$label progress'),
+          actions: [
+            IconButton(
+              tooltip: 'Reset',
+              onPressed: () => state.resetProgress(subject: state.subject),
+              icon: const Icon(Icons.refresh_rounded),
+            ),
+          ],
+        ),
+        body: SafeArea(
+          child: ListView(
+            padding: const EdgeInsets.all(18),
+            children: [
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -77,7 +80,8 @@ class ProgressScreen extends StatelessWidget {
               MasteryBar(skill: skill, value: state.masteryFor(skill)),
               const SizedBox(height: 12),
             ]
-          ],
+            ],
+          ),
         ),
       ),
     );

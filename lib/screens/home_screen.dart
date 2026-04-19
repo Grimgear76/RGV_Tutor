@@ -6,6 +6,7 @@ import '../book_library_state.dart';
 import '../models/subject.dart';
 import '../widgets/library_mode_toggle.dart';
 import '../widgets/rgv_logo.dart';
+import '../widgets/helper_bot.dart';
 import 'book_hub_screen.dart';
 import 'practice_screen.dart';
 import 'practice_setup_screen.dart';
@@ -25,94 +26,96 @@ class HomeScreen extends StatelessWidget {
         subject == Subject.math || subject == Subject.reading || subject == Subject.science || subject == Subject.history;
     final currentUser = state.currentUser;
 
-    return Scaffold(
-      body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverPadding(
-              padding: const EdgeInsets.all(18),
-              sliver: SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                    Row(
-                      children: [
-                        const RgvTutorLogo(size: 40),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: Text(
-                            'RGV Math Coach',
-                            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                  fontWeight: FontWeight.w900,
-                                ),
+    return HelperBotPlacement(
+      corner: HelperBotCorner.bottomLeft,
+      child: Scaffold(
+        body: SafeArea(
+          child: CustomScrollView(
+            slivers: [
+              SliverPadding(
+                padding: const EdgeInsets.all(18),
+                sliver: SliverList(
+                  delegate: SliverChildListDelegate(
+                    [
+                      Row(
+                        children: [
+                          const RgvTutorLogo(size: 40),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              'RGV Tutor',
+                              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                            ),
                           ),
+                          IconButton(
+                            tooltip: 'Books',
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(builder: (_) => const BookHubScreen()),
+                              );
+                            },
+                            icon: const Icon(Icons.library_books_rounded),
+                          ),
+                          IconButton(
+                            tooltip: 'Sign out',
+                            onPressed: () => context.read<AppState>().signOut(),
+                            icon: const Icon(Icons.logout_rounded),
+                          ),
+                          const LibraryModeToggle(compact: true),
+                        ],
+                      ),
+                      const SizedBox(height: 14),
+                      if (currentUser != null) ...[
+                        Text(
+                          currentUser.isGuest
+                              ? 'Hi Guest!'
+                              : 'Hi ${currentUser.name.isEmpty ? currentUser.username : currentUser.name}!',
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                fontWeight: FontWeight.w900,
+                              ),
                         ),
-                        IconButton(
-                          tooltip: 'Books',
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(builder: (_) => const BookHubScreen()),
-                            );
-                          },
-                          icon: const Icon(Icons.library_books_rounded),
-                        ),
-                        IconButton(
-                          tooltip: 'Sign out',
-                          onPressed: () => context.read<AppState>().signOut(),
-                          icon: const Icon(Icons.logout_rounded),
-                        ),
-                        const LibraryModeToggle(compact: true),
+                        const SizedBox(height: 8),
                       ],
-                    ),
-                    const SizedBox(height: 14),
-                    if (currentUser != null) ...[
                       Text(
-                        currentUser.isGuest
-                            ? 'Hi Guest!'
-                            : 'Hi ${currentUser.name.isEmpty ? currentUser.username : currentUser.name}!',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.w900,
+                        'Pick a subject and practice ${bookState.mode == LibraryMode.online ? 'online' : 'offline'}.',
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              color: colorScheme.onSurfaceVariant,
+                              fontWeight: FontWeight.w600,
                             ),
                       ),
-                      const SizedBox(height: 8),
-                    ],
-                    Text(
-                      'Pick a subject and practice ${bookState.mode == LibraryMode.online ? 'online' : 'offline'}.',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: colorScheme.onSurfaceVariant,
-                            fontWeight: FontWeight.w600,
-                          ),
-                    ),
-                    const SizedBox(height: 18),
-                    Text(
-                      'Choose a subject',
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w800,
-                          ),
-                    ),
-                    const SizedBox(height: 10),
-                    GridView.count(
-                      shrinkWrap: true,
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 12,
-                      crossAxisSpacing: 12,
-                      childAspectRatio: 1.2,
-                      physics: const NeverScrollableScrollPhysics(),
-                      children: [
-                        for (final s in Subject.values)
-                          _SubjectCard(
-                            subject: s,
-                            selected: s == subject,
-                            onTap: () => state.setSubject(s),
-                          ),
-                      ],
-                    ),
-                    const SizedBox(height: 18),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: FilledButton(
-                            onPressed: practiceEnabled
-                                ? () {
+                      const SizedBox(height: 18),
+                      Text(
+                        'Choose a subject',
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.w800,
+                            ),
+                      ),
+                      SizedBox(height: 10),
+                      GridView.count(
+                        shrinkWrap: true,
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 12,
+                        crossAxisSpacing: 12,
+                        childAspectRatio: 1.2,
+                        physics: NeverScrollableScrollPhysics(),
+                        children: [
+                          for (final s in Subject.values)
+                            _SubjectCard(
+                              subject: s,
+                              selected: s == subject,
+                              onTap: () => state.setSubject(s),
+                            ),
+                        ],
+                      ),
+                      SizedBox(height: 18),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: FilledButton(
+                              onPressed: practiceEnabled
+                                  ? () {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(builder: (_) => const PracticeSetupScreen()),
                                     );
@@ -132,8 +135,8 @@ class HomeScreen extends StatelessWidget {
                               : null,
                           icon: const Icon(Icons.insights_rounded),
                         ),
-                      ],
-                    ),
+                        ],
+                      ),
                     const SizedBox(height: 18),
                     if (!practiceEnabled) _ComingSoon(subject: subject),
                     if (practiceEnabled) ...[
@@ -180,7 +183,8 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ),
+  );
   }
 }
 
@@ -221,12 +225,23 @@ class _SubjectCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final (icon, accent) = switch (subject) {
-      Subject.math => (Icons.calculate_rounded, colorScheme.primary),
-      Subject.reading => (Icons.menu_book_rounded, const Color(0xFF3B82F6)),
-      Subject.science => (Icons.science_rounded, const Color(0xFF10B981)),
-      Subject.history => (Icons.public_rounded, const Color(0xFFF59E0B)),
-    };
+    late final IconData icon;
+    late final Color accent;
+
+    switch (subject) {
+      case Subject.math:
+        icon = Icons.calculate_rounded;
+        accent = colorScheme.primary;
+      case Subject.reading:
+        icon = Icons.menu_book_rounded;
+        accent = const Color(0xFF3B82F6);
+      case Subject.science:
+        icon = Icons.science_rounded;
+        accent = const Color(0xFF10B981);
+      case Subject.history:
+        icon = Icons.public_rounded;
+        accent = const Color(0xFFF59E0B);
+    }
 
     final backgroundColor = selected ? accent.withOpacity(0.12) : colorScheme.surfaceContainerHighest;
     final side = selected ? BorderSide(color: accent.withOpacity(0.55), width: 2) : BorderSide.none;

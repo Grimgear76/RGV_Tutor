@@ -7,6 +7,7 @@ import '../models/book.dart';
 import '../widgets/library_mode_toggle.dart';
 import '../widgets/local_file_image.dart';
 import '../widgets/network_image.dart';
+import '../widgets/helper_bot.dart';
 import 'book_reader_screen.dart';
 
 class BookHubScreen extends StatefulWidget {
@@ -23,32 +24,35 @@ class _BookHubScreenState extends State<BookHubScreen> {
   Widget build(BuildContext context) {
     final state = context.watch<BookLibraryState>();
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Books'),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 12),
-            child: Center(
-              child: const LibraryModeToggle(compact: true),
+    return HelperBotPlacement(
+      corner: HelperBotCorner.bottomLeft,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Books'),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 12),
+              child: Center(
+                child: const LibraryModeToggle(compact: true),
+              ),
             ),
-          ),
-        ],
-      ),
-      body: IndexedStack(
-        index: index,
-        children: const [
-          _CatalogTab(),
-          _LibraryTab(),
-        ],
-      ),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: index,
-        onDestinationSelected: (next) => setState(() => index = next),
-        destinations: const [
-          NavigationDestination(icon: Icon(Icons.public_rounded), label: 'Catalog'),
-          NavigationDestination(icon: Icon(Icons.library_books_rounded), label: 'My Library'),
-        ],
+          ],
+        ),
+        body: IndexedStack(
+          index: index,
+          children: [
+            _CatalogTab(),
+            _LibraryTab(),
+          ],
+        ),
+        bottomNavigationBar: NavigationBar(
+          selectedIndex: index,
+          onDestinationSelected: (next) => setState(() => index = next),
+          destinations: [
+            NavigationDestination(icon: Icon(Icons.public_rounded), label: 'Catalog'),
+            NavigationDestination(icon: Icon(Icons.library_books_rounded), label: 'My Library'),
+          ],
+        ),
       ),
     );
   }
@@ -69,6 +73,10 @@ class _CatalogTab extends StatelessWidget {
         final existing = state.byId(book.id);
         final isInLibrary = existing != null;
         final isDownloaded = existing?.isDownloaded ?? false;
+
+        final canAddToLibrary = state.isOnline && !isInLibrary;
+        final canDownloadFromCatalog = state.isOnline && isInLibrary && !isDownloaded;
+        final canTapPrimary = canAddToLibrary || canDownloadFromCatalog;
 
         return _BookCard(
           book: existing ?? book,
@@ -101,18 +109,14 @@ class _CatalogTab extends StatelessWidget {
                 child: const Text('Read'),
               ),
               FilledButton(
-                onPressed: isDownloaded
+                onPressed: !canTapPrimary
                     ? null
                     : () async {
-                        await state.addFromCatalog(book);
-
-                        if (!state.isOnline) {
-                          if (!context.mounted) return;
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Added to your library. Connect to the internet to download.')),
-                          );
-                          return;
+                        if (!isInLibrary) {
+                          await state.addFromCatalog(book);
                         }
+
+                        if (!state.isOnline) return;
 
                         if (kIsWeb) {
                           if (!context.mounted) return;
@@ -128,8 +132,8 @@ class _CatalogTab extends StatelessWidget {
                   isDownloaded
                       ? 'Downloaded'
                       : isInLibrary
-                          ? (state.isOnline && !kIsWeb ? 'Download' : 'Added')
-                          : (state.isOnline && !kIsWeb ? 'Add & download' : 'Add'),
+                          ? (canDownloadFromCatalog ? 'Download' : 'Added')
+                          : (state.isOnline && !kIsWeb ? 'Add & download' : (state.isOnline ? 'Add' : 'Offline')),
                 ),
               ),
             ],
@@ -161,8 +165,8 @@ class _LibraryTab extends StatelessWidget {
       items: items,
       emptyLabel: 'No books found.',
       builder: (context, book) {
-        final canOpen = (book.isDownloaded && book.localPath != null) || (kIsWeb && state.isOnline);
-        final canDownload = state.isOnline && !kIsWeb && !book.isDownloaded;
+        final canOpen = (book.isDownloaded && book.localPath != null) || state.isOnline;
+        final canDownload = state.mode == LibraryMode.online && !kIsWeb && !book.isDownloaded;
 
         return _BookCard(
           book: book,
@@ -173,8 +177,14 @@ class _LibraryTab extends StatelessWidget {
                 onPressed: !canOpen
                     ? null
                     : () async {
-                        final path = kIsWeb ? book.resolvedRemoteUrl : book.localPath;
-                        if (path == null) return;
+                        final path = await state.prepareOnlineReadEntry(book);
+                        if (path == null) {
+                          if (!context.mounted) return;
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Could not prepare this book for reading. Try again.')),
+                          );
+                          return;
+                        }
                         await Navigator.of(context).push(
                           MaterialPageRoute(builder: (_) => BookReaderScreen(bookId: book.id, filePath: path)),
                         );
@@ -182,7 +192,17 @@ class _LibraryTab extends StatelessWidget {
                 child: const Text('Open'),
               ),
               FilledButton(
-                onPressed: !canDownload ? null : () => state.download(book.id),
+                onPressed: !canDownload
+                    ? null
+                    : () {
+                        if (!state.deviceOnline) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('You appear to be offline. Connect to the internet to download.')),
+                          );
+                          return;
+                        }
+                        state.download(book.id);
+                      },
                 child: Text(book.downloadState == BookDownloadState.failed ? 'Retry' : 'Download'),
               ),
               IconButton.filledTonal(

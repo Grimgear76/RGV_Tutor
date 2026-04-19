@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../book_library_state.dart';
 import '../models/book.dart';
 import '../utils/book_reader_documents.dart';
+import '../widgets/helper_bot.dart';
 
 class BookReaderScreen extends StatefulWidget {
   const BookReaderScreen({
@@ -259,15 +260,60 @@ class _BookReaderScreenState extends State<BookReaderScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final book = context.watch<BookLibraryState>().byId(widget.bookId);
+    final libraryState = context.watch<BookLibraryState>();
+    final book = libraryState.byId(widget.bookId);
     final title = widget.titleOverride ?? book?.title ?? 'Reader';
+
+    final canDownload = libraryState.isOnline && !kIsWeb && (book == null || !book.isDownloaded);
+    final isDownloading = book?.downloadState == BookDownloadState.downloading;
 
     final bottomBar = _buildBottomReaderBar();
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-        actions: [
+    return HelperBotPlacement(
+      corner: HelperBotCorner.bottomLeft,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(title),
+          actions: [
+          if (canDownload)
+            IconButton(
+              tooltip: isDownloading ? 'Downloading' : 'Download',
+              onPressed: isDownloading
+                  ? null
+                  : () async {
+                      if (!libraryState.isOnline) return;
+                      if (book == null) {
+                        BookEntry? catalogEntry;
+                        for (final entry in libraryState.catalog) {
+                          if (entry.id == widget.bookId) {
+                            catalogEntry = entry;
+                            break;
+                          }
+                        }
+                        if (catalogEntry != null) await libraryState.addFromCatalog(catalogEntry);
+                      }
+
+                      if (libraryState.byId(widget.bookId) == null) {
+                        if (!context.mounted) return;
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Could not add this book to your library.')),
+                        );
+                        return;
+                      }
+                      await libraryState.download(widget.bookId);
+                      if (!context.mounted) return;
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Download started.')),
+                      );
+                    },
+              icon: isDownloading
+                  ? const SizedBox(
+                      width: 22,
+                      height: 22,
+                      child: CircularProgressIndicator(strokeWidth: 2.4),
+                    )
+                  : const Icon(Icons.download_rounded),
+            ),
           if (_format == BookFormat.epub)
             IconButton(
               tooltip: 'Chapters',
@@ -295,10 +341,10 @@ class _BookReaderScreenState extends State<BookReaderScreen> {
                   );
                 },
               ),
-        ],
-      ),
-      bottomNavigationBar: bottomBar,
-      body: _format == BookFormat.epub
+          ],
+        ),
+        bottomNavigationBar: bottomBar,
+        body: _format == BookFormat.epub
           ? FutureBuilder<EpubBook>(
               future: _epubFuture,
               builder: (context, snapshot) {
@@ -350,6 +396,7 @@ class _BookReaderScreenState extends State<BookReaderScreen> {
                 );
               },
             ),
+      ),
     );
   }
 }

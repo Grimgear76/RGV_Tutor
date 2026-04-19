@@ -102,6 +102,7 @@ class BookLibraryState extends ChangeNotifier {
   }
 
   Future<void> addFromCatalog(BookEntry book) async {
+    if (!isOnline) return;
     if (_booksById.containsKey(book.id)) return;
     final entry = book.copyWith(downloadState: BookDownloadState.notDownloaded);
     _booksById = {..._booksById, entry.id: entry};
