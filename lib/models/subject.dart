@@ -22,7 +22,7 @@ extension SubjectX on Subject {
       case Subject.math:
         return 'Math';
       case Subject.reading:
-        return 'Reading';
+        return 'Reading / Writing';
       case Subject.science:
         return 'Science';
       case Subject.history:
@@ -30,4 +30,3 @@ extension SubjectX on Subject {
     }
   }
 }
-

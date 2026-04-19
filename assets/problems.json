@@ -2425,5 +2425,269 @@
       "Amendments require proposal (2/3 of Congress or states) and ratification (3/4 of states).",
       "So the correct answer is Proposal and ratification by supermajorities."
     ]
+  },
+  {
+    "id": "read_main_idea_01",
+    "subject": "reading",
+    "skill": "Reading Comprehension",
+    "difficulty": 1,
+    "question": "Which sentence best states the main idea?\n\nDogs have lived with humans for thousands of years. They help with hunting, guarding, and providing companionship. Many families consider dogs part of the family.",
+    "choices": [
+      "Dogs are better than cats.",
+      "Dogs have a long history with humans and serve many roles.",
+      "Hunting is the most important job dogs do.",
+      "Families should adopt more dogs."
+    ],
+    "answerIndex": 1,
+    "steps": [
+      "Look for the idea that connects all the details.",
+      "The passage lists several ways dogs live and work with people.",
+      "So the main idea is that dogs have a long history with humans and serve many roles."
+    ]
+  },
+  {
+    "id": "read_context_01",
+    "subject": "reading",
+    "skill": "Vocabulary in Context",
+    "difficulty": 1,
+    "question": "In the sentence, what does the word \"reluctant\" most nearly mean?\n\nMia was reluctant to speak in front of the class because she felt nervous.",
+    "choices": ["Eager", "Unwilling", "Loud", "Confident"],
+    "answerIndex": 1,
+    "steps": [
+      "Use nearby clues: Mia felt nervous about speaking.",
+      "That suggests she did not want to do it.",
+      "So \"reluctant\" means unwilling."
+    ]
+  },
+  {
+    "id": "read_inference_01",
+    "subject": "reading",
+    "skill": "Making Inferences",
+    "difficulty": 1,
+    "question": "What can you infer about the weather?\n\nAfter school, Jay grabbed his umbrella before stepping outside and heard thunder in the distance.",
+    "choices": ["It is snowing.", "A storm is likely.", "It is extremely hot.", "It is windy but clear."],
+    "answerIndex": 1,
+    "steps": [
+      "An umbrella and thunder are clues.",
+      "Thunder often happens during storms, and umbrellas are used for rain.",
+      "So you can infer a storm is likely."
+    ]
+  },
+  {
+    "id": "write_punctuation_01",
+    "subject": "reading",
+    "skill": "Writing Conventions",
+    "difficulty": 1,
+    "question": "Which sentence uses end punctuation correctly?",
+    "choices": [
+      "Where are you going.",
+      "I can't believe it!",
+      "Stop that?",
+      "We walked to the store?"
+    ],
+    "answerIndex": 1,
+    "steps": [
+      "Exclamations use an exclamation mark.",
+      "Questions use a question mark, and statements use a period.",
+      "\"I can't believe it!\" is punctuated correctly."
+    ]
+  },
+  {
+    "id": "read_structure_01",
+    "subject": "reading",
+    "skill": "Text Structure",
+    "difficulty": 2,
+    "question": "Which text structure is used most in the passage?\n\nFirst, gather the ingredients. Next, mix them in a bowl. Then, bake the mixture for 25 minutes. Finally, let it cool.",
+    "choices": ["Cause and effect", "Compare and contrast", "Sequence (steps in order)", "Problem and solution"],
+    "answerIndex": 2,
+    "steps": [
+      "Signal words like first, next, then, and finally show order.",
+      "The passage lists steps to complete a task.",
+      "So the structure is sequence."
+    ]
+  },
+  {
+    "id": "read_author_purpose_01",
+    "subject": "reading",
+    "skill": "Author's Purpose",
+    "difficulty": 2,
+    "question": "A brochure explains the benefits of recycling and encourages readers to recycle at home. What is the author's purpose?",
+    "choices": ["To entertain", "To persuade", "To tell a story", "To describe a character"],
+    "answerIndex": 1,
+    "steps": [
+      "Persuade means convince the reader to do something.",
+      "The brochure encourages readers to recycle.",
+      "So the author's purpose is to persuade."
+    ]
+  },
+  {
+    "id": "write_sentence_combine_01",
+    "subject": "reading",
+    "skill": "Writing Conventions",
+    "difficulty": 2,
+    "question": "Which is the best way to combine the sentences?\n\nThe team practiced every day. The team improved quickly.",
+    "choices": [
+      "The team practiced every day, but the team improved quickly.",
+      "The team practiced every day, and it improved quickly.",
+      "The team practiced every day because the team improved quickly.",
+      "The team practiced every day; the team improved quickly because."
+    ],
+    "answerIndex": 1,
+    "steps": [
+      "Use a conjunction to join two related ideas.",
+      "The second sentence follows from the first.",
+      "\"The team practiced every day, and it improved quickly.\" is clear and correct."
+    ]
+  },
+  {
+    "id": "read_claim_evidence_01",
+    "subject": "reading",
+    "skill": "Claims & Evidence",
+    "difficulty": 3,
+    "question": "Which sentence is the best evidence for the claim?\n\nClaim: Regular exercise can improve mood.",
+    "choices": [
+      "Many people enjoy watching sports.",
+      "Doctors often recommend exercise for overall health.",
+      "A study found that people who exercised three times a week reported feeling less stressed.",
+      "Exercise can be done indoors or outdoors."
+    ],
+    "answerIndex": 2,
+    "steps": [
+      "Evidence should directly support the claim.",
+      "The study result connects exercise with reduced stress (a mood benefit).",
+      "So the best evidence is the study finding."
+    ]
+  },
+  {
+    "id": "write_revision_01",
+    "subject": "reading",
+    "skill": "Revising & Editing",
+    "difficulty": 3,
+    "question": "Which revision best improves clarity?\n\nOriginal: The movie was good and I liked it because it was interesting.",
+    "choices": [
+      "The movie was good and I liked it.",
+      "I liked the movie because its plot kept me interested.",
+      "The movie was interesting and I liked it because it was good.",
+      "I liked it because it was a movie."
+    ],
+    "answerIndex": 1,
+    "steps": [
+      "A good revision removes repetition and adds specific meaning.",
+      "Option B explains why it was interesting without repeating \"good\" and \"liked\".",
+      "So the best revision is: I liked the movie because its plot kept me interested."
+    ]
+  },
+  {
+    "id": "read_tone_01",
+    "subject": "reading",
+    "skill": "Tone & Mood",
+    "difficulty": 3,
+    "question": "What is the tone of the sentence?\n\n\"At last, the long-awaited results arrived, and she could barely contain her excitement.\"",
+    "choices": ["Angry", "Excited", "Confused", "Bored"],
+    "answerIndex": 1,
+    "steps": [
+      "Words like \"at last\" and \"barely contain her excitement\" show strong positive emotion.",
+      "That feeling matches excitement.",
+      "So the tone is excited."
+    ]
+  },
+  {
+    "id": "sci_life_01",
+    "subject": "science",
+    "skill": "Life Science",
+    "difficulty": 1,
+    "question": "What is the basic unit of life?",
+    "choices": ["Atom", "Cell", "Organ", "Tissue"],
+    "answerIndex": 1,
+    "steps": [
+      "Living things are made of cells.",
+      "Cells are the smallest structures that can carry out life processes.",
+      "So the basic unit of life is the cell."
+    ]
+  },
+  {
+    "id": "sci_phys_01",
+    "subject": "science",
+    "skill": "Physical Science",
+    "difficulty": 1,
+    "question": "Which change is a physical change?",
+    "choices": ["Burning paper", "Rusting iron", "Melting ice", "Baking a cake"],
+    "answerIndex": 2,
+    "steps": [
+      "A physical change does not create a new substance.",
+      "Melting ice is still water, just in a different state.",
+      "So melting ice is a physical change."
+    ]
+  },
+  {
+    "id": "sci_earth_01",
+    "subject": "science",
+    "skill": "Earth Science",
+    "difficulty": 1,
+    "question": "What causes day and night on Earth?",
+    "choices": ["Earth's rotation", "Earth's revolution", "The Moon's rotation", "The Sun moving around Earth"],
+    "answerIndex": 0,
+    "steps": [
+      "Earth spins on its axis about once every 24 hours.",
+      "The side facing the Sun has day; the opposite side has night.",
+      "So day and night are caused by Earth's rotation."
+    ]
+  },
+  {
+    "id": "sci_energy_01",
+    "subject": "science",
+    "skill": "Energy",
+    "difficulty": 2,
+    "question": "Which form of energy is stored in a stretched rubber band?",
+    "choices": ["Thermal energy", "Chemical energy", "Elastic potential energy", "Electrical energy"],
+    "answerIndex": 2,
+    "steps": [
+      "When an object is stretched, it can store energy due to its shape.",
+      "That stored energy is potential energy.",
+      "For a rubber band, it's elastic potential energy."
+    ]
+  },
+  {
+    "id": "sci_ecology_01",
+    "subject": "science",
+    "skill": "Ecology",
+    "difficulty": 2,
+    "question": "In a food chain, what role does a producer play?",
+    "choices": ["Eats other organisms", "Breaks down dead matter", "Makes its own food", "Only eats plants"],
+    "answerIndex": 2,
+    "steps": [
+      "Producers make their own food, usually through photosynthesis.",
+      "They provide energy for other organisms in the chain.",
+      "So a producer makes its own food."
+    ]
+  },
+  {
+    "id": "sci_genetics_01",
+    "subject": "science",
+    "skill": "Genetics",
+    "difficulty": 3,
+    "question": "DNA is best described as:",
+    "choices": ["A type of sugar", "A genetic blueprint", "A cell wall", "A form of energy"],
+    "answerIndex": 1,
+    "steps": [
+      "DNA contains the instructions for building proteins and traits.",
+      "Those instructions guide how organisms grow and function.",
+      "So DNA is a genetic blueprint."
+    ]
+  },
+  {
+    "id": "sci_forces_01",
+    "subject": "science",
+    "skill": "Forces & Motion",
+    "difficulty": 3,
+    "question": "A net force of 0 N on an object means the object:",
+    "choices": ["Must be speeding up", "Must be slowing down", "Has no acceleration", "Cannot be moving"],
+    "answerIndex": 2,
+    "steps": [
+      "Net force is related to acceleration (Newton's 2nd law).",
+      "If the net force is zero, acceleration is zero.",
+      "The object can be at rest or moving at constant velocity.",
+      "So it has no acceleration."
+    ]
   }
 ]

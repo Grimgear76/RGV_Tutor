@@ -134,6 +134,7 @@ class _PracticeScreenState extends State<PracticeScreen> with SingleTickerProvid
     final state = context.watch<AppState>();
     final problem = state.current;
     final isHistory = state.subject == Subject.history;
+    final usesExplanation = isHistory || state.subject == Subject.reading || state.subject == Subject.science;
 
     if (problem == null) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
@@ -370,8 +371,8 @@ class _PracticeScreenState extends State<PracticeScreen> with SingleTickerProvid
                               onPressed: answered ? () => setState(() => _showSteps = !_showSteps) : null,
                               child: Text(
                                 _showSteps
-                                    ? (isHistory ? 'Hide explanation' : 'Hide steps')
-                                    : (isHistory ? 'Show explanation' : 'Show steps'),
+                                    ? (usesExplanation ? 'Hide Explanation' : 'Hide steps')
+                                    : (usesExplanation ? 'Show Explanation' : 'Show steps'),
                               ),
                             ),
                           ),
@@ -417,7 +418,7 @@ class _PracticeScreenState extends State<PracticeScreen> with SingleTickerProvid
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                isHistory ? 'Explanation' : 'Steps',
+                                usesExplanation ? 'Explanation' : 'Steps',
                                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                                       fontWeight: FontWeight.w900,
                                     ),
@@ -427,7 +428,7 @@ class _PracticeScreenState extends State<PracticeScreen> with SingleTickerProvid
                                 Padding(
                                   padding: const EdgeInsets.only(bottom: 6),
                                   child: Text(
-                                    isHistory ? s : '• $s',
+                                    usesExplanation ? s : '• $s',
                                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                                           fontWeight: FontWeight.w600,
                                           height: 1.25,

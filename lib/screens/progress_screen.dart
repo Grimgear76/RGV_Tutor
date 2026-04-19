@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../app_state.dart';
+import '../models/subject.dart';
 import '../widgets/mastery_bar.dart';
 
 class ProgressScreen extends StatelessWidget {

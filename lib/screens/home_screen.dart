@@ -17,7 +17,8 @@ class HomeScreen extends StatelessWidget {
     final state = context.watch<AppState>();
     final colorScheme = Theme.of(context).colorScheme;
     final subject = state.subject;
-    final practiceEnabled = subject == Subject.math || subject == Subject.history;
+    final practiceEnabled =
+        subject == Subject.math || subject == Subject.reading || subject == Subject.science || subject == Subject.history;
     final currentUser = state.currentUser;
 
     return Scaffold(
@@ -212,7 +213,7 @@ class _ComingSoon extends StatelessWidget {
         borderRadius: BorderRadius.circular(22),
       ),
       child: Text(
-        '${subject.label} practice is coming soon.\nPick Math or History to try it now.',
+        '${subject.label} practice is coming soon.\nPick Math, Reading / Writing, Science, or History to try it now.',
         style: Theme.of(context).textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.w800,
               color: colorScheme.onSurfaceVariant,
