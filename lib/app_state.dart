@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'dart:convert';
 
 import 'models/problem.dart';
 import 'models/user.dart';
@@ -83,6 +84,8 @@ class AppState extends ChangeNotifier {
       _box.get(_personalBankByUserKey, defaultValue: const <String, dynamic>{}),
     );
 
+    _migrateSubjectQuestionsToSections();
+
     xp = (_box.get(_xpKey, defaultValue: 0) as int);
     streak = (_box.get(_streakKey, defaultValue: 0) as int);
 
@@ -93,6 +96,43 @@ class AppState extends ChangeNotifier {
     );
 
     notifyListeners();
+  }
+
+  void _migrateSubjectQuestionsToSections() {
+    var changed = false;
+
+    final next = <String, PersonalBank>{};
+    for (final entry in personalBankByUser.entries) {
+      final bank = entry.value;
+      final categories = <PersonalCategory>[];
+
+      for (final category in bank.categories) {
+        if (category.questions.isEmpty) {
+          categories.add(category);
+          continue;
+        }
+
+        changed = true;
+        final section = PersonalSection(
+          id: DateTime.now().microsecondsSinceEpoch.toString(),
+          name: 'General',
+          questions: category.questions,
+        );
+
+        categories.add(
+          category.copyWith(
+            questions: const [],
+            sections: [...category.sections, section],
+          ),
+        );
+      }
+
+      next[entry.key] = bank.copyWith(categories: categories);
+    }
+
+    if (!changed) return;
+    personalBankByUser = next;
+    _persistPersonalBanks();
   }
 
   PersonalBank get personalBank {
@@ -133,8 +173,109 @@ class AppState extends ChangeNotifier {
     _updatePersonalBank(personalBank.copyWith(categories: categories));
   }
 
+  static const _packPrefix = 'RGVTUTOR1:';
+
+  String exportCategoryPack(String categoryId) {
+    final category = personalCategories.where((c) => c.id == categoryId).firstOrNull;
+    if (category == null) return '';
+    final map = category.toMap();
+    map.remove('id');
+    final raw = jsonEncode(map);
+    final encoded = base64UrlEncode(utf8.encode(raw));
+    return '$_packPrefix$encoded';
+  }
+
+  String? importCategoryPack(String data) {
+    final trimmed = data.trim();
+    if (!trimmed.startsWith(_packPrefix)) return null;
+    final payload = trimmed.substring(_packPrefix.length);
+
+    Map<String, dynamic> decoded;
+    try {
+      decoded = jsonDecode(utf8.decode(base64Url.decode(payload))) as Map<String, dynamic>;
+    } catch (_) {
+      return null;
+    }
+
+    final packId = payload;
+    final category = PersonalCategory.fromMap({
+      'id': DateTime.now().microsecondsSinceEpoch.toString(),
+      ...decoded,
+      'imported': true,
+      'editUnlocked': false,
+      'packId': packId,
+    });
+
+    _updatePersonalBank(
+      personalBank.copyWith(categories: [...personalCategories, category]),
+    );
+    return category.id;
+  }
+
+  void unlockPersonalCategoryEditing(String categoryId) {
+    final categories = personalCategories
+        .map((c) => c.id == categoryId ? c.copyWith(editUnlocked: true) : c)
+        .toList(growable: false);
+    _updatePersonalBank(personalBank.copyWith(categories: categories));
+  }
+
   void createPersonalQuestion({
     required String categoryId,
+    required String question,
+    required String answer,
+    required String explanation,
+    required List<String> incorrectAnswers,
+  }) {
+    return;
+  }
+
+  String? createPersonalSection({required String categoryId, required String name}) {
+    final trimmed = name.trim();
+    if (trimmed.isEmpty) return null;
+
+    final section = PersonalSection(
+      id: DateTime.now().microsecondsSinceEpoch.toString(),
+      name: trimmed,
+      questions: const [],
+    );
+
+    final categories = personalCategories.map((c) {
+      if (c.id != categoryId) return c;
+      return c.copyWith(sections: [...c.sections, section]);
+    }).toList(growable: false);
+
+    _updatePersonalBank(personalBank.copyWith(categories: categories));
+    return section.id;
+  }
+
+  void renamePersonalSection({required String categoryId, required String sectionId, required String name}) {
+    final trimmed = name.trim();
+    if (trimmed.isEmpty) return;
+
+    final categories = personalCategories.map((c) {
+      if (c.id != categoryId) return c;
+      final sections = c.sections
+          .map((s) => s.id == sectionId ? s.copyWith(name: trimmed) : s)
+          .toList(growable: false);
+      return c.copyWith(sections: sections);
+    }).toList(growable: false);
+
+    _updatePersonalBank(personalBank.copyWith(categories: categories));
+  }
+
+  void deletePersonalSection({required String categoryId, required String sectionId}) {
+    final categories = personalCategories.map((c) {
+      if (c.id != categoryId) return c;
+      final sections = c.sections.where((s) => s.id != sectionId).toList(growable: false);
+      return c.copyWith(sections: sections);
+    }).toList(growable: false);
+
+    _updatePersonalBank(personalBank.copyWith(categories: categories));
+  }
+
+  void createSectionQuestion({
+    required String categoryId,
+    required String sectionId,
     required String question,
     required String answer,
     required String explanation,
@@ -163,7 +304,24 @@ class AppState extends ChangeNotifier {
 
     final categories = personalCategories.map((c) {
       if (c.id != categoryId) return c;
-      return c.copyWith(questions: [...c.questions, next]);
+      final sections = c.sections.map((s) {
+        if (s.id != sectionId) return s;
+        return s.copyWith(questions: [...s.questions, next]);
+      }).toList(growable: false);
+      return c.copyWith(sections: sections);
+    }).toList(growable: false);
+
+    _updatePersonalBank(personalBank.copyWith(categories: categories));
+  }
+
+  void deleteSectionQuestion({required String categoryId, required String sectionId, required String questionId}) {
+    final categories = personalCategories.map((c) {
+      if (c.id != categoryId) return c;
+      final sections = c.sections.map((s) {
+        if (s.id != sectionId) return s;
+        return s.copyWith(questions: s.questions.where((q) => q.id != questionId).toList(growable: false));
+      }).toList(growable: false);
+      return c.copyWith(sections: sections);
     }).toList(growable: false);
 
     _updatePersonalBank(personalBank.copyWith(categories: categories));
@@ -177,46 +335,11 @@ class AppState extends ChangeNotifier {
     required String explanation,
     required List<String> incorrectAnswers,
   }) {
-    final q = question.trim();
-    final a = answer.trim();
-    final e = explanation.trim();
-    final incorrect = incorrectAnswers
-        .map((row) => row.trim())
-        .where((row) => row.isNotEmpty)
-        .where((row) => row.toLowerCase() != a.toLowerCase())
-        .toSet()
-        .toList(growable: false)
-        .take(3)
-        .toList(growable: false);
-    if (q.isEmpty || a.isEmpty) return;
-
-    final categories = personalCategories.map((c) {
-      if (c.id != categoryId) return c;
-      final questions = c.questions
-          .map(
-            (row) => row.id == questionId
-                ? row.copyWith(
-                    question: q,
-                    answer: a,
-                    explanation: e,
-                    incorrectAnswers: incorrect,
-                  )
-                : row,
-          )
-          .toList(growable: false);
-      return c.copyWith(questions: questions);
-    }).toList(growable: false);
-
-    _updatePersonalBank(personalBank.copyWith(categories: categories));
+    return;
   }
 
   void deletePersonalQuestion({required String categoryId, required String questionId}) {
-    final categories = personalCategories.map((c) {
-      if (c.id != categoryId) return c;
-      return c.copyWith(questions: c.questions.where((q) => q.id != questionId).toList(growable: false));
-    }).toList(growable: false);
-
-    _updatePersonalBank(personalBank.copyWith(categories: categories));
+    return;
   }
 
   String? signUp({

@@ -11,6 +11,7 @@ import 'practice_screen.dart';
 import 'practice_setup_screen.dart';
 import 'progress_screen.dart';
 import 'personal_questions_screen.dart';
+import 'subject_import_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -100,7 +101,7 @@ class HomeScreen extends StatelessWidget {
                         for (final category in customSubjects)
                           _CustomSubjectCard(
                             title: category.name,
-                            subtitle: '${category.questions.length} card${category.questions.length == 1 ? '' : 's'}',
+                            subtitle: '${(category.questions.length + category.sections.fold<int>(0, (sum, s) => sum + s.questions.length))} card${(category.questions.length + category.sections.fold<int>(0, (sum, s) => sum + s.questions.length)) == 1 ? '' : 's'}',
                             onTap: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
@@ -109,6 +110,13 @@ class HomeScreen extends StatelessWidget {
                               );
                             },
                           ),
+                        _ImportSubjectCard(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(builder: (_) => const SubjectImportScreen()),
+                            );
+                          },
+                        ),
                         _CreateSubjectCard(
                           onTap: () => _showCreateSubjectDialog(context),
                         ),
@@ -363,6 +371,62 @@ class _CreateSubjectCard extends StatelessWidget {
               const SizedBox(height: 6),
               Text(
                 'Make your own',
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                      fontWeight: FontWeight.w700,
+                    ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ImportSubjectCard extends StatelessWidget {
+  const _ImportSubjectCard({required this.onTap});
+
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final accent = const Color(0xFF06B6D4);
+
+    return Material(
+      color: accent.withOpacity(0.12),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(22),
+        side: BorderSide(color: accent.withOpacity(0.45), width: 2),
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                  color: accent.withOpacity(0.18),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Icon(Icons.qr_code_scanner_rounded, color: accent),
+              ),
+              const Spacer(),
+              Text(
+                'Import\nSubject',
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w900,
+                    ),
+              ),
+              const SizedBox(height: 6),
+              Text(
+                'Scan a QR',
                 style: Theme.of(context).textTheme.labelLarge?.copyWith(
                       color: colorScheme.onSurfaceVariant,
                       fontWeight: FontWeight.w700,

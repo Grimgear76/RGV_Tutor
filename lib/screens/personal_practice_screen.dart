@@ -8,9 +8,17 @@ import '../models/personal_bank.dart';
 import '../widgets/quiz_card.dart';
 
 class PersonalPracticeScreen extends StatefulWidget {
-  const PersonalPracticeScreen({super.key, required this.categoryId, this.initialMode = PersonalPracticeMode.quiz});
+  const PersonalPracticeScreen({
+    super.key,
+    required this.categoryId,
+    this.sectionId,
+    this.sectionName,
+    this.initialMode = PersonalPracticeMode.quiz,
+  });
 
   final String categoryId;
+  final String? sectionId;
+  final String? sectionName;
   final PersonalPracticeMode initialMode;
 
   @override
@@ -41,6 +49,8 @@ class _PersonalPracticeScreenState extends State<PersonalPracticeScreen> {
         MaterialPageRoute(
           builder: (_) => PersonalPracticeFinishScreen(
             categoryId: widget.categoryId,
+            sectionId: widget.sectionId,
+            sectionName: widget.sectionName,
             mode: _mode,
             total: questions.length,
             quizAnswered: _quizAnswered,
@@ -81,10 +91,15 @@ class _PersonalPracticeScreenState extends State<PersonalPracticeScreen> {
       return const Scaffold(body: SafeArea(child: Center(child: Text('Category not found.'))));
     }
 
-    final questions = category.questions;
+    final questions = widget.sectionId == null
+        ? [...category.sections.expand((s) => s.questions)]
+        : category.sections
+            .where((s) => s.id == widget.sectionId)
+            .expand((s) => s.questions)
+            .toList(growable: false);
     if (questions.isEmpty) {
       return Scaffold(
-        appBar: AppBar(title: Text(category.name)),
+        appBar: AppBar(title: Text(widget.sectionName == null ? category.name : '${category.name} • ${widget.sectionName}')),
         body: const SafeArea(child: Center(child: Text('No questions in this category yet.'))),
       );
     }
@@ -98,7 +113,7 @@ class _PersonalPracticeScreenState extends State<PersonalPracticeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(category.name),
+        title: Text(widget.sectionName == null ? category.name : '${category.name} • ${widget.sectionName}'),
       ),
       body: SafeArea(
         child: Stack(
@@ -439,6 +454,8 @@ class PersonalPracticeFinishScreen extends StatelessWidget {
   const PersonalPracticeFinishScreen({
     super.key,
     required this.categoryId,
+    required this.sectionId,
+    required this.sectionName,
     required this.mode,
     required this.total,
     required this.quizAnswered,
@@ -447,6 +464,8 @@ class PersonalPracticeFinishScreen extends StatelessWidget {
   });
 
   final String categoryId;
+  final String? sectionId;
+  final String? sectionName;
   final PersonalPracticeMode mode;
   final int total;
   final int quizAnswered;
@@ -490,7 +509,12 @@ class PersonalPracticeFinishScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                        builder: (_) => PersonalPracticeScreen(categoryId: categoryId, initialMode: mode),
+                        builder: (_) => PersonalPracticeScreen(
+                          categoryId: categoryId,
+                          sectionId: sectionId,
+                          sectionName: sectionName,
+                          initialMode: mode,
+                        ),
                       ),
                     );
                   },
@@ -505,7 +529,12 @@ class PersonalPracticeFinishScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                        builder: (_) => PersonalPracticeScreen(categoryId: categoryId, initialMode: nextMode),
+                        builder: (_) => PersonalPracticeScreen(
+                          categoryId: categoryId,
+                          sectionId: sectionId,
+                          sectionName: sectionName,
+                          initialMode: nextMode,
+                        ),
                       ),
                     );
                   },
