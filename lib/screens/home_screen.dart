@@ -55,23 +55,18 @@ class HomeScreen extends StatelessWidget {
                                 ),
                           ),
                         ),
-                        IconButton(
-                          tooltip: 'Books',
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(builder: (_) => const BookHubScreen()),
-                            );
-                          },
-                          icon: const Icon(Icons.library_books_rounded),
-                        ),
-                        IconButton(
-                          tooltip: 'Sign out',
-                          onPressed: () => context.read<AppState>().signOut(),
-                          icon: const Icon(Icons.logout_rounded),
-                        ),
-                        const LibraryModeToggle(compact: true),
-                      ],
-                    ),
+                          IconButton(
+                            tooltip: 'Books',
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(builder: (_) => const BookHubScreen()),
+                              );
+                            },
+                            icon: const Icon(Icons.library_books_rounded),
+                          ),
+                          const LibraryModeToggle(compact: true),
+                        ],
+                      ),
                     const SizedBox(height: 14),
                     if (currentUser != null) ...[
                       Text(
