@@ -31,7 +31,21 @@ class Recommender {
   }) {
     final skills = all.map((p) => p.skill).toSet().toList()..sort();
 
-    final targetSkill = forcedSkill ?? _pickTargetSkill(skills, masteryBySkill);
+    String pickSkill() {
+      if (forcedSkill != null) return forcedSkill;
+
+      final skillsWithUnseen = skills
+          .where((skill) => all.any((p) => p.skill == skill && !seenProblemIds.contains(p.id)))
+          .toList(growable: false);
+
+      if (skillsWithUnseen.isEmpty) {
+        return _pickTargetSkill(skills, masteryBySkill);
+      }
+
+      return _pickTargetSkill(skillsWithUnseen, masteryBySkill);
+    }
+
+    final targetSkill = pickSkill();
     final targetMastery = (masteryBySkill[targetSkill] ?? 0.35).clamp(0.0, 1.0);
     final desiredDifficulty = (forcedDifficulty ?? (1 + (targetMastery * 4)).round()).clamp(1, 5);
 

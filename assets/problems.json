@@ -51,6 +51,30 @@
     ]
   },
   {
+    "id": "eq_02",
+    "skill": "Equations",
+    "difficulty": 2,
+    "question": "Solve for x: x - 7 = 12",
+    "choices": ["5", "12", "19", "-19"],
+    "answerIndex": 2,
+    "steps": [
+      "Add 7 to both sides.",
+      "x = 12 + 7 = 19."
+    ]
+  },
+  {
+    "id": "eq_03",
+    "skill": "Equations",
+    "difficulty": 2,
+    "question": "Solve for x: 5x = 30",
+    "choices": ["5", "6", "25", "35"],
+    "answerIndex": 1,
+    "steps": [
+      "Divide both sides by 5.",
+      "x = 30 \u00f7 5 = 6."
+    ]
+  },
+  {
     "id": "geom_area_01",
     "skill": "Geometry",
     "difficulty": 3,
@@ -1647,6 +1671,120 @@
     ]
   },
   {
+    "id": "int_add_02",
+    "skill": "Integers",
+    "difficulty": 1,
+    "question": "What is -7 + 3?",
+    "choices": ["-10", "-4", "4", "10"],
+    "answerIndex": 1,
+    "steps": [
+      "Start at -7.",
+      "Move 3 steps to the right.",
+      "You land on -4."
+    ]
+  },
+  {
+    "id": "int_sub_01",
+    "skill": "Integers",
+    "difficulty": 1,
+    "question": "What is 6 - 9?",
+    "choices": ["-3", "3", "15", "-15"],
+    "answerIndex": 0,
+    "steps": [
+      "Subtracting 9 from 6 is the same as 6 + (-9).",
+      "6 + (-9) = -3."
+    ]
+  },
+  {
+    "id": "frac_simplify_01",
+    "skill": "Fractions",
+    "difficulty": 1,
+    "question": "Simplify the fraction 12/18.",
+    "choices": ["2/3", "3/2", "6/9", "4/5"],
+    "answerIndex": 0,
+    "steps": [
+      "Find the greatest common factor of 12 and 18, which is 6.",
+      "Divide numerator and denominator by 6.",
+      "12/18 = 2/3."
+    ]
+  },
+  {
+    "id": "frac_mult_01",
+    "skill": "Fractions",
+    "difficulty": 2,
+    "question": "What is 2/3 \u00d7 3/5?",
+    "choices": ["2/5", "6/15", "1/5", "5/6"],
+    "answerIndex": 0,
+    "steps": [
+      "Multiply numerators: 2 \u00d7 3 = 6.",
+      "Multiply denominators: 3 \u00d7 5 = 15.",
+      "6/15 simplifies to 2/5."
+    ]
+  },
+  {
+    "id": "ratio_02",
+    "skill": "Ratios & Proportions",
+    "difficulty": 2,
+    "question": "A map scale is 1 inch : 5 miles. How many miles does 3 inches represent?",
+    "choices": ["8", "10", "15", "20"],
+    "answerIndex": 2,
+    "steps": [
+      "The scale is 1 inch for every 5 miles.",
+      "For 3 inches, multiply 5 by 3.",
+      "3 \u00d7 5 = 15 miles."
+    ]
+  },
+  {
+    "id": "ratio_03",
+    "skill": "Ratios & Proportions",
+    "difficulty": 2,
+    "question": "A classroom has 12 girls and 8 boys. What is the ratio of girls to boys in simplest form?",
+    "choices": ["12:8", "3:2", "2:3", "4:5"],
+    "answerIndex": 1,
+    "steps": [
+      "Girls:boys = 12:8.",
+      "Divide both numbers by 4.",
+      "12 \u00f7 4 : 8 \u00f7 4 = 3:2."
+    ]
+  },
+  {
+    "id": "geom_perim_01",
+    "skill": "Geometry",
+    "difficulty": 1,
+    "question": "What is the perimeter of a rectangle with length 8 and width 3?",
+    "choices": ["11", "22", "24", "48"],
+    "answerIndex": 1,
+    "steps": [
+      "Perimeter = 2(length + width).",
+      "2(8 + 3) = 2 \u00d7 11 = 22."
+    ]
+  },
+  {
+    "id": "alg2_fact_01",
+    "skill": "Algebra 2",
+    "difficulty": 2,
+    "question": "Factor: x^2 - 9",
+    "choices": ["(x-3)(x+3)", "(x-9)(x+1)", "(x-3)^2", "(x+9)(x-1)"],
+    "answerIndex": 0,
+    "steps": [
+      "x^2 - 9 is a difference of squares.",
+      "a^2 - b^2 = (a-b)(a+b).",
+      "So x^2 - 9 = (x-3)(x+3)."
+    ]
+  },
+  {
+    "id": "precalc_trig_01",
+    "skill": "Precalculus",
+    "difficulty": 2,
+    "question": "If sin(\u03b8) = 0, which angle could \u03b8 be?",
+    "choices": ["0\u00b0", "45\u00b0", "60\u00b0", "30\u00b0"],
+    "answerIndex": 0,
+    "steps": [
+      "sin(\u03b8) = 0 at angles like 0\u00b0, 180\u00b0, 360\u00b0, ...",
+      "So 0\u00b0 is a correct choice."
+    ]
+  },
+  {
     "id": "hist_us_01",
     "subject": "history",
     "skill": "US History",
@@ -2592,6 +2730,279 @@
     ]
   },
   {
+    "id": "read_main_idea_02",
+    "subject": "reading",
+    "skill": "Reading Comprehension",
+    "difficulty": 1,
+    "question": "Which sentence best states the main idea?\n\nMany towns plant trees along streets and in parks. Trees provide shade, improve air quality, and make neighborhoods more beautiful.",
+    "choices": [
+      "Trees are hard to take care of.",
+      "Trees can help towns in several ways.",
+      "Shade is the only benefit of trees.",
+      "Parks are better than streets."
+    ],
+    "answerIndex": 1,
+    "steps": [
+      "The main idea includes all key details.",
+      "The passage lists multiple benefits of trees.",
+      "So the best main idea is that trees can help towns in several ways."
+    ]
+  },
+  {
+    "id": "read_main_idea_03",
+    "subject": "reading",
+    "skill": "Reading Comprehension",
+    "difficulty": 2,
+    "question": "Which sentence best states the main idea?\n\nRecycling reduces waste in landfills. It also saves energy because making products from recycled materials often uses less energy than making them from new materials.",
+    "choices": [
+      "Landfills are always bad.",
+      "Recycling helps the environment in more than one way.",
+      "Energy is not important.",
+      "Products should never be made from new materials."
+    ],
+    "answerIndex": 1,
+    "steps": [
+      "The main idea should connect both benefits mentioned.",
+      "The passage mentions reducing waste and saving energy.",
+      "So the main idea is that recycling helps the environment in more than one way."
+    ]
+  },
+  {
+    "id": "read_author_purpose_02",
+    "subject": "reading",
+    "skill": "Author's Purpose",
+    "difficulty": 1,
+    "question": "A paragraph explains how to wash your hands properly using step-by-step directions. What is the author's purpose?",
+    "choices": ["To entertain", "To inform", "To persuade", "To describe a character"],
+    "answerIndex": 1,
+    "steps": [
+      "Inform means to teach or explain.",
+      "Step-by-step directions are meant to help the reader learn.",
+      "So the author's purpose is to inform."
+    ]
+  },
+  {
+    "id": "read_author_purpose_03",
+    "subject": "reading",
+    "skill": "Author's Purpose",
+    "difficulty": 2,
+    "question": "A poster says, \"Join the cleanup day this Saturday!\" What is the author's purpose?",
+    "choices": ["To entertain", "To persuade", "To summarize", "To list facts"],
+    "answerIndex": 1,
+    "steps": [
+      "Persuade means convince the reader to do something.",
+      "The poster is encouraging people to join an event.",
+      "So the author's purpose is to persuade."
+    ]
+  },
+  {
+    "id": "read_context_02",
+    "subject": "reading",
+    "skill": "Vocabulary in Context",
+    "difficulty": 1,
+    "question": "In the sentence, what does the word \"fragile\" most nearly mean?\n\nHandle the glass vase carefully because it is fragile.",
+    "choices": ["Strong", "Easily broken", "Heavy", "Expensive"],
+    "answerIndex": 1,
+    "steps": [
+      "Clue: handle carefully.",
+      "That suggests it could break easily.",
+      "So \"fragile\" means easily broken."
+    ]
+  },
+  {
+    "id": "read_context_03",
+    "subject": "reading",
+    "skill": "Vocabulary in Context",
+    "difficulty": 2,
+    "question": "In the sentence, what does the word \"conclude\" most nearly mean?\n\nAfter reviewing the evidence, the detectives could finally conclude what happened.",
+    "choices": ["Forget", "Decide", "Argue", "Delay"],
+    "answerIndex": 1,
+    "steps": [
+      "Clue: after reviewing evidence.",
+      "That suggests making a final decision.",
+      "So \"conclude\" means decide."
+    ]
+  },
+  {
+    "id": "read_inference_02",
+    "subject": "reading",
+    "skill": "Making Inferences",
+    "difficulty": 1,
+    "question": "What can you infer about the person?\n\nAlyssa checked the forecast twice, packed a rain jacket, and put extra socks in her bag.",
+    "choices": ["She expects rainy weather.", "She is going swimming.", "She forgot her bag.", "She dislikes forecasts."],
+    "answerIndex": 0,
+    "steps": [
+      "Rain jacket and extra socks are clues.",
+      "Those items are useful if it rains.",
+      "So you can infer she expects rainy weather."
+    ]
+  },
+  {
+    "id": "read_inference_03",
+    "subject": "reading",
+    "skill": "Making Inferences",
+    "difficulty": 2,
+    "question": "What can you infer about the event?\n\nThe stadium lights dimmed, the crowd grew quiet, and the announcer said, \"Please rise.\"",
+    "choices": ["A game is ending.", "A ceremony is starting.", "It is lunchtime.", "The power went out."],
+    "answerIndex": 1,
+    "steps": [
+      "Clues: crowd quiet and \"please rise\" are typical for ceremonies.",
+      "The lights dimming suggests a formal moment.",
+      "So you can infer a ceremony is starting."
+    ]
+  },
+  {
+    "id": "read_structure_02",
+    "subject": "reading",
+    "skill": "Text Structure",
+    "difficulty": 2,
+    "question": "Which text structure is used most in the passage?\n\nBecause the river flooded, the road closed for two days. As a result, many people took a longer route to work.",
+    "choices": ["Cause and effect", "Compare and contrast", "Sequence", "Problem and solution"],
+    "answerIndex": 0,
+    "steps": [
+      "Words like because and as a result show cause and effect.",
+      "The flood causes the road to close.",
+      "So the structure is cause and effect."
+    ]
+  },
+  {
+    "id": "read_structure_03",
+    "subject": "reading",
+    "skill": "Text Structure",
+    "difficulty": 3,
+    "question": "Which text structure is used most in the passage?\n\nBoth dolphins and sharks live in the ocean. Dolphins are mammals that breathe air, while sharks are fish that breathe through gills.",
+    "choices": ["Compare and contrast", "Cause and effect", "Sequence", "Problem and solution"],
+    "answerIndex": 0,
+    "steps": [
+      "The passage shows similarities and differences.",
+      "Words like both and while compare two things.",
+      "So the structure is compare and contrast."
+    ]
+  },
+  {
+    "id": "read_claim_evidence_02",
+    "subject": "reading",
+    "skill": "Claims & Evidence",
+    "difficulty": 2,
+    "question": "Which sentence is the best evidence for the claim?\n\nClaim: Drinking water helps people stay hydrated.",
+    "choices": [
+      "Some people prefer juice.",
+      "Water helps the body replace fluids lost through sweat.",
+      "Hydration is important for athletes.",
+      "Many bottles are made of plastic."
+    ],
+    "answerIndex": 1,
+    "steps": [
+      "Evidence should directly support the claim.",
+      "Replacing lost fluids explains hydration.",
+      "So the best evidence is that water helps replace fluids lost through sweat."
+    ]
+  },
+  {
+    "id": "read_claim_evidence_03",
+    "subject": "reading",
+    "skill": "Claims & Evidence",
+    "difficulty": 3,
+    "question": "Which sentence is the best evidence for the claim?\n\nClaim: Getting enough sleep improves concentration.",
+    "choices": [
+      "Many students like staying up late.",
+      "A report showed students who slept 8 hours made fewer mistakes on tests.",
+      "Concentration is hard to define.",
+      "Some people drink coffee in the morning."
+    ],
+    "answerIndex": 1,
+    "steps": [
+      "Evidence should link sleep to better focus.",
+      "Fewer mistakes after 8 hours of sleep supports better concentration.",
+      "So the best evidence is the report about fewer mistakes on tests."
+    ]
+  },
+  {
+    "id": "write_revision_02",
+    "subject": "reading",
+    "skill": "Revising & Editing",
+    "difficulty": 2,
+    "question": "Which revision best improves clarity?\n\nOriginal: The book was interesting and it was fun and I liked it.",
+    "choices": [
+      "I liked the book.",
+      "I enjoyed the book because it was interesting.",
+      "The book was fun because it was a book.",
+      "The book was interesting and fun and I liked it."
+    ],
+    "answerIndex": 1,
+    "steps": [
+      "A good revision removes repetition and keeps meaning.",
+      "Option B is concise and clear.",
+      "So the best revision is: I enjoyed the book because it was interesting."
+    ]
+  },
+  {
+    "id": "write_revision_03",
+    "subject": "reading",
+    "skill": "Revising & Editing",
+    "difficulty": 3,
+    "question": "Which revision best improves clarity?\n\nOriginal: The speaker talked loudly, which was loud, so everyone could hear.",
+    "choices": [
+      "The speaker talked loudly so everyone could hear.",
+      "The speaker talked so everyone could.",
+      "The speaker was loud and loud.",
+      "Everyone heard because hearing happened."
+    ],
+    "answerIndex": 0,
+    "steps": [
+      "Remove repeated words like loud.",
+      "Keep the cause-and-effect meaning.",
+      "So the best revision is: The speaker talked loudly so everyone could hear."
+    ]
+  },
+  {
+    "id": "tone_mood_02",
+    "subject": "reading",
+    "skill": "Tone & Mood",
+    "difficulty": 2,
+    "question": "What is the tone of the sentence?\n\n\"I can't believe we have to do this again,\" he muttered, rolling his eyes.",
+    "choices": ["Excited", "Annoyed", "Hopeful", "Proud"],
+    "answerIndex": 1,
+    "steps": [
+      "Rolling eyes and muttering suggest frustration.",
+      "That emotion matches annoyance.",
+      "So the tone is annoyed."
+    ]
+  },
+  {
+    "id": "tone_mood_03",
+    "subject": "reading",
+    "skill": "Tone & Mood",
+    "difficulty": 3,
+    "question": "What is the tone of the sentence?\n\n\"With careful planning, we can solve this problem together,\" she said calmly.",
+    "choices": ["Panicked", "Optimistic", "Angry", "Jealous"],
+    "answerIndex": 1,
+    "steps": [
+      "Words like careful planning and together suggest confidence.",
+      "That emotion matches optimism.",
+      "So the tone is optimistic."
+    ]
+  },
+  {
+    "id": "write_conv_03",
+    "subject": "reading",
+    "skill": "Writing Conventions",
+    "difficulty": 1,
+    "question": "Which sentence is punctuated correctly?",
+    "choices": [
+      "Its time to go.",
+      "It's time to go.",
+      "Its' time to go.",
+      "Its time, to go."
+    ],
+    "answerIndex": 1,
+    "steps": [
+      "It's is a contraction for it is.",
+      "The sentence means \"It is time to go.\"",
+      "So the correct punctuation is: It's time to go."
+    ]
+  },
+  {
     "id": "sci_life_01",
     "subject": "science",
     "skill": "Life Science",
@@ -2688,6 +3099,301 @@
       "If the net force is zero, acceleration is zero.",
       "The object can be at rest or moving at constant velocity.",
       "So it has no acceleration."
+    ]
+  },
+  {
+    "id": "sci_life_02",
+    "subject": "science",
+    "skill": "Life Science",
+    "difficulty": 1,
+    "question": "Which organelle is known as the powerhouse of the cell?",
+    "choices": ["Nucleus", "Mitochondria", "Ribosome", "Cell membrane"],
+    "answerIndex": 1,
+    "steps": [
+      "Mitochondria convert food into usable energy for the cell.",
+      "That is why they are called the powerhouse.",
+      "So the answer is mitochondria."
+    ]
+  },
+  {
+    "id": "sci_life_03",
+    "subject": "science",
+    "skill": "Life Science",
+    "difficulty": 2,
+    "question": "What process do plants use to make their own food?",
+    "choices": ["Respiration", "Photosynthesis", "Fermentation", "Digestion"],
+    "answerIndex": 1,
+    "steps": [
+      "Plants use sunlight, water, and carbon dioxide to make glucose.",
+      "That process is called photosynthesis.",
+      "So the answer is photosynthesis."
+    ]
+  },
+  {
+    "id": "sci_life_04",
+    "subject": "science",
+    "skill": "Life Science",
+    "difficulty": 2,
+    "question": "Which body system is responsible for transporting oxygen in the blood?",
+    "choices": ["Digestive", "Circulatory", "Skeletal", "Nervous"],
+    "answerIndex": 1,
+    "steps": [
+      "The circulatory system moves blood throughout the body.",
+      "Blood carries oxygen to cells.",
+      "So the answer is circulatory."
+    ]
+  },
+  {
+    "id": "sci_phys_02",
+    "subject": "science",
+    "skill": "Physical Science",
+    "difficulty": 1,
+    "question": "Which state of matter has a definite volume but no definite shape?",
+    "choices": ["Solid", "Liquid", "Gas", "Plasma"],
+    "answerIndex": 1,
+    "steps": [
+      "Liquids keep the same volume but take the shape of their container.",
+      "Solids have definite shape and volume.",
+      "Gases have neither definite shape nor volume.",
+      "So the answer is liquid."
+    ]
+  },
+  {
+    "id": "sci_phys_03",
+    "subject": "science",
+    "skill": "Physical Science",
+    "difficulty": 2,
+    "question": "What is the pH of a neutral solution?",
+    "choices": ["0", "7", "10", "14"],
+    "answerIndex": 1,
+    "steps": [
+      "The pH scale measures acidity and basicity.",
+      "A neutral solution has pH 7.",
+      "So the answer is 7."
+    ]
+  },
+  {
+    "id": "sci_phys_04",
+    "subject": "science",
+    "skill": "Physical Science",
+    "difficulty": 2,
+    "question": "Which particle has a negative charge?",
+    "choices": ["Proton", "Neutron", "Electron", "Nucleus"],
+    "answerIndex": 2,
+    "steps": [
+      "Protons are positive and neutrons are neutral.",
+      "Electrons have a negative charge.",
+      "So the answer is electron."
+    ]
+  },
+  {
+    "id": "sci_earth_02",
+    "subject": "science",
+    "skill": "Earth Science",
+    "difficulty": 1,
+    "question": "Which layer of Earth is made of liquid iron and nickel?",
+    "choices": ["Crust", "Mantle", "Outer core", "Inner core"],
+    "answerIndex": 2,
+    "steps": [
+      "The outer core is molten (liquid) metal.",
+      "The inner core is solid.",
+      "So the liquid layer is the outer core."
+    ]
+  },
+  {
+    "id": "sci_earth_03",
+    "subject": "science",
+    "skill": "Earth Science",
+    "difficulty": 2,
+    "question": "What type of rock forms from cooled magma or lava?",
+    "choices": ["Sedimentary", "Metamorphic", "Igneous", "Fossil"],
+    "answerIndex": 2,
+    "steps": [
+      "Igneous rocks form when molten rock cools and solidifies.",
+      "Magma cools underground; lava cools on the surface.",
+      "So the answer is igneous."
+    ]
+  },
+  {
+    "id": "sci_earth_04",
+    "subject": "science",
+    "skill": "Earth Science",
+    "difficulty": 2,
+    "question": "What instrument is used to measure earthquakes?",
+    "choices": ["Thermometer", "Barometer", "Seismograph", "Hygrometer"],
+    "answerIndex": 2,
+    "steps": [
+      "A seismograph records ground motion.",
+      "That data is used to measure earthquakes.",
+      "So the answer is seismograph."
+    ]
+  },
+  {
+    "id": "sci_energy_02",
+    "subject": "science",
+    "skill": "Energy",
+    "difficulty": 1,
+    "question": "Which unit is used to measure energy?",
+    "choices": ["Watt", "Joule", "Newton", "Meter"],
+    "answerIndex": 1,
+    "steps": [
+      "Energy is measured in joules (J).",
+      "Watt measures power, and newton measures force.",
+      "So the answer is joule."
+    ]
+  },
+  {
+    "id": "sci_energy_03",
+    "subject": "science",
+    "skill": "Energy",
+    "difficulty": 3,
+    "question": "A moving object has what type of energy?",
+    "choices": ["Kinetic energy", "Potential energy", "Chemical energy", "Nuclear energy"],
+    "answerIndex": 0,
+    "steps": [
+      "Kinetic energy is the energy of motion.",
+      "Potential energy is stored energy.",
+      "So a moving object has kinetic energy."
+    ]
+  },
+  {
+    "id": "sci_energy_04",
+    "subject": "science",
+    "skill": "Energy",
+    "difficulty": 2,
+    "question": "Which energy transformation happens in a flashlight?",
+    "choices": ["Electrical to light", "Light to chemical", "Sound to thermal", "Kinetic to nuclear"],
+    "answerIndex": 0,
+    "steps": [
+      "A flashlight uses electrical energy from a battery.",
+      "It produces light energy.",
+      "So the transformation is electrical to light."
+    ]
+  },
+  {
+    "id": "sci_ecology_02",
+    "subject": "science",
+    "skill": "Ecology",
+    "difficulty": 1,
+    "question": "A relationship where both species benefit is called:",
+    "choices": ["Parasitism", "Mutualism", "Competition", "Predation"],
+    "answerIndex": 1,
+    "steps": [
+      "Mutualism means both organisms benefit.",
+      "Parasitism benefits one and harms the other.",
+      "So the answer is mutualism."
+    ]
+  },
+  {
+    "id": "sci_ecology_03",
+    "subject": "science",
+    "skill": "Ecology",
+    "difficulty": 2,
+    "question": "Which is an example of a decomposer?",
+    "choices": ["Grass", "Rabbit", "Mushroom", "Hawk"],
+    "answerIndex": 2,
+    "steps": [
+      "Decomposers break down dead organisms.",
+      "Fungi like mushrooms are decomposers.",
+      "So the answer is mushroom."
+    ]
+  },
+  {
+    "id": "sci_ecology_04",
+    "subject": "science",
+    "skill": "Ecology",
+    "difficulty": 3,
+    "question": "If a population grows beyond what its environment can support, it exceeds its:",
+    "choices": ["Niche", "Carrying capacity", "Habitat", "Food web"],
+    "answerIndex": 1,
+    "steps": [
+      "Carrying capacity is the maximum population an environment can sustain.",
+      "Beyond that, resources become limited.",
+      "So it exceeds carrying capacity."
+    ]
+  },
+  {
+    "id": "sci_genetics_02",
+    "subject": "science",
+    "skill": "Genetics",
+    "difficulty": 2,
+    "question": "Which structure carries genetic information in a cell?",
+    "choices": ["Chloroplast", "Chromosome", "Vacuole", "Cell wall"],
+    "answerIndex": 1,
+    "steps": [
+      "Chromosomes are made of DNA and contain genes.",
+      "They carry genetic information.",
+      "So the answer is chromosome."
+    ]
+  },
+  {
+    "id": "sci_genetics_03",
+    "subject": "science",
+    "skill": "Genetics",
+    "difficulty": 3,
+    "question": "A dominant trait is one that:",
+    "choices": ["Only appears in males", "Always skips a generation", "Can mask a recessive trait", "Is caused by the environment"],
+    "answerIndex": 2,
+    "steps": [
+      "Dominant alleles can mask the effect of recessive alleles.",
+      "That means the dominant trait can show even if only one allele is present.",
+      "So the answer is: can mask a recessive trait."
+    ]
+  },
+  {
+    "id": "sci_genetics_04",
+    "subject": "science",
+    "skill": "Genetics",
+    "difficulty": 2,
+    "question": "Genes are best defined as:",
+    "choices": ["Types of cells", "Segments of DNA that code for traits", "Kinds of energy", "Parts of the atmosphere"],
+    "answerIndex": 1,
+    "steps": [
+      "Genes are sections of DNA.",
+      "They contain instructions for traits.",
+      "So genes are segments of DNA that code for traits."
+    ]
+  },
+  {
+    "id": "sci_forces_02",
+    "subject": "science",
+    "skill": "Forces & Motion",
+    "difficulty": 2,
+    "question": "What force pulls objects toward Earth?",
+    "choices": ["Magnetism", "Friction", "Gravity", "Tension"],
+    "answerIndex": 2,
+    "steps": [
+      "Gravity is the force of attraction between masses.",
+      "Earth's gravity pulls objects toward its center.",
+      "So the answer is gravity."
+    ]
+  },
+  {
+    "id": "sci_forces_03",
+    "subject": "science",
+    "skill": "Forces & Motion",
+    "difficulty": 2,
+    "question": "If a car speeds up, it is:",
+    "choices": ["At rest", "Accelerating", "Decelerating", "Not moving"],
+    "answerIndex": 1,
+    "steps": [
+      "Acceleration is any change in velocity.",
+      "Speeding up is a change in velocity.",
+      "So the car is accelerating."
+    ]
+  },
+  {
+    "id": "sci_forces_04",
+    "subject": "science",
+    "skill": "Forces & Motion",
+    "difficulty": 3,
+    "question": "Which statement about friction is true?",
+    "choices": ["It always increases speed", "It opposes motion between surfaces", "It only exists in water", "It is a type of energy"],
+    "answerIndex": 1,
+    "steps": [
+      "Friction is a force that resists motion.",
+      "It acts between surfaces in contact.",
+      "So it opposes motion between surfaces."
     ]
   }
 ]
