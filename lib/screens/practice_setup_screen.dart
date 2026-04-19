@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../app_state.dart';
+import '../models/subject.dart';
 import 'practice_screen.dart';
 
 class PracticeSetupScreen extends StatefulWidget {
@@ -22,7 +23,7 @@ class _PracticeSetupScreenState extends State<PracticeSetupScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Math setup'),
+        title: Text('${state.subject.label} setup'),
       ),
       body: SafeArea(
         child: Padding(

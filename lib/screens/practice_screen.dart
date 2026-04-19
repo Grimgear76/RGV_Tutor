@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../app_state.dart';
+import '../models/subject.dart';
 import '../widgets/feedback_burst.dart';
 import '../widgets/quiz_card.dart';
 import '../widgets/xp_bar.dart';
@@ -122,6 +123,8 @@ class _PracticeScreenState extends State<PracticeScreen> with SingleTickerProvid
   Widget build(BuildContext context) {
     final state = context.watch<AppState>();
     final problem = state.current;
+    final isHistory = state.subject == Subject.history;
+    final usesExplanation = isHistory || state.subject == Subject.reading || state.subject == Subject.science;
 
     if (problem == null) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
@@ -315,7 +318,11 @@ class _PracticeScreenState extends State<PracticeScreen> with SingleTickerProvid
                           Expanded(
                             child: FilledButton.tonal(
                               onPressed: answered ? () => setState(() => _showSteps = !_showSteps) : null,
-                              child: Text(_showSteps ? 'Hide steps' : 'Show steps'),
+                              child: Text(
+                                _showSteps
+                                    ? (usesExplanation ? 'Hide Explanation' : 'Hide steps')
+                                    : (usesExplanation ? 'Show Explanation' : 'Show steps'),
+                              ),
                             ),
                           ),
                           if (answered && !correct) ...[
@@ -360,7 +367,7 @@ class _PracticeScreenState extends State<PracticeScreen> with SingleTickerProvid
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Steps',
+                                usesExplanation ? 'Explanation' : 'Steps',
                                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                                       fontWeight: FontWeight.w900,
                                     ),
@@ -370,7 +377,7 @@ class _PracticeScreenState extends State<PracticeScreen> with SingleTickerProvid
                                 Padding(
                                   padding: const EdgeInsets.only(bottom: 6),
                                   child: Text(
-                                    '• $s',
+                                    usesExplanation ? s : '• $s',
                                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                                           fontWeight: FontWeight.w600,
                                           height: 1.25,

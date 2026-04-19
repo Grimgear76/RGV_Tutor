@@ -1,6 +1,9 @@
+import 'subject.dart';
+
 class Problem {
   const Problem({
     required this.id,
+    required this.subject,
     required this.skill,
     required this.difficulty,
     required this.question,
@@ -10,6 +13,7 @@ class Problem {
   });
 
   final String id;
+  final Subject subject;
   final String skill;
   final int difficulty;
   final String question;
@@ -20,6 +24,7 @@ class Problem {
   factory Problem.fromJson(Map<String, dynamic> json) {
     return Problem(
       id: json['id'] as String,
+      subject: SubjectX.fromId((json['subject'] as String?) ?? Subject.math.id),
       skill: json['skill'] as String,
       difficulty: json['difficulty'] as int,
       question: json['question'] as String,

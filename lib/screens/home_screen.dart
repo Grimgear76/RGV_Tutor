@@ -21,7 +21,8 @@ class HomeScreen extends StatelessWidget {
     final bookState = context.watch<BookLibraryState>();
     final colorScheme = Theme.of(context).colorScheme;
     final subject = state.subject;
-    final mathEnabled = subject == Subject.math;
+    final practiceEnabled =
+        subject == Subject.math || subject == Subject.reading || subject == Subject.science || subject == Subject.history;
     final currentUser = state.currentUser;
 
     return Scaffold(
@@ -110,19 +111,19 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         Expanded(
                           child: FilledButton(
-                            onPressed: mathEnabled
+                            onPressed: practiceEnabled
                                 ? () {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(builder: (_) => const PracticeSetupScreen()),
                                     );
                                   }
                                 : null,
-                            child: Text(mathEnabled ? 'Continue math' : 'Coming soon'),
+                            child: Text(practiceEnabled ? 'Continue ${subject.label.toLowerCase()}' : 'Coming soon'),
                           ),
                         ),
                         const SizedBox(width: 12),
                         IconButton.filledTonal(
-                          onPressed: mathEnabled
+                          onPressed: practiceEnabled
                               ? () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(builder: (_) => const ProgressScreen()),
@@ -134,10 +135,10 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 18),
-                    if (!mathEnabled) _ComingSoon(subject: subject),
-                    if (mathEnabled) ...[
+                    if (!practiceEnabled) _ComingSoon(subject: subject),
+                    if (practiceEnabled) ...[
                       Text(
-                        'Pick a math skill',
+                        'Pick a ${subject.label.toLowerCase()} skill',
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.w800,
                             ),
@@ -200,7 +201,7 @@ class _ComingSoon extends StatelessWidget {
         borderRadius: BorderRadius.circular(22),
       ),
       child: Text(
-        '${subject.label} practice is coming soon.\nPick Math to try it now.',
+        '${subject.label} practice is coming soon.\nPick Math, Reading / Writing, Science, or History to try it now.',
         style: Theme.of(context).textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.w800,
               color: colorScheme.onSurfaceVariant,

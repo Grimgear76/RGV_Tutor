@@ -1645,5 +1645,1049 @@
       "Since d/dx(sin x) = cos x, the integral reverses that.",
       "\u222b cos(x) dx = sin(x) + C."
     ]
+  },
+  {
+    "id": "hist_us_01",
+    "subject": "history",
+    "skill": "US History",
+    "difficulty": 1,
+    "question": "Which document begins with \"We the People\"?",
+    "choices": ["Declaration of Independence", "U.S. Constitution", "Bill of Rights", "Magna Carta"],
+    "answerIndex": 1,
+    "steps": [
+      "The phrase \"We the People\" is the opening of the U.S. Constitution.",
+      "So the correct answer is U.S. Constitution."
+    ]
+  },
+  {
+    "id": "hist_us_02",
+    "subject": "history",
+    "skill": "US History",
+    "difficulty": 1,
+    "question": "What year did the United States declare independence?",
+    "choices": ["1492", "1776", "1865", "1914"],
+    "answerIndex": 1,
+    "steps": [
+      "The Declaration of Independence was adopted on July 4, 1776.",
+      "So the correct answer is 1776."
+    ]
+  },
+  {
+    "id": "hist_us_03",
+    "subject": "history",
+    "skill": "US History",
+    "difficulty": 2,
+    "question": "Which event is most closely associated with the start of the Great Depression in the U.S.?",
+    "choices": ["Louisiana Purchase", "Stock market crash of 1929", "Boston Tea Party", "Signing of the Treaty of Paris"],
+    "answerIndex": 1,
+    "steps": [
+      "The Great Depression is commonly linked to the stock market crash in 1929.",
+      "So the correct answer is Stock market crash of 1929."
+    ]
+  },
+  {
+    "id": "hist_world_01",
+    "subject": "history",
+    "skill": "World History",
+    "difficulty": 1,
+    "question": "Which ancient civilization built the pyramids at Giza?",
+    "choices": ["Romans", "Greeks", "Egyptians", "Vikings"],
+    "answerIndex": 2,
+    "steps": [
+      "The pyramids at Giza were built in Ancient Egypt.",
+      "So the correct answer is Egyptians."
+    ]
+  },
+  {
+    "id": "hist_world_02",
+    "subject": "history",
+    "skill": "World History",
+    "difficulty": 2,
+    "question": "The Renaissance began in which European region?",
+    "choices": ["Scandinavia", "Italy", "Russia", "Ireland"],
+    "answerIndex": 1,
+    "steps": [
+      "The Renaissance started in Italian city-states like Florence.",
+      "So the correct answer is Italy."
+    ]
+  },
+  {
+    "id": "hist_world_03",
+    "subject": "history",
+    "skill": "World History",
+    "difficulty": 3,
+    "question": "Which war ended with the Treaty of Versailles (1919)?",
+    "choices": ["World War I", "World War II", "The Cold War", "The Crimean War"],
+    "answerIndex": 0,
+    "steps": [
+      "The Treaty of Versailles was signed after World War I.",
+      "So the correct answer is World War I."
+    ]
+  },
+  {
+    "id": "hist_civics_01",
+    "subject": "history",
+    "skill": "Civics",
+    "difficulty": 1,
+    "question": "How many branches are in the U.S. federal government?",
+    "choices": ["2", "3", "4", "5"],
+    "answerIndex": 1,
+    "steps": [
+      "The U.S. federal government has three branches: legislative, executive, and judicial.",
+      "So the correct answer is 3."
+    ]
+  },
+  {
+    "id": "hist_civics_02",
+    "subject": "history",
+    "skill": "Civics",
+    "difficulty": 2,
+    "question": "Which branch of government is responsible for interpreting laws?",
+    "choices": ["Legislative", "Executive", "Judicial", "Local"],
+    "answerIndex": 2,
+    "steps": [
+      "Courts interpret laws and the Constitution.",
+      "So the correct answer is Judicial."
+    ]
+  },
+  {
+    "id": "hist_geo_01",
+    "subject": "history",
+    "skill": "Texas History",
+    "difficulty": 1,
+    "question": "What is the capital of Texas?",
+    "choices": ["Houston", "Austin", "Dallas", "San Antonio"],
+    "answerIndex": 1,
+    "steps": [
+      "Austin is the capital city of Texas.",
+      "So the correct answer is Austin."
+    ]
+  },
+  {
+    "id": "hist_tx_02",
+    "subject": "history",
+    "skill": "Texas History",
+    "difficulty": 2,
+    "question": "In which year did Texas become the 28th state of the United States?",
+    "choices": ["1836", "1845", "1861", "1901"],
+    "answerIndex": 1,
+    "steps": [
+      "Texas was annexed by the United States in 1845.",
+      "So the correct answer is 1845."
+    ]
+  },
+  {
+    "id": "hist_tx_03",
+    "subject": "history",
+    "skill": "Texas History",
+    "difficulty": 3,
+    "question": "Which battle is most associated with the phrase \"Remember the Alamo\"?",
+    "choices": ["Battle of San Jacinto", "Battle of the Alamo", "Battle of Gettysburg", "Battle of New Orleans"],
+    "answerIndex": 1,
+    "steps": [
+      "\"Remember the Alamo\" refers to the 1836 Battle of the Alamo during the Texas Revolution.",
+      "So the correct answer is Battle of the Alamo."
+    ]
+  },
+  {
+    "id": "hist_us_04",
+    "subject": "history",
+    "skill": "US History",
+    "difficulty": 1,
+    "question": "Which ocean is on the east coast of the United States?",
+    "choices": ["Pacific Ocean", "Atlantic Ocean", "Indian Ocean", "Arctic Ocean"],
+    "answerIndex": 1,
+    "steps": [
+      "The Atlantic Ocean borders the eastern United States.",
+      "So the correct answer is Atlantic Ocean."
+    ]
+  },
+  {
+    "id": "hist_us_05",
+    "subject": "history",
+    "skill": "US History",
+    "difficulty": 1,
+    "question": "Who was the first President of the United States?",
+    "choices": ["Thomas Jefferson", "George Washington", "Abraham Lincoln", "John Adams"],
+    "answerIndex": 1,
+    "steps": [
+      "George Washington served as the first U.S. President.",
+      "So the correct answer is George Washington."
+    ]
+  },
+  {
+    "id": "hist_us_06",
+    "subject": "history",
+    "skill": "US History",
+    "difficulty": 1,
+    "question": "What was the purpose of the Louisiana Purchase (1803)?",
+    "choices": ["To buy Alaska", "To double U.S. territory", "To end the Civil War", "To create the Bill of Rights"],
+    "answerIndex": 1,
+    "steps": [
+      "The Louisiana Purchase greatly expanded U.S. land and roughly doubled its size.",
+      "So the correct answer is To double U.S. territory."
+    ]
+  },
+  {
+    "id": "hist_us_07",
+    "subject": "history",
+    "skill": "US History",
+    "difficulty": 2,
+    "question": "Which amendment to the U.S. Constitution abolished slavery?",
+    "choices": ["10th", "13th", "15th", "19th"],
+    "answerIndex": 1,
+    "steps": [
+      "The 13th Amendment abolished slavery in the United States.",
+      "So the correct answer is 13th."
+    ]
+  },
+  {
+    "id": "hist_us_08",
+    "subject": "history",
+    "skill": "US History",
+    "difficulty": 2,
+    "question": "Which event directly prompted the U.S. entry into World War II?",
+    "choices": ["Boston Tea Party", "Pearl Harbor", "Louisiana Purchase", "Sputnik launch"],
+    "answerIndex": 1,
+    "steps": [
+      "Japan's attack on Pearl Harbor in 1941 led the U.S. to enter World War II.",
+      "So the correct answer is Pearl Harbor."
+    ]
+  },
+  {
+    "id": "hist_us_09",
+    "subject": "history",
+    "skill": "US History",
+    "difficulty": 2,
+    "question": "The Civil Rights Act of 1964 primarily aimed to:",
+    "choices": ["Create new states", "End segregation and discrimination", "Start the Space Race", "Raise tariffs"],
+    "answerIndex": 1,
+    "steps": [
+      "The Civil Rights Act of 1964 banned discrimination and helped end legal segregation.",
+      "So the correct answer is End segregation and discrimination."
+    ]
+  },
+  {
+    "id": "hist_us_10",
+    "subject": "history",
+    "skill": "US History",
+    "difficulty": 2,
+    "question": "What was the main goal of the New Deal programs?",
+    "choices": ["Expand colonies", "Respond to the Great Depression", "Start World War I", "End the Constitution"],
+    "answerIndex": 1,
+    "steps": [
+      "The New Deal was a set of programs to provide relief, recovery, and reform during the Great Depression.",
+      "So the correct answer is Respond to the Great Depression."
+    ]
+  },
+  {
+    "id": "hist_us_11",
+    "subject": "history",
+    "skill": "US History",
+    "difficulty": 3,
+    "question": "What is the term for the period of political tension between the U.S. and the Soviet Union after World War II?",
+    "choices": ["The Enlightenment", "The Cold War", "The Renaissance", "The Gilded Age"],
+    "answerIndex": 1,
+    "steps": [
+      "After World War II, the U.S. and Soviet Union were rivals in the Cold War.",
+      "So the correct answer is The Cold War."
+    ]
+  },
+  {
+    "id": "hist_us_12",
+    "subject": "history",
+    "skill": "US History",
+    "difficulty": 3,
+    "question": "Which Supreme Court case declared racial segregation in public schools unconstitutional?",
+    "choices": ["Marbury v. Madison", "Brown v. Board of Education", "Dred Scott v. Sandford", "Plessy v. Ferguson"],
+    "answerIndex": 1,
+    "steps": [
+      "Brown v. Board of Education (1954) ruled school segregation unconstitutional.",
+      "So the correct answer is Brown v. Board of Education."
+    ]
+  },
+  {
+    "id": "hist_us_13",
+    "subject": "history",
+    "skill": "US History",
+    "difficulty": 3,
+    "question": "What was the primary purpose of the Marshall Plan (1948)?",
+    "choices": ["Build the Panama Canal", "Rebuild Europe after World War II", "Purchase Louisiana", "Establish the United Nations"],
+    "answerIndex": 1,
+    "steps": [
+      "The Marshall Plan provided U.S. aid to help rebuild European economies after WWII.",
+      "So the correct answer is Rebuild Europe after World War II."
+    ]
+  },
+  {
+    "id": "hist_us_14",
+    "subject": "history",
+    "skill": "US History",
+    "difficulty": 3,
+    "question": "Which conflict is best described as a war between Northern and Southern states from 1861 to 1865?",
+    "choices": ["War of 1812", "American Civil War", "Spanish-American War", "Korean War"],
+    "answerIndex": 1,
+    "steps": [
+      "The American Civil War was fought from 1861 to 1865 between the Union and Confederacy.",
+      "So the correct answer is American Civil War."
+    ]
+  },
+  {
+    "id": "hist_us_15",
+    "subject": "history",
+    "skill": "US History",
+    "difficulty": 3,
+    "question": "Which economic idea is most associated with the term \"laissez-faire\" during the late 1800s?",
+    "choices": ["Government controls all prices", "Limited government intervention in business", "No private property", "Money should be abolished"],
+    "answerIndex": 1,
+    "steps": [
+      "Laissez-faire economics argues for minimal government involvement in the marketplace.",
+      "So the correct answer is Limited government intervention in business."
+    ]
+  },
+  {
+    "id": "hist_world_04",
+    "subject": "history",
+    "skill": "World History",
+    "difficulty": 1,
+    "question": "Which continent is the Sahara Desert located in?",
+    "choices": ["Asia", "Africa", "South America", "Europe"],
+    "answerIndex": 1,
+    "steps": [
+      "The Sahara is a large desert in northern Africa.",
+      "So the correct answer is Africa."
+    ]
+  },
+  {
+    "id": "hist_world_05",
+    "subject": "history",
+    "skill": "World History",
+    "difficulty": 1,
+    "question": "Which river is most associated with Ancient Egypt?",
+    "choices": ["Amazon", "Nile", "Yangtze", "Danube"],
+    "answerIndex": 1,
+    "steps": [
+      "Ancient Egypt developed along the Nile River.",
+      "So the correct answer is Nile."
+    ]
+  },
+  {
+    "id": "hist_world_06",
+    "subject": "history",
+    "skill": "World History",
+    "difficulty": 1,
+    "question": "Who is traditionally credited with major contributions to Greek philosophy as the teacher of Aristotle?",
+    "choices": ["Plato", "Julius Caesar", "Cleopatra", "Genghis Khan"],
+    "answerIndex": 0,
+    "steps": [
+      "Plato was a major Greek philosopher and the teacher of Aristotle.",
+      "So the correct answer is Plato."
+    ]
+  },
+  {
+    "id": "hist_world_07",
+    "subject": "history",
+    "skill": "World History",
+    "difficulty": 1,
+    "question": "Which invention is most associated with Johannes Gutenberg?",
+    "choices": ["Compass", "Printing press", "Steam engine", "Telephone"],
+    "answerIndex": 1,
+    "steps": [
+      "Gutenberg is known for developing the movable-type printing press in Europe.",
+      "So the correct answer is Printing press."
+    ]
+  },
+  {
+    "id": "hist_world_08",
+    "subject": "history",
+    "skill": "World History",
+    "difficulty": 2,
+    "question": "Which movement emphasized reason, science, and individual rights in the 1700s?",
+    "choices": ["Romanticism", "Enlightenment", "Feudalism", "Mercantilism"],
+    "answerIndex": 1,
+    "steps": [
+      "The Enlightenment promoted reason, science, and ideas about rights and government.",
+      "So the correct answer is Enlightenment."
+    ]
+  },
+  {
+    "id": "hist_world_09",
+    "subject": "history",
+    "skill": "World History",
+    "difficulty": 2,
+    "question": "The Silk Road was primarily used for:",
+    "choices": ["Religious ceremonies", "Trade between Asia and Europe", "Underwater exploration", "Space travel"],
+    "answerIndex": 1,
+    "steps": [
+      "The Silk Road was a network of trade routes linking Asia, the Middle East, and Europe.",
+      "So the correct answer is Trade between Asia and Europe."
+    ]
+  },
+  {
+    "id": "hist_world_10",
+    "subject": "history",
+    "skill": "World History",
+    "difficulty": 2,
+    "question": "What was a key cause of the French Revolution?",
+    "choices": ["Abolition of the monarchy in England", "Economic inequality and debt", "Discovery of Australia", "The fall of the Roman Empire"],
+    "answerIndex": 1,
+    "steps": [
+      "France faced deep inequality, heavy debt, and financial crisis, which contributed to revolution.",
+      "So the correct answer is Economic inequality and debt."
+    ]
+  },
+  {
+    "id": "hist_world_11",
+    "subject": "history",
+    "skill": "World History",
+    "difficulty": 2,
+    "question": "Industrialization first took hold most strongly in which country?",
+    "choices": ["Japan", "Great Britain", "Brazil", "Canada"],
+    "answerIndex": 1,
+    "steps": [
+      "The Industrial Revolution began in Great Britain in the late 1700s.",
+      "So the correct answer is Great Britain."
+    ]
+  },
+  {
+    "id": "hist_world_12",
+    "subject": "history",
+    "skill": "World History",
+    "difficulty": 3,
+    "question": "Which system describes a social order in medieval Europe based on land and loyalty?",
+    "choices": ["Democracy", "Feudalism", "Communism", "Capitalism"],
+    "answerIndex": 1,
+    "steps": [
+      "Feudalism involved nobles controlling land and vassals owing loyalty and service.",
+      "So the correct answer is Feudalism."
+    ]
+  },
+  {
+    "id": "hist_world_13",
+    "subject": "history",
+    "skill": "World History",
+    "difficulty": 3,
+    "question": "Which leader is most associated with the nonviolent movement for Indian independence?",
+    "choices": ["Napoleon", "Mahatma Gandhi", "Winston Churchill", "Vladimir Lenin"],
+    "answerIndex": 1,
+    "steps": [
+      "Gandhi led a nonviolent resistance movement for India's independence.",
+      "So the correct answer is Mahatma Gandhi."
+    ]
+  },
+  {
+    "id": "hist_world_14",
+    "subject": "history",
+    "skill": "World History",
+    "difficulty": 3,
+    "question": "What was the main purpose of the United Nations, founded in 1945?",
+    "choices": ["Control world trade", "Promote peace and cooperation", "Replace national governments", "End all elections"],
+    "answerIndex": 1,
+    "steps": [
+      "The UN was created to help prevent future wars and promote international cooperation.",
+      "So the correct answer is Promote peace and cooperation."
+    ]
+  },
+  {
+    "id": "hist_world_15",
+    "subject": "history",
+    "skill": "World History",
+    "difficulty": 3,
+    "question": "The term \"apartheid\" refers to a system of racial segregation that existed primarily in:",
+    "choices": ["South Africa", "China", "Norway", "Mexico"],
+    "answerIndex": 0,
+    "steps": [
+      "Apartheid was a policy of institutional racial segregation in South Africa.",
+      "So the correct answer is South Africa."
+    ]
+  },
+  {
+    "id": "hist_tx_04",
+    "subject": "history",
+    "skill": "Texas History",
+    "difficulty": 1,
+    "question": "Which symbol is featured on the Texas state flag?",
+    "choices": ["A single star", "A maple leaf", "A crown", "A pyramid"],
+    "answerIndex": 0,
+    "steps": [
+      "Texas is known as the Lone Star State, and its flag features a single star.",
+      "So the correct answer is A single star."
+    ]
+  },
+  {
+    "id": "hist_tx_05",
+    "subject": "history",
+    "skill": "Texas History",
+    "difficulty": 1,
+    "question": "What is Texas's nickname?",
+    "choices": ["Sunshine State", "Lone Star State", "Empire State", "Golden State"],
+    "answerIndex": 1,
+    "steps": [
+      "Texas is called the Lone Star State.",
+      "So the correct answer is Lone Star State."
+    ]
+  },
+  {
+    "id": "hist_tx_06",
+    "subject": "history",
+    "skill": "Texas History",
+    "difficulty": 1,
+    "question": "Which river forms a large part of the border between Texas and Mexico?",
+    "choices": ["Rio Grande", "Mississippi River", "Colorado River", "Ohio River"],
+    "answerIndex": 0,
+    "steps": [
+      "The Rio Grande forms much of the Texas-Mexico border.",
+      "So the correct answer is Rio Grande."
+    ]
+  },
+  {
+    "id": "hist_tx_07",
+    "subject": "history",
+    "skill": "Texas History",
+    "difficulty": 1,
+    "question": "Texas declared independence from which country in 1836?",
+    "choices": ["Spain", "Mexico", "France", "Canada"],
+    "answerIndex": 1,
+    "steps": [
+      "The Texas Revolution was fought for independence from Mexico.",
+      "So the correct answer is Mexico."
+    ]
+  },
+  {
+    "id": "hist_tx_08",
+    "subject": "history",
+    "skill": "Texas History",
+    "difficulty": 2,
+    "question": "Which city is most associated with the Alamo mission?",
+    "choices": ["El Paso", "San Antonio", "Lubbock", "Corpus Christi"],
+    "answerIndex": 1,
+    "steps": [
+      "The Alamo is located in San Antonio, Texas.",
+      "So the correct answer is San Antonio."
+    ]
+  },
+  {
+    "id": "hist_tx_09",
+    "subject": "history",
+    "skill": "Texas History",
+    "difficulty": 2,
+    "question": "Who was a leader of the Texas Revolution and later the first president of the Republic of Texas?",
+    "choices": ["Sam Houston", "George Washington", "Ulysses S. Grant", "Franklin D. Roosevelt"],
+    "answerIndex": 0,
+    "steps": [
+      "Sam Houston led Texas forces and became the first president of the Republic of Texas.",
+      "So the correct answer is Sam Houston."
+    ]
+  },
+  {
+    "id": "hist_tx_10",
+    "subject": "history",
+    "skill": "Texas History",
+    "difficulty": 2,
+    "question": "What is the name of the 1836 declaration that formally declared Texas independence?",
+    "choices": ["Texas Declaration of Independence", "Bill of Rights", "Treaty of Versailles", "Emancipation Proclamation"],
+    "answerIndex": 0,
+    "steps": [
+      "Texas formally declared independence in the Texas Declaration of Independence (1836).",
+      "So the correct answer is Texas Declaration of Independence."
+    ]
+  },
+  {
+    "id": "hist_tx_11",
+    "subject": "history",
+    "skill": "Texas History",
+    "difficulty": 2,
+    "question": "Which battle (1836) is often considered the decisive victory that secured Texas independence?",
+    "choices": ["Battle of San Jacinto", "Battle of Yorktown", "Battle of Bunker Hill", "Battle of Midway"],
+    "answerIndex": 0,
+    "steps": [
+      "The Battle of San Jacinto was a decisive Texas victory leading to independence.",
+      "So the correct answer is Battle of San Jacinto."
+    ]
+  },
+  {
+    "id": "hist_tx_12",
+    "subject": "history",
+    "skill": "Texas History",
+    "difficulty": 3,
+    "question": "The Republic of Texas existed as an independent nation during which years?",
+    "choices": ["1492–1600", "1836–1845", "1861–1865", "1900–1910"],
+    "answerIndex": 1,
+    "steps": [
+      "Texas was an independent republic from 1836 until it joined the U.S. in 1845.",
+      "So the correct answer is 1836–1845."
+    ]
+  },
+  {
+    "id": "hist_tx_13",
+    "subject": "history",
+    "skill": "Texas History",
+    "difficulty": 3,
+    "question": "Which agreement helped end the Texas Revolution by leading to Santa Anna's release?",
+    "choices": ["Treaties of Velasco", "Treaty of Paris", "Treaty of Ghent", "Treaty of Tordesillas"],
+    "answerIndex": 0,
+    "steps": [
+      "The Treaties of Velasco (1836) were signed after San Jacinto.",
+      "So the correct answer is Treaties of Velasco."
+    ]
+  },
+  {
+    "id": "hist_tx_14",
+    "subject": "history",
+    "skill": "Texas History",
+    "difficulty": 3,
+    "question": "The phrase \"Gone to Texas\" is associated with settlers moving to Texas primarily to:",
+    "choices": ["Escape debt or seek opportunity", "Join the Roman army", "Avoid learning to read", "Start World War II"],
+    "answerIndex": 0,
+    "steps": [
+      "Historically, \"Gone to Texas\" referred to people moving to Texas for opportunity or to escape debts.",
+      "So the correct answer is Escape debt or seek opportunity."
+    ]
+  },
+  {
+    "id": "hist_tx_15",
+    "subject": "history",
+    "skill": "Texas History",
+    "difficulty": 3,
+    "question": "Which industry is most closely tied to the Spindletop discovery in Texas (1901)?",
+    "choices": ["Oil", "Textiles", "Shipbuilding", "Coal mining"],
+    "answerIndex": 0,
+    "steps": [
+      "Spindletop was a major oil discovery that sparked an oil boom in Texas.",
+      "So the correct answer is Oil."
+    ]
+  },
+  {
+    "id": "hist_civics_03",
+    "subject": "history",
+    "skill": "Civics",
+    "difficulty": 1,
+    "question": "What is the name of the first ten amendments to the U.S. Constitution?",
+    "choices": ["Articles of Confederation", "Bill of Rights", "Federalist Papers", "Declaration of Independence"],
+    "answerIndex": 1,
+    "steps": [
+      "The first ten amendments are known as the Bill of Rights.",
+      "So the correct answer is Bill of Rights."
+    ]
+  },
+  {
+    "id": "hist_civics_04",
+    "subject": "history",
+    "skill": "Civics",
+    "difficulty": 1,
+    "question": "Which branch of government makes laws?",
+    "choices": ["Legislative", "Executive", "Judicial", "Military"],
+    "answerIndex": 0,
+    "steps": [
+      "Congress (the legislative branch) makes laws.",
+      "So the correct answer is Legislative."
+    ]
+  },
+  {
+    "id": "hist_civics_05",
+    "subject": "history",
+    "skill": "Civics",
+    "difficulty": 1,
+    "question": "Who is the head of the executive branch in the United States?",
+    "choices": ["Speaker of the House", "President", "Chief Justice", "Secretary of State"],
+    "answerIndex": 1,
+    "steps": [
+      "The President leads the executive branch.",
+      "So the correct answer is President."
+    ]
+  },
+  {
+    "id": "hist_civics_06",
+    "subject": "history",
+    "skill": "Civics",
+    "difficulty": 1,
+    "question": "What is the minimum voting age for U.S. citizens in federal elections?",
+    "choices": ["16", "18", "21", "25"],
+    "answerIndex": 1,
+    "steps": [
+      "The 26th Amendment set the voting age at 18.",
+      "So the correct answer is 18."
+    ]
+  },
+  {
+    "id": "hist_civics_07",
+    "subject": "history",
+    "skill": "Civics",
+    "difficulty": 2,
+    "question": "How many U.S. Senators does each state have?",
+    "choices": ["1", "2", "3", "Depends on population"],
+    "answerIndex": 1,
+    "steps": [
+      "Every state has two Senators.",
+      "So the correct answer is 2."
+    ]
+  },
+  {
+    "id": "hist_civics_08",
+    "subject": "history",
+    "skill": "Civics",
+    "difficulty": 2,
+    "question": "A bill becomes a law after it is passed by Congress and then:",
+    "choices": ["Approved by the Supreme Court", "Signed by the President (or Congress overrides a veto)", "Announced by the media", "Filed at a library"],
+    "answerIndex": 1,
+    "steps": [
+      "After passing Congress, a bill goes to the President to sign or veto.",
+      "So the correct answer is Signed by the President (or Congress overrides a veto)."
+    ]
+  },
+  {
+    "id": "hist_civics_09",
+    "subject": "history",
+    "skill": "Civics",
+    "difficulty": 2,
+    "question": "Which level of government is responsible for public schools in most communities?",
+    "choices": ["Local and state", "Foreign governments", "The United Nations", "Only the federal government"],
+    "answerIndex": 0,
+    "steps": [
+      "Education is mainly handled by state and local governments.",
+      "So the correct answer is Local and state."
+    ]
+  },
+  {
+    "id": "hist_civics_10",
+    "subject": "history",
+    "skill": "Civics",
+    "difficulty": 2,
+    "question": "Which part of the U.S. Constitution is considered the supreme law of the land?",
+    "choices": ["Preamble", "The Constitution itself", "State laws", "Executive orders"],
+    "answerIndex": 1,
+    "steps": [
+      "The Constitution is the highest law in the United States.",
+      "So the correct answer is The Constitution itself."
+    ]
+  },
+  {
+    "id": "hist_civics_11",
+    "subject": "history",
+    "skill": "Civics",
+    "difficulty": 3,
+    "question": "What is the main purpose of checks and balances?",
+    "choices": ["To speed up lawmaking", "To prevent one branch from becoming too powerful", "To eliminate elections", "To increase taxes"],
+    "answerIndex": 1,
+    "steps": [
+      "Checks and balances limit each branch and prevent concentration of power.",
+      "So the correct answer is To prevent one branch from becoming too powerful."
+    ]
+  },
+  {
+    "id": "hist_civics_12",
+    "subject": "history",
+    "skill": "Civics",
+    "difficulty": 3,
+    "question": "What is the term for a formal accusation of wrongdoing against a public official, such as the President?",
+    "choices": ["Ratification", "Impeachment", "Amnesty", "Census"],
+    "answerIndex": 1,
+    "steps": [
+      "Impeachment is the process of formally charging a federal official with misconduct.",
+      "So the correct answer is Impeachment."
+    ]
+  },
+  {
+    "id": "hist_civics_13",
+    "subject": "history",
+    "skill": "Civics",
+    "difficulty": 3,
+    "question": "Which clause in the Constitution gives Congress the power to regulate trade between states?",
+    "choices": ["Commerce Clause", "Due Process Clause", "Establishment Clause", "Equal Protection Clause"],
+    "answerIndex": 0,
+    "steps": [
+      "The Commerce Clause grants Congress power to regulate interstate commerce.",
+      "So the correct answer is Commerce Clause."
+    ]
+  },
+  {
+    "id": "hist_civics_14",
+    "subject": "history",
+    "skill": "Civics",
+    "difficulty": 3,
+    "question": "Why are Supreme Court justices appointed for life (good behavior)?",
+    "choices": ["To ensure they are elected often", "To promote judicial independence", "To allow states to remove them easily", "To shorten court cases"],
+    "answerIndex": 1,
+    "steps": [
+      "Life tenure helps keep justices independent from political pressure.",
+      "So the correct answer is To promote judicial independence."
+    ]
+  },
+  {
+    "id": "hist_civics_15",
+    "subject": "history",
+    "skill": "Civics",
+    "difficulty": 3,
+    "question": "What must happen for the Constitution to be amended?",
+    "choices": ["A simple majority vote in the Senate", "Proposal and ratification by supermajorities", "Approval by the President only", "A Supreme Court decision"],
+    "answerIndex": 1,
+    "steps": [
+      "Amendments require proposal (2/3 of Congress or states) and ratification (3/4 of states).",
+      "So the correct answer is Proposal and ratification by supermajorities."
+    ]
+  },
+  {
+    "id": "read_main_idea_01",
+    "subject": "reading",
+    "skill": "Reading Comprehension",
+    "difficulty": 1,
+    "question": "Which sentence best states the main idea?\n\nDogs have lived with humans for thousands of years. They help with hunting, guarding, and providing companionship. Many families consider dogs part of the family.",
+    "choices": [
+      "Dogs are better than cats.",
+      "Dogs have a long history with humans and serve many roles.",
+      "Hunting is the most important job dogs do.",
+      "Families should adopt more dogs."
+    ],
+    "answerIndex": 1,
+    "steps": [
+      "Look for the idea that connects all the details.",
+      "The passage lists several ways dogs live and work with people.",
+      "So the main idea is that dogs have a long history with humans and serve many roles."
+    ]
+  },
+  {
+    "id": "read_context_01",
+    "subject": "reading",
+    "skill": "Vocabulary in Context",
+    "difficulty": 1,
+    "question": "In the sentence, what does the word \"reluctant\" most nearly mean?\n\nMia was reluctant to speak in front of the class because she felt nervous.",
+    "choices": ["Eager", "Unwilling", "Loud", "Confident"],
+    "answerIndex": 1,
+    "steps": [
+      "Use nearby clues: Mia felt nervous about speaking.",
+      "That suggests she did not want to do it.",
+      "So \"reluctant\" means unwilling."
+    ]
+  },
+  {
+    "id": "read_inference_01",
+    "subject": "reading",
+    "skill": "Making Inferences",
+    "difficulty": 1,
+    "question": "What can you infer about the weather?\n\nAfter school, Jay grabbed his umbrella before stepping outside and heard thunder in the distance.",
+    "choices": ["It is snowing.", "A storm is likely.", "It is extremely hot.", "It is windy but clear."],
+    "answerIndex": 1,
+    "steps": [
+      "An umbrella and thunder are clues.",
+      "Thunder often happens during storms, and umbrellas are used for rain.",
+      "So you can infer a storm is likely."
+    ]
+  },
+  {
+    "id": "write_punctuation_01",
+    "subject": "reading",
+    "skill": "Writing Conventions",
+    "difficulty": 1,
+    "question": "Which sentence uses end punctuation correctly?",
+    "choices": [
+      "Where are you going.",
+      "I can't believe it!",
+      "Stop that?",
+      "We walked to the store?"
+    ],
+    "answerIndex": 1,
+    "steps": [
+      "Exclamations use an exclamation mark.",
+      "Questions use a question mark, and statements use a period.",
+      "\"I can't believe it!\" is punctuated correctly."
+    ]
+  },
+  {
+    "id": "read_structure_01",
+    "subject": "reading",
+    "skill": "Text Structure",
+    "difficulty": 2,
+    "question": "Which text structure is used most in the passage?\n\nFirst, gather the ingredients. Next, mix them in a bowl. Then, bake the mixture for 25 minutes. Finally, let it cool.",
+    "choices": ["Cause and effect", "Compare and contrast", "Sequence (steps in order)", "Problem and solution"],
+    "answerIndex": 2,
+    "steps": [
+      "Signal words like first, next, then, and finally show order.",
+      "The passage lists steps to complete a task.",
+      "So the structure is sequence."
+    ]
+  },
+  {
+    "id": "read_author_purpose_01",
+    "subject": "reading",
+    "skill": "Author's Purpose",
+    "difficulty": 2,
+    "question": "A brochure explains the benefits of recycling and encourages readers to recycle at home. What is the author's purpose?",
+    "choices": ["To entertain", "To persuade", "To tell a story", "To describe a character"],
+    "answerIndex": 1,
+    "steps": [
+      "Persuade means convince the reader to do something.",
+      "The brochure encourages readers to recycle.",
+      "So the author's purpose is to persuade."
+    ]
+  },
+  {
+    "id": "write_sentence_combine_01",
+    "subject": "reading",
+    "skill": "Writing Conventions",
+    "difficulty": 2,
+    "question": "Which is the best way to combine the sentences?\n\nThe team practiced every day. The team improved quickly.",
+    "choices": [
+      "The team practiced every day, but the team improved quickly.",
+      "The team practiced every day, and it improved quickly.",
+      "The team practiced every day because the team improved quickly.",
+      "The team practiced every day; the team improved quickly because."
+    ],
+    "answerIndex": 1,
+    "steps": [
+      "Use a conjunction to join two related ideas.",
+      "The second sentence follows from the first.",
+      "\"The team practiced every day, and it improved quickly.\" is clear and correct."
+    ]
+  },
+  {
+    "id": "read_claim_evidence_01",
+    "subject": "reading",
+    "skill": "Claims & Evidence",
+    "difficulty": 3,
+    "question": "Which sentence is the best evidence for the claim?\n\nClaim: Regular exercise can improve mood.",
+    "choices": [
+      "Many people enjoy watching sports.",
+      "Doctors often recommend exercise for overall health.",
+      "A study found that people who exercised three times a week reported feeling less stressed.",
+      "Exercise can be done indoors or outdoors."
+    ],
+    "answerIndex": 2,
+    "steps": [
+      "Evidence should directly support the claim.",
+      "The study result connects exercise with reduced stress (a mood benefit).",
+      "So the best evidence is the study finding."
+    ]
+  },
+  {
+    "id": "write_revision_01",
+    "subject": "reading",
+    "skill": "Revising & Editing",
+    "difficulty": 3,
+    "question": "Which revision best improves clarity?\n\nOriginal: The movie was good and I liked it because it was interesting.",
+    "choices": [
+      "The movie was good and I liked it.",
+      "I liked the movie because its plot kept me interested.",
+      "The movie was interesting and I liked it because it was good.",
+      "I liked it because it was a movie."
+    ],
+    "answerIndex": 1,
+    "steps": [
+      "A good revision removes repetition and adds specific meaning.",
+      "Option B explains why it was interesting without repeating \"good\" and \"liked\".",
+      "So the best revision is: I liked the movie because its plot kept me interested."
+    ]
+  },
+  {
+    "id": "read_tone_01",
+    "subject": "reading",
+    "skill": "Tone & Mood",
+    "difficulty": 3,
+    "question": "What is the tone of the sentence?\n\n\"At last, the long-awaited results arrived, and she could barely contain her excitement.\"",
+    "choices": ["Angry", "Excited", "Confused", "Bored"],
+    "answerIndex": 1,
+    "steps": [
+      "Words like \"at last\" and \"barely contain her excitement\" show strong positive emotion.",
+      "That feeling matches excitement.",
+      "So the tone is excited."
+    ]
+  },
+  {
+    "id": "sci_life_01",
+    "subject": "science",
+    "skill": "Life Science",
+    "difficulty": 1,
+    "question": "What is the basic unit of life?",
+    "choices": ["Atom", "Cell", "Organ", "Tissue"],
+    "answerIndex": 1,
+    "steps": [
+      "Living things are made of cells.",
+      "Cells are the smallest structures that can carry out life processes.",
+      "So the basic unit of life is the cell."
+    ]
+  },
+  {
+    "id": "sci_phys_01",
+    "subject": "science",
+    "skill": "Physical Science",
+    "difficulty": 1,
+    "question": "Which change is a physical change?",
+    "choices": ["Burning paper", "Rusting iron", "Melting ice", "Baking a cake"],
+    "answerIndex": 2,
+    "steps": [
+      "A physical change does not create a new substance.",
+      "Melting ice is still water, just in a different state.",
+      "So melting ice is a physical change."
+    ]
+  },
+  {
+    "id": "sci_earth_01",
+    "subject": "science",
+    "skill": "Earth Science",
+    "difficulty": 1,
+    "question": "What causes day and night on Earth?",
+    "choices": ["Earth's rotation", "Earth's revolution", "The Moon's rotation", "The Sun moving around Earth"],
+    "answerIndex": 0,
+    "steps": [
+      "Earth spins on its axis about once every 24 hours.",
+      "The side facing the Sun has day; the opposite side has night.",
+      "So day and night are caused by Earth's rotation."
+    ]
+  },
+  {
+    "id": "sci_energy_01",
+    "subject": "science",
+    "skill": "Energy",
+    "difficulty": 2,
+    "question": "Which form of energy is stored in a stretched rubber band?",
+    "choices": ["Thermal energy", "Chemical energy", "Elastic potential energy", "Electrical energy"],
+    "answerIndex": 2,
+    "steps": [
+      "When an object is stretched, it can store energy due to its shape.",
+      "That stored energy is potential energy.",
+      "For a rubber band, it's elastic potential energy."
+    ]
+  },
+  {
+    "id": "sci_ecology_01",
+    "subject": "science",
+    "skill": "Ecology",
+    "difficulty": 2,
+    "question": "In a food chain, what role does a producer play?",
+    "choices": ["Eats other organisms", "Breaks down dead matter", "Makes its own food", "Only eats plants"],
+    "answerIndex": 2,
+    "steps": [
+      "Producers make their own food, usually through photosynthesis.",
+      "They provide energy for other organisms in the chain.",
+      "So a producer makes its own food."
+    ]
+  },
+  {
+    "id": "sci_genetics_01",
+    "subject": "science",
+    "skill": "Genetics",
+    "difficulty": 3,
+    "question": "DNA is best described as:",
+    "choices": ["A type of sugar", "A genetic blueprint", "A cell wall", "A form of energy"],
+    "answerIndex": 1,
+    "steps": [
+      "DNA contains the instructions for building proteins and traits.",
+      "Those instructions guide how organisms grow and function.",
+      "So DNA is a genetic blueprint."
+    ]
+  },
+  {
+    "id": "sci_forces_01",
+    "subject": "science",
+    "skill": "Forces & Motion",
+    "difficulty": 3,
+    "question": "A net force of 0 N on an object means the object:",
+    "choices": ["Must be speeding up", "Must be slowing down", "Has no acceleration", "Cannot be moving"],
+    "answerIndex": 2,
+    "steps": [
+      "Net force is related to acceleration (Newton's 2nd law).",
+      "If the net force is zero, acceleration is zero.",
+      "The object can be at rest or moving at constant velocity.",
+      "So it has no acceleration."
+    ]
   }
 ]
