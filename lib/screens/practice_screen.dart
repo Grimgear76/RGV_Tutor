@@ -59,16 +59,6 @@ class _PracticeScreenState extends State<PracticeScreen> with SingleTickerProvid
     }
 
     _autoNext?.cancel();
-    _autoNext = Timer(const Duration(milliseconds: 900), () {
-      if (!mounted) return;
-      if (state.lastCorrect == true) {
-        setState(() {
-          _selected = null;
-          _showSteps = false;
-        });
-        state.next();
-      }
-    });
   }
 
   bool _looksLikeMath(String text) {
