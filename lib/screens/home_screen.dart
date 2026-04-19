@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../app_state.dart';
+import '../book_library_state.dart';
 import '../models/subject.dart';
+import '../widgets/library_mode_toggle.dart';
 import '../widgets/rgv_logo.dart';
+import 'book_hub_screen.dart';
 import 'practice_screen.dart';
 import 'practice_setup_screen.dart';
 import 'progress_screen.dart';
@@ -15,6 +18,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<AppState>();
+    final bookState = context.watch<BookLibraryState>();
     final colorScheme = Theme.of(context).colorScheme;
     final subject = state.subject;
     final mathEnabled = subject == Subject.math;
@@ -22,173 +26,157 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(18),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  const RgvTutorLogo(size: 40),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      'RGV Tutor',
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                            fontWeight: FontWeight.w900,
+        child: CustomScrollView(
+          slivers: [
+            SliverPadding(
+              padding: const EdgeInsets.all(18),
+              sliver: SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    Row(
+                      children: [
+                        const RgvTutorLogo(size: 40),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Text(
+                            'RGV Math Coach',
+                            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                  fontWeight: FontWeight.w900,
+                                ),
+                          ),
+                        ),
+                        IconButton(
+                          tooltip: 'Books',
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(builder: (_) => const BookHubScreen()),
+                            );
+                          },
+                          icon: const Icon(Icons.library_books_rounded),
+                        ),
+                        IconButton(
+                          tooltip: 'Sign out',
+                          onPressed: () => context.read<AppState>().signOut(),
+                          icon: const Icon(Icons.logout_rounded),
+                        ),
+                        const LibraryModeToggle(compact: true),
+                      ],
+                    ),
+                    const SizedBox(height: 14),
+                    if (currentUser != null) ...[
+                      Text(
+                        currentUser.isGuest
+                            ? 'Hi Guest!'
+                            : 'Hi ${currentUser.name.isEmpty ? currentUser.username : currentUser.name}!',
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.w900,
+                            ),
+                      ),
+                      const SizedBox(height: 8),
+                    ],
+                    Text(
+                      'Pick a subject and practice ${bookState.mode == LibraryMode.online ? 'online' : 'offline'}.',
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: colorScheme.onSurfaceVariant,
+                            fontWeight: FontWeight.w600,
                           ),
                     ),
-                  ),
-                  IconButton(
-                    tooltip: 'Sign out',
-                    onPressed: () => context.read<AppState>().signOut(),
-                    icon: const Icon(Icons.logout_rounded),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    decoration: BoxDecoration(
-                      color: colorScheme.surfaceContainerHighest,
-                      borderRadius: BorderRadius.circular(999),
+                    const SizedBox(height: 18),
+                    Text(
+                      'Choose a subject',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.w800,
+                          ),
                     ),
-                    child: Row(
+                    const SizedBox(height: 10),
+                    GridView.count(
+                      shrinkWrap: true,
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 12,
+                      crossAxisSpacing: 12,
+                      childAspectRatio: 1.2,
+                      physics: const NeverScrollableScrollPhysics(),
                       children: [
-                        Icon(Icons.offline_bolt_rounded, size: 18, color: colorScheme.onSurfaceVariant),
-                        const SizedBox(width: 6),
-                        Text(
-                          'Offline ready',
-                          style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                                color: colorScheme.onSurfaceVariant,
-                                fontWeight: FontWeight.w700,
-                              ),
+                        for (final s in Subject.values)
+                          _SubjectCard(
+                            subject: s,
+                            selected: s == subject,
+                            onTap: () => state.setSubject(s),
+                          ),
+                      ],
+                    ),
+                    const SizedBox(height: 18),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: FilledButton(
+                            onPressed: mathEnabled
+                                ? () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(builder: (_) => const PracticeSetupScreen()),
+                                    );
+                                  }
+                                : null,
+                            child: Text(mathEnabled ? 'Continue math' : 'Coming soon'),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        IconButton.filledTonal(
+                          onPressed: mathEnabled
+                              ? () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (_) => const ProgressScreen()),
+                                  );
+                                }
+                              : null,
+                          icon: const Icon(Icons.insights_rounded),
                         ),
                       ],
                     ),
-                  )
-                ],
-              ),
-              const SizedBox(height: 14),
-              if (currentUser != null) ...[
-                Text(
-                  currentUser.isGuest
-                      ? 'Hi Guest!'
-                      : 'Hi ${currentUser.name.isEmpty ? currentUser.username : currentUser.name}!',
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w900,
+                    const SizedBox(height: 18),
+                    if (!mathEnabled) _ComingSoon(subject: subject),
+                    if (mathEnabled) ...[
+                      Text(
+                        'Pick a math skill',
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.w800,
+                            ),
                       ),
-                ),
-                const SizedBox(height: 8),
-              ],
-              Text(
-                'Pick a subject and practice offline.',
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: colorScheme.onSurfaceVariant,
-                      fontWeight: FontWeight.w600,
-                    ),
-              ),
-              const SizedBox(height: 18),
-              Text(
-                'Choose a subject',
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w800,
-                    ),
-              ),
-              const SizedBox(height: 10),
-              GridView.count(
-                shrinkWrap: true,
-                crossAxisCount: 2,
-                mainAxisSpacing: 12,
-                crossAxisSpacing: 12,
-                childAspectRatio: 1.2,
-                physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  for (final s in Subject.values)
-                    _SubjectCard(
-                      subject: s,
-                      selected: s == subject,
-                      onTap: () => state.setSubject(s),
-                    ),
-                ],
-              ),
-              const SizedBox(height: 18),
-              Row(
-                children: [
-                  Expanded(
-                    child: FilledButton(
-                      onPressed: mathEnabled
-                          ? () {
+                      const SizedBox(height: 10),
+                      GridView.count(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 12,
+                        crossAxisSpacing: 12,
+                        childAspectRatio: 1.15,
+                        children: [
+                          _PersonalQuestionsCard(
+                            onTap: () {
                               Navigator.of(context).push(
-                                MaterialPageRoute(builder: (_) => const PracticeSetupScreen()),
+                                MaterialPageRoute(builder: (_) => const PersonalQuestionsScreen()),
                               );
-                            }
-                          : null,
-                      child: Text(mathEnabled ? 'Continue math' : 'Coming soon'),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  IconButton.filledTonal(
-                    onPressed: mathEnabled
-                        ? () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(builder: (_) => const ProgressScreen()),
-                            );
-                          }
-                        : null,
-                    icon: const Icon(Icons.insights_rounded),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 18),
-              Expanded(
-                child: mathEnabled
-                    ? ClipRect(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Pick a math skill',
-                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                    fontWeight: FontWeight.w800,
-                                  ),
+                            },
+                          ),
+                          for (final skill in state.skills)
+                            _SkillCard(
+                              skill: skill,
+                              mastery: state.masteryFor(skill),
+                              onTap: () {
+                                state.startSkill(skill);
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(builder: (_) => const PracticeScreen()),
+                                );
+                              },
                             ),
-                            const SizedBox(height: 10),
-                            Expanded(
-                              child: GridView.count(
-                                padding: EdgeInsets.zero,
-                                physics: const ClampingScrollPhysics(),
-                                clipBehavior: Clip.hardEdge,
-                                crossAxisCount: 2,
-                                mainAxisSpacing: 12,
-                                crossAxisSpacing: 12,
-                                childAspectRatio: 1.15,
-                                children: [
-                                  _PersonalQuestionsCard(
-                                    onTap: () {
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(builder: (_) => const PersonalQuestionsScreen()),
-                                      );
-                                    },
-                                  ),
-                                  for (final skill in state.skills)
-                                    _SkillCard(
-                                      skill: skill,
-                                      mastery: state.masteryFor(skill),
-                                      onTap: () {
-                                        state.startSkill(skill);
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(builder: (_) => const PracticeScreen()),
-                                        );
-                                      },
-                                    ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    : _ComingSoon(subject: subject),
+                        ],
+                      ),
+                    ],
+                  ],
+                ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

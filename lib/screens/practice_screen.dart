@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../app_state.dart';
 import '../widgets/feedback_burst.dart';
+import '../widgets/quiz_card.dart';
 import '../widgets/xp_bar.dart';
 
 class PracticeScreen extends StatefulWidget {
@@ -70,28 +71,23 @@ class _PracticeScreenState extends State<PracticeScreen> with SingleTickerProvid
   }
 
   bool _looksLikeMath(String text) {
-    return text.contains('∫') ||
-        text.contains('lim') ||
-        text.contains('π') ||
-        text.contains('→') ||
-        text.contains('^') ||
-        text.contains('_') ||
-        text.contains('sin') ||
-        text.contains('cos') ||
-        text.contains('tan') ||
-        text.contains('ln') ||
-        text.contains('e^') ||
-        text.contains('d/dx');
+    final trimmed = text.trim();
+    if (trimmed.isEmpty) return false;
+
+    final hasMathSymbols = RegExp(r'[=+\-*/^()\[\]{}<>√×÷]').hasMatch(trimmed);
+    final hasDigit = RegExp(r'\d').hasMatch(trimmed);
+    final hasWord = RegExp(r'[A-Za-z]{2,}').hasMatch(trimmed);
+    final isSingleLetterVariable = RegExp(r'^[A-Za-z]$').hasMatch(trimmed);
+
+    return hasMathSymbols || (hasDigit && (!hasWord || isSingleLetterVariable));
   }
 
   TextStyle _problemTextStyle(BuildContext context, String text) {
-    final base = Theme.of(context).textTheme.titleLarge?.copyWith(
-          fontWeight: FontWeight.w900,
-          height: 1.25,
-        );
-
-    if (!_looksLikeMath(text)) return base ?? const TextStyle();
-    return (base ?? const TextStyle()).copyWith(fontFamily: 'monospace');
+    final base = Theme.of(context).textTheme.bodyLarge ?? const TextStyle(fontSize: 16);
+    if (_looksLikeMath(text)) {
+      return (Theme.of(context).textTheme.titleLarge ?? base).copyWith(height: 1.1);
+    }
+    return base.copyWith(height: 1.15);
   }
 
   TextStyle _fitSingleLine(
@@ -99,33 +95,27 @@ class _PracticeScreenState extends State<PracticeScreen> with SingleTickerProvid
     required String text,
     required TextStyle style,
     required double maxWidth,
-    required double minFontSize,
+    double minFontSize = 12,
   }) {
-    final baseSize = style.fontSize ?? Theme.of(context).textTheme.titleLarge?.fontSize ?? 20;
-    var low = minFontSize;
-    var high = baseSize;
+    final textDirection = Directionality.of(context);
 
-    bool fits(double size) {
+    var fontSize = (style.fontSize ?? 16).toDouble();
+    if (fontSize < minFontSize) fontSize = minFontSize;
+
+    for (var size = fontSize; size >= minFontSize; size -= 1) {
+      final candidate = style.copyWith(fontSize: size);
       final painter = TextPainter(
-        text: TextSpan(text: text, style: style.copyWith(fontSize: size)),
+        text: TextSpan(text: text, style: candidate),
         maxLines: 1,
-        textDirection: TextDirection.ltr,
+        textDirection: textDirection,
       )..layout(maxWidth: maxWidth);
-      return !painter.didExceedMaxLines;
-    }
 
-    if (fits(high)) return style;
-
-    for (var i = 0; i < 12; i++) {
-      final mid = (low + high) / 2;
-      if (fits(mid)) {
-        low = mid;
-      } else {
-        high = mid;
+      if (!painter.didExceedMaxLines && painter.width <= maxWidth) {
+        return candidate;
       }
     }
 
-    return style.copyWith(fontSize: low);
+    return style.copyWith(fontSize: minFontSize);
   }
 
   @override
@@ -221,48 +211,7 @@ class _PracticeScreenState extends State<PracticeScreen> with SingleTickerProvid
                         child: Container(
                           width: double.infinity,
                           constraints: BoxConstraints(maxHeight: maxQuestionHeight),
-                          padding: const EdgeInsets.all(18),
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.surfaceContainerHighest,
-                            borderRadius: BorderRadius.circular(22),
-                          ),
-                          child: LayoutBuilder(
-                            builder: (context, box) {
-                              final style = _problemTextStyle(context, problem.question);
-                              final isMath = _looksLikeMath(problem.question);
-
-                              if (isMath) {
-                                final fitted = _fitSingleLine(
-                                  context,
-                                  text: problem.question,
-                                  style: style,
-                                  maxWidth: box.maxWidth,
-                                  minFontSize: 16,
-                                );
-
-                                return SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: ConstrainedBox(
-                                    constraints: BoxConstraints(minWidth: box.maxWidth),
-                                    child: Text(
-                                      problem.question,
-                                      maxLines: 1,
-                                      softWrap: false,
-                                      style: fitted,
-                                    ),
-                                  ),
-                                );
-                              }
-
-                              return SingleChildScrollView(
-                                child: Text(
-                                  problem.question,
-                                  textAlign: TextAlign.start,
-                                  style: style,
-                                ),
-                              );
-                            },
-                          ),
+                          child: QuizCard(text: problem.question, maxHeight: maxQuestionHeight),
                         ),
                       ),
                       const SizedBox(height: 14),

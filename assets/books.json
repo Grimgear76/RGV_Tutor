@@ -1,0 +1,1145 @@
+[
+  {
+    "id": "standardebooks-a-christmas-carol",
+    "title": "A Christmas Carol",
+    "author": "Charles Dickens",
+    "format": "epub",
+    "remoteUrl": "https://standardebooks.org/ebooks/charles-dickens/a-christmas-carol/downloads/charles-dickens_a-christmas-carol.epub?source=download",
+    "coverUrl": "https://standardebooks.org/ebooks/charles-dickens/a-christmas-carol/downloads/cover.jpg",
+    "source": "standardebooks"
+  },
+  {
+    "id": "gutenberg-a-doll-s-house-2542",
+    "title": "A Doll's House",
+    "author": "Henrik Ibsen",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/2542.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/2542/pg2542.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-a-journey-to-the-center-of-the-earth-18857",
+    "title": "A Journey to the Center of the Earth",
+    "author": "Jules Verne",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/18857.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/18857/pg18857.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-a-midsummer-night-s-dream-1514",
+    "title": "A Midsummer Night's Dream",
+    "author": "William Shakespeare",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/1514.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/1514/pg1514.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-a-modest-proposal-1080",
+    "title": "A Modest Proposal",
+    "author": "Jonathan Swift",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/1080.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/1080/pg1080.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-a-room-with-a-view-2641",
+    "title": "A Room with a View",
+    "author": "E. M. Forster",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/2641.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/2641/pg2641.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-a-study-in-scarlet-244",
+    "title": "A Study in Scarlet",
+    "author": "Arthur Conan Doyle",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/244.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/244/pg244.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-tale-of-two-cities-98",
+    "title": "A Tale of Two Cities",
+    "author": "Charles Dickens",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/98.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/98/pg98.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-huckleberry-finn-76",
+    "title": "Adventures of Huckleberry Finn",
+    "author": "Mark Twain",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/76.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/76/pg76.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-aesop-s-fables-21",
+    "title": "Aesop's Fables",
+    "author": "Aesop",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/21.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/21/pg21.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-after-london-or-wild-england-13944",
+    "title": "After London; Or, Wild England",
+    "author": "Richard Jefferies",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/13944.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/13944/pg13944.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-agnes-grey-767",
+    "title": "Agnes Grey",
+    "author": "Anne Brontë",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/767.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/767/pg767.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-alice-11",
+    "title": "Alice's Adventures in Wonderland",
+    "author": "Lewis Carroll",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/11.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/11/pg11.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-anna-karenina-1399",
+    "title": "Anna Karenina",
+    "author": "Leo Tolstoy",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/1399.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/1399/pg1399.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "standardebooks-anne-of-green-gables",
+    "title": "Anne of Green Gables",
+    "author": "L. M. Montgomery",
+    "format": "epub",
+    "remoteUrl": "https://standardebooks.org/ebooks/l-m-montgomery/anne-of-green-gables/downloads/l-m-montgomery_anne-of-green-gables.epub?source=download",
+    "coverUrl": "https://standardebooks.org/ebooks/l-m-montgomery/anne-of-green-gables/downloads/cover.jpg",
+    "source": "standardebooks"
+  },
+  {
+    "id": "gutenberg-anthem-1250",
+    "title": "Anthem",
+    "author": "Ayn Rand",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/1250.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/1250/pg1250.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-around-the-world-in-eighty-days-103",
+    "title": "Around the World in Eighty Days",
+    "author": "Jules Verne",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/103.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/103/pg103.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-autobiography-of-benjamin-franklin-20203",
+    "title": "Autobiography of Benjamin Franklin",
+    "author": "Benjamin Franklin",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/20203.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/20203/pg20203.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-bartleby-the-scrivener-11231",
+    "title": "Bartleby, the Scrivener",
+    "author": "Herman Melville",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/11231.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/11231/pg11231.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-beowulf-16328",
+    "title": "Beowulf",
+    "author": "Anonymous",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/16328.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/16328/pg16328.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-beyond-good-and-evil-4363",
+    "title": "Beyond Good and Evil",
+    "author": "Friedrich Nietzsche",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/4363.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/4363/pg4363.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-candide-19942",
+    "title": "Candide",
+    "author": "Voltaire",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/19942.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/19942/pg19942.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-carmilla-10007",
+    "title": "Carmilla",
+    "author": "J. Sheridan Le Fanu",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/10007.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/10007/pg10007.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-common-sense-147",
+    "title": "Common Sense",
+    "author": "Thomas Paine",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/147.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/147/pg147.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-crime-and-punishment-2554",
+    "title": "Crime and Punishment",
+    "author": "Fyodor Dostoyevsky",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/2554.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/2554/pg2554.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-david-copperfield-766",
+    "title": "David Copperfield",
+    "author": "Charles Dickens",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/766.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/766/pg766.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-de-profundis-921",
+    "title": "De Profundis",
+    "author": "Oscar Wilde",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/921.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/921/pg921.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-demian-5200",
+    "title": "Demian",
+    "author": "Hermann Hesse",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/5200.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/5200/pg5200.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-don-quixote-996",
+    "title": "Don Quixote",
+    "author": "Miguel de Cervantes Saavedra",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/996.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/996/pg996.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-dr-syn-24854",
+    "title": "Dr. Syn",
+    "author": "Russell Thorndike",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/24854.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/24854/pg24854.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "standardebooks-dracula",
+    "title": "Dracula",
+    "author": "Bram Stoker",
+    "format": "epub",
+    "remoteUrl": "https://standardebooks.org/ebooks/bram-stoker/dracula/downloads/bram-stoker_dracula.epub?source=download",
+    "coverUrl": "https://standardebooks.org/ebooks/bram-stoker/dracula/downloads/cover.jpg",
+    "source": "standardebooks"
+  },
+  {
+    "id": "gutenberg-dracula-s-guest-10150",
+    "title": "Dracula's Guest",
+    "author": "Bram Stoker",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/10150.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/10150/pg10150.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-dubliners-2814",
+    "title": "Dubliners",
+    "author": "James Joyce",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/2814.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/2814/pg2814.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-erewhon-or-over-the-range-1906",
+    "title": "Erewhon; Or, Over the Range",
+    "author": "Samuel Butler",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/1906.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/1906/pg1906.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-ethan-frome-4517",
+    "title": "Ethan Frome",
+    "author": "Edith Wharton",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/4517.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/4517/pg4517.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-eugene-onegin-23997",
+    "title": "Eugene Onegin",
+    "author": "Alexander Pushkin",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/23997.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/23997/pg23997.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-far-from-the-madding-crowd-107",
+    "title": "Far from the Madding Crowd",
+    "author": "Thomas Hardy",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/107.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/107/pg107.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "standardebooks-frankenstein",
+    "title": "Frankenstein",
+    "author": "Mary Shelley",
+    "format": "epub",
+    "remoteUrl": "https://standardebooks.org/ebooks/mary-shelley/frankenstein/downloads/mary-shelley_frankenstein.epub?source=download",
+    "coverUrl": "https://standardebooks.org/ebooks/mary-shelley/frankenstein/downloads/cover.jpg",
+    "source": "standardebooks"
+  },
+  {
+    "id": "gutenberg-great-expectations-1400",
+    "title": "Great Expectations",
+    "author": "Charles Dickens",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/1400.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/1400/pg1400.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-grimm-2591",
+    "title": "Grimm's Fairy Stories",
+    "author": "Jacob Grimm, Wilhelm Grimm",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/2591.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/2591/pg2591.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-gulliver-s-travels-829",
+    "title": "Gulliver's Travels",
+    "author": "Jonathan Swift",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/829.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/829/pg829.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-hamlet-1524",
+    "title": "Hamlet",
+    "author": "William Shakespeare",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/1524.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/1524/pg1524.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-heart-of-darkness-219",
+    "title": "Heart of Darkness",
+    "author": "Joseph Conrad",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/219.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/219/pg219.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-hedda-gabler-4093",
+    "title": "Hedda Gabler",
+    "author": "Henrik Ibsen",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/4093.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/4093/pg4093.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-herland-32",
+    "title": "Herland",
+    "author": "Charlotte Perkins Gilman",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/32.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/32/pg32.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "standardebooks-grimm-fairy-tales",
+    "title": "Household Tales",
+    "author": "Jacob Grimm, Wilhelm Grimm",
+    "format": "epub",
+    "remoteUrl": "https://standardebooks.org/ebooks/jacob-grimm_wilhelm-grimm/household-tales/margaret-hunt/downloads/jacob-grimm-wilhelm-grimm_household-tales_margaret-hunt.epub?source=download",
+    "coverUrl": "https://standardebooks.org/ebooks/jacob-grimm_wilhelm-grimm/household-tales/margaret-hunt/downloads/cover.jpg",
+    "source": "standardebooks"
+  },
+  {
+    "id": "gutenberg-iliad-6130",
+    "title": "Iliad",
+    "author": "Homer",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/6130.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/6130/pg6130.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-incidents-in-the-life-of-a-slave-girl-11030",
+    "title": "Incidents in the Life of a Slave Girl",
+    "author": "Harriet A. Jacobs",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/11030.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/11030/pg11030.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-jane-eyre-1260",
+    "title": "Jane Eyre",
+    "author": "Charlotte Brontë",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/1260.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/1260/pg1260.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-kidnapped-421",
+    "title": "Kidnapped",
+    "author": "Robert Louis Stevenson",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/421.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/421/pg421.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-kim-2226",
+    "title": "Kim",
+    "author": "Rudyard Kipling",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/2226.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/2226/pg2226.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-leaves-of-grass-1322",
+    "title": "Leaves of Grass",
+    "author": "Walt Whitman",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/1322.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/1322/pg1322.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-les-mis-rables-135",
+    "title": "Les Misérables",
+    "author": "Victor Hugo",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/135.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/135/pg135.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-leviathan-3207",
+    "title": "Leviathan",
+    "author": "Thomas Hobbes",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/3207.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/3207/pg3207.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-little-lord-fauntleroy-479",
+    "title": "Little Lord Fauntleroy",
+    "author": "Frances Hodgson Burnett",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/479.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/479/pg479.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-little-women-514",
+    "title": "Little Women",
+    "author": "Louisa May Alcott",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/514.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/514/pg514.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-macbeth-2264",
+    "title": "Macbeth",
+    "author": "William Shakespeare",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/2264.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/2264/pg2264.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-madame-bovary-2413",
+    "title": "Madame Bovary",
+    "author": "Gustave Flaubert",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/2413.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/2413/pg2413.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-meditations-2680",
+    "title": "Meditations",
+    "author": "Marcus Aurelius",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/2680.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/2680/pg2680.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-metamorphoses-21765",
+    "title": "Metamorphoses",
+    "author": "Ovid",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/21765.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/21765/pg21765.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "standardebooks-moby-dick",
+    "title": "Moby-Dick; Or, The Whale",
+    "author": "Herman Melville",
+    "format": "epub",
+    "remoteUrl": "https://standardebooks.org/ebooks/herman-melville/moby-dick/downloads/herman-melville_moby-dick.epub?source=download",
+    "coverUrl": "https://standardebooks.org/ebooks/herman-melville/moby-dick/downloads/cover.jpg",
+    "source": "standardebooks"
+  },
+  {
+    "id": "gutenberg-narrative-of-the-life-of-frederick-douglass-23",
+    "title": "Narrative of the Life of Frederick Douglass",
+    "author": "Frederick Douglass",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/23.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/23/pg23.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-notes-from-the-underground-600",
+    "title": "Notes from the Underground",
+    "author": "Fyodor Dostoyevsky",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/600.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/600/pg600.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-o-pioneers-24",
+    "title": "O Pioneers!",
+    "author": "Willa Cather",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/24.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/24/pg24.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "standardebooks-oliver-twist",
+    "title": "Oliver Twist",
+    "author": "Charles Dickens",
+    "format": "epub",
+    "remoteUrl": "https://standardebooks.org/ebooks/charles-dickens/oliver-twist/downloads/charles-dickens_oliver-twist.epub?source=download",
+    "coverUrl": "https://standardebooks.org/ebooks/charles-dickens/oliver-twist/downloads/cover.jpg",
+    "source": "standardebooks"
+  },
+  {
+    "id": "gutenberg-on-the-origin-of-species-2009",
+    "title": "On the Origin of Species",
+    "author": "Charles Darwin",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/2009.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/2009/pg2009.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-paradise-lost-26",
+    "title": "Paradise Lost",
+    "author": "John Milton",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/26.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/26/pg26.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-peter-pan-16",
+    "title": "Peter Pan",
+    "author": "J. M. Barrie",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/16.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/16/pg16.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-phantom-of-the-opera-175",
+    "title": "Phantom of the Opera",
+    "author": "Gaston Leroux",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/175.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/175/pg175.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-pinocchio-500",
+    "title": "Pinocchio",
+    "author": "Carlo Collodi",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/500.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/500/pg500.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "standardebooks-pride-and-prejudice",
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "format": "epub",
+    "remoteUrl": "https://standardebooks.org/ebooks/jane-austen/pride-and-prejudice/downloads/jane-austen_pride-and-prejudice.epub?source=download",
+    "coverUrl": "https://standardebooks.org/ebooks/jane-austen/pride-and-prejudice/downloads/cover.jpg",
+    "source": "standardebooks"
+  },
+  {
+    "id": "gutenberg-pygmalion-3825",
+    "title": "Pygmalion",
+    "author": "George Bernard Shaw",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/3825.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/3825/pg3825.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-rebecca-of-sunnybrook-farm-498",
+    "title": "Rebecca of Sunnybrook Farm",
+    "author": "Kate Douglas Wiggin",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/498.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/498/pg498.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-red-badge-of-courage-73",
+    "title": "Red Badge of Courage",
+    "author": "Stephen Crane",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/73.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/73/pg73.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-romeo-and-juliet-1112",
+    "title": "Romeo and Juliet",
+    "author": "William Shakespeare",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/1112.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/1112/pg1112.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-sense-and-sensibility-161",
+    "title": "Sense and Sensibility",
+    "author": "Jane Austen",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/161.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/161/pg161.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-siddhartha-2500",
+    "title": "Siddhartha",
+    "author": "Hermann Hesse",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/2500.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/2500/pg2500.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-silas-marner-550",
+    "title": "Silas Marner",
+    "author": "George Eliot",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/550.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/550/pg550.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-sister-carrie-233",
+    "title": "Sister Carrie",
+    "author": "Theodore Dreiser",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/233.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/233/pg233.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "standardebooks-jekyll-hyde",
+    "title": "Strange Case of Dr. Jekyll and Mr. Hyde",
+    "author": "Robert Louis Stevenson",
+    "format": "epub",
+    "remoteUrl": "https://standardebooks.org/ebooks/robert-louis-stevenson/strange-case-of-dr-jekyll-and-mr-hyde/downloads/robert-louis-stevenson_strange-case-of-dr-jekyll-and-mr-hyde.epub?source=download",
+    "coverUrl": "https://standardebooks.org/ebooks/robert-louis-stevenson/strange-case-of-dr-jekyll-and-mr-hyde/downloads/cover.jpg",
+    "source": "standardebooks"
+  },
+  {
+    "id": "gutenberg-swiss-family-robinson-11703",
+    "title": "Swiss Family Robinson",
+    "author": "Johann David Wyss",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/11703.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/11703/pg11703.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-tarzan-of-the-apes-78",
+    "title": "Tarzan of the Apes",
+    "author": "Edgar Rice Burroughs",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/78.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/78/pg78.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "standardebooks-sherlock-holmes-1",
+    "title": "The Adventures of Sherlock Holmes",
+    "author": "Arthur Conan Doyle",
+    "format": "epub",
+    "remoteUrl": "https://standardebooks.org/ebooks/arthur-conan-doyle/the-adventures-of-sherlock-holmes/downloads/arthur-conan-doyle_the-adventures-of-sherlock-holmes.epub?source=download",
+    "coverUrl": "https://standardebooks.org/ebooks/arthur-conan-doyle/the-adventures-of-sherlock-holmes/downloads/cover.jpg",
+    "source": "standardebooks"
+  },
+  {
+    "id": "gutenberg-tom-sawyer-74",
+    "title": "The Adventures of Tom Sawyer",
+    "author": "Mark Twain",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/74.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/74/pg74.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-the-aeneid-228",
+    "title": "The Aeneid",
+    "author": "Virgil",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/228.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/228/pg228.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-the-age-of-innocence-541",
+    "title": "The Age of Innocence",
+    "author": "Edith Wharton",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/541.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/541/pg541.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-the-art-of-war-132",
+    "title": "The Art of War",
+    "author": "Sun Tzu",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/132.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/132/pg132.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-the-awakening-160",
+    "title": "The Awakening",
+    "author": "Kate Chopin",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/160.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/160/pg160.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-the-brothers-karamazov-28054",
+    "title": "The Brothers Karamazov",
+    "author": "Fyodor Dostoyevsky",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/28054.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/28054/pg28054.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-the-call-of-the-wild-215",
+    "title": "The Call of the Wild",
+    "author": "Jack London",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/215.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/215/pg215.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-the-canterbury-tales-2383",
+    "title": "The Canterbury Tales",
+    "author": "Geoffrey Chaucer",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/2383.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/2383/pg2383.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-the-communist-manifesto-61",
+    "title": "The Communist Manifesto",
+    "author": "Karl Marx, Friedrich Engels",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/61.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/61/pg61.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-monte-cristo-1184",
+    "title": "The Count of Monte Cristo",
+    "author": "Alexandre Dumas",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/1184.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/1184/pg1184.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-the-federalist-papers-1404",
+    "title": "The Federalist Papers",
+    "author": "Alexander Hamilton, James Madison, John Jay",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/1404.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/1404/pg1404.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "standardebooks-great-gatsby",
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "format": "epub",
+    "remoteUrl": "https://standardebooks.org/ebooks/f-scott-fitzgerald/the-great-gatsby/downloads/f-scott-fitzgerald_the-great-gatsby.epub?source=download",
+    "coverUrl": "https://standardebooks.org/ebooks/f-scott-fitzgerald/the-great-gatsby/downloads/cover.jpg",
+    "source": "standardebooks"
+  },
+  {
+    "id": "gutenberg-the-great-god-pan-389",
+    "title": "The Great God Pan",
+    "author": "Arthur Machen",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/389.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/389/pg389.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-the-hound-of-the-baskervilles-2852",
+    "title": "The Hound of the Baskervilles",
+    "author": "Arthur Conan Doyle",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/2852.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/2852/pg2852.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-the-hunchback-of-notre-dame-2610",
+    "title": "The Hunchback of Notre-Dame",
+    "author": "Victor Hugo",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/2610.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/2610/pg2610.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-importance-of-being-earnest-844",
+    "title": "The Importance of Being Earnest",
+    "author": "Oscar Wilde",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/844.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/844/pg844.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-the-jungle-book-236",
+    "title": "The Jungle Book",
+    "author": "Rudyard Kipling",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/236.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/236/pg236.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-the-last-of-the-mohicans-940",
+    "title": "The Last of the Mohicans",
+    "author": "James Fenimore Cooper",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/940.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/940/pg940.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-the-legend-of-sleepy-hollow-41",
+    "title": "The Legend of Sleepy Hollow",
+    "author": "Washington Irving",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/41.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/41/pg41.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-the-lost-world-139",
+    "title": "The Lost World",
+    "author": "Arthur Conan Doyle",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/139.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/139/pg139.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "standardebooks-metamorphosis",
+    "title": "The Metamorphosis",
+    "author": "Franz Kafka",
+    "format": "epub",
+    "remoteUrl": "https://standardebooks.org/ebooks/franz-kafka/the-metamorphosis/downloads/franz-kafka_the-metamorphosis.epub?source=download",
+    "coverUrl": "https://standardebooks.org/ebooks/franz-kafka/the-metamorphosis/downloads/cover.jpg",
+    "source": "standardebooks"
+  },
+  {
+    "id": "gutenberg-the-mysterious-affair-at-styles-863",
+    "title": "The Mysterious Affair at Styles",
+    "author": "Agatha Christie",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/863.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/863/pg863.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-odyssey-1727",
+    "title": "The Odyssey",
+    "author": "Homer",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/1727.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/1727/pg1727.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "standardebooks-picture-of-dorian-gray",
+    "title": "The Picture of Dorian Gray",
+    "author": "Oscar Wilde",
+    "format": "epub",
+    "remoteUrl": "https://standardebooks.org/ebooks/oscar-wilde/the-picture-of-dorian-gray/downloads/oscar-wilde_the-picture-of-dorian-gray.epub?source=download",
+    "coverUrl": "https://standardebooks.org/ebooks/oscar-wilde/the-picture-of-dorian-gray/downloads/cover.jpg",
+    "source": "standardebooks"
+  },
+  {
+    "id": "gutenberg-prince-1232",
+    "title": "The Prince",
+    "author": "Niccolò Machiavelli",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/1232.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/1232/pg1232.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-the-republic-1497",
+    "title": "The Republic",
+    "author": "Plato",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/1497.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/1497/pg1497.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-scarlet-letter-33",
+    "title": "The Scarlet Letter",
+    "author": "Nathaniel Hawthorne",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/33.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/33/pg33.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-the-secret-garden-113",
+    "title": "The Secret Garden",
+    "author": "Frances Hodgson Burnett",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/113.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/113/pg113.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "standardebooks-time-machine",
+    "title": "The Time Machine",
+    "author": "H. G. Wells",
+    "format": "epub",
+    "remoteUrl": "https://standardebooks.org/ebooks/h-g-wells/the-time-machine/downloads/h-g-wells_the-time-machine.epub?source=download",
+    "coverUrl": "https://standardebooks.org/ebooks/h-g-wells/the-time-machine/downloads/cover.jpg",
+    "source": "standardebooks"
+  },
+  {
+    "id": "gutenberg-the-turn-of-the-screw-209",
+    "title": "The Turn of the Screw",
+    "author": "Henry James",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/209.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/209/pg209.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "standardebooks-war-of-the-worlds",
+    "title": "The War of the Worlds",
+    "author": "H. G. Wells",
+    "format": "epub",
+    "remoteUrl": "https://standardebooks.org/ebooks/h-g-wells/the-war-of-the-worlds/downloads/h-g-wells_the-war-of-the-worlds.epub?source=download",
+    "coverUrl": "https://standardebooks.org/ebooks/h-g-wells/the-war-of-the-worlds/downloads/cover.jpg",
+    "source": "standardebooks"
+  },
+  {
+    "id": "gutenberg-the-woman-in-white-583",
+    "title": "The Woman in White",
+    "author": "Wilkie Collins",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/583.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/583/pg583.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "standardebooks-wizard-of-oz",
+    "title": "The Wonderful Wizard of Oz",
+    "author": "L. Frank Baum",
+    "format": "epub",
+    "remoteUrl": "https://standardebooks.org/ebooks/l-frank-baum/the-wonderful-wizard-of-oz/downloads/l-frank-baum_the-wonderful-wizard-of-oz.epub?source=download",
+    "coverUrl": "https://standardebooks.org/ebooks/l-frank-baum/the-wonderful-wizard-of-oz/downloads/cover.jpg",
+    "source": "standardebooks"
+  },
+  {
+    "id": "gutenberg-the-yellow-wallpaper-1952",
+    "title": "The Yellow Wallpaper",
+    "author": "Charlotte Perkins Gilman",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/1952.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/1952/pg1952.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-three-men-in-a-boat-308",
+    "title": "Three Men in a Boat",
+    "author": "Jerome K. Jerome",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/308.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/308/pg308.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-through-the-looking-glass-12",
+    "title": "Through the Looking-Glass",
+    "author": "Lewis Carroll",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/12.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/12/pg12.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "standardebooks-treasure-island",
+    "title": "Treasure Island",
+    "author": "Robert Louis Stevenson",
+    "format": "epub",
+    "remoteUrl": "https://standardebooks.org/ebooks/robert-louis-stevenson/treasure-island/downloads/robert-louis-stevenson_treasure-island.epub?source=download",
+    "coverUrl": "https://standardebooks.org/ebooks/robert-louis-stevenson/treasure-island/downloads/cover.jpg",
+    "source": "standardebooks"
+  },
+  {
+    "id": "gutenberg-twenty-thousand-leagues-under-the-seas-164",
+    "title": "Twenty Thousand Leagues Under the Seas",
+    "author": "Jules Verne",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/164.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/164/pg164.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-uncle-tom-s-cabin-203",
+    "title": "Uncle Tom's Cabin",
+    "author": "Harriet Beecher Stowe",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/203.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/203/pg203.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-walden-205",
+    "title": "Walden",
+    "author": "Henry David Thoreau",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/205.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/205/pg205.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-war-and-peace-2600",
+    "title": "War and Peace",
+    "author": "Leo Tolstoy",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/2600.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/2600/pg2600.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-white-fang-910",
+    "title": "White Fang",
+    "author": "Jack London",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/910.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/910/pg910.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-works-of-edgar-allan-poe-volume-1-2147",
+    "title": "Works of Edgar Allan Poe — Volume 1",
+    "author": "Edgar Allan Poe",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/2147.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/2147/pg2147.cover.medium.jpg",
+    "source": "gutenberg"
+  },
+  {
+    "id": "gutenberg-wuthering-heights-768",
+    "title": "Wuthering Heights",
+    "author": "Emily Brontë",
+    "format": "epub",
+    "remoteUrl": "https://www.gutenberg.org/ebooks/768.epub.noimages",
+    "coverUrl": "https://www.gutenberg.org/cache/epub/768/pg768.cover.medium.jpg",
+    "source": "gutenberg"
+  }
+]
