@@ -31,7 +31,7 @@ class SubjectShareScreen extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                'Have the student scan this QR code to import a copy.',
+                'Have someone scan this QR code to import a copy.',
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge

@@ -24,12 +24,21 @@ class AppState extends ChangeNotifier {
   static const _usersKey = 'users';
   static const _currentUserKey = 'currentUser';
   static const _personalBankByUserKey = 'personalBankByUser';
+  static const _customSubjectKey = 'customSubjectId';
+  static const _personalSeenKey = 'seenPersonalQuestionIds';
+  static const _personalFlashSeenBySectionKey = 'seenPersonalFlashcardIdsBySection';
+  static const _personalQuizAnsweredBySectionKey = 'personalQuizAnsweredBySection';
+  static const _personalQuizCorrectBySectionKey = 'personalQuizCorrectBySection';
   static const _guestUsername = '__guest__';
 
   late final Box _box;
 
   Map<String, double> masteryBySkill = {};
   Set<String> seenProblemIds = {};
+  Set<String> seenPersonalQuestionIds = {};
+  Map<String, Set<String>> seenPersonalFlashcardIdsBySection = {};
+  Map<String, int> personalQuizAnsweredBySection = {};
+  Map<String, int> personalQuizCorrectBySection = {};
   int xp = 0;
   int streak = 0;
   Map<String, int> wrongStreakBySkill = {};
@@ -48,6 +57,7 @@ class AppState extends ChangeNotifier {
   int _attemptsOnCurrentProblem = 0;
 
   Subject subject = Subject.math;
+  String? customSubjectId;
 
   List<Problem> get activeProblems =>
       problems.where((p) => p.subject == subject).toList(growable: false);
@@ -75,9 +85,20 @@ class AppState extends ChangeNotifier {
     }
 
     subject = SubjectX.fromId(_box.get(_subjectKey, defaultValue: Subject.math.id) as String);
+    customSubjectId = _box.get(_customSubjectKey) as String?;
 
     masteryBySkill = Map<String, double>.from(_box.get(_masteryKey, defaultValue: <String, double>{}));
     seenProblemIds = Set<String>.from(_box.get(_seenKey, defaultValue: <String>[]));
+    seenPersonalQuestionIds = Set<String>.from(_box.get(_personalSeenKey, defaultValue: <String>[]));
+    seenPersonalFlashcardIdsBySection = _loadSectionSeenMap(
+      _box.get(_personalFlashSeenBySectionKey, defaultValue: const <String, dynamic>{}),
+    );
+    personalQuizAnsweredBySection = Map<String, int>.from(
+      _box.get(_personalQuizAnsweredBySectionKey, defaultValue: const <String, int>{}),
+    );
+    personalQuizCorrectBySection = Map<String, int>.from(
+      _box.get(_personalQuizCorrectBySectionKey, defaultValue: const <String, int>{}),
+    );
     wrongStreakBySkill = Map<String, int>.from(_box.get(_wrongStreakBySkillKey, defaultValue: <String, int>{}));
 
     personalBankByUser = _loadPersonalBanks(
@@ -142,6 +163,115 @@ class AppState extends ChangeNotifier {
 
   List<PersonalCategory> get personalCategories => personalBank.categories;
 
+  PersonalCategory? get selectedCustomSubject {
+    final id = customSubjectId;
+    if (id == null) return null;
+    return personalCategories.where((c) => c.id == id).firstOrNull;
+  }
+
+  void setCustomSubject(String? categoryId) {
+    if (customSubjectId == categoryId) return;
+    customSubjectId = categoryId;
+    if (customSubjectId == null) {
+      _box.delete(_customSubjectKey);
+    } else {
+      _box.put(_customSubjectKey, customSubjectId);
+    }
+    notifyListeners();
+  }
+
+  void markPersonalQuestionSeen(String questionId) {
+    if (seenPersonalQuestionIds.contains(questionId)) return;
+    seenPersonalQuestionIds.add(questionId);
+    _box.put(_personalSeenKey, seenPersonalQuestionIds.toList(growable: false));
+    notifyListeners();
+  }
+
+  void markPersonalFlashcardSeen({required String sectionId, required String questionId}) {
+    final existing = seenPersonalFlashcardIdsBySection[sectionId] ?? <String>{};
+    if (existing.contains(questionId)) return;
+    seenPersonalFlashcardIdsBySection = {
+      ...seenPersonalFlashcardIdsBySection,
+      sectionId: {...existing, questionId},
+    };
+    _persistPersonalPracticeStats();
+    notifyListeners();
+  }
+
+  void markPersonalQuizAnswered({required String sectionId, required String questionId, required bool correct}) {
+    personalQuizAnsweredBySection = {
+      ...personalQuizAnsweredBySection,
+      sectionId: (personalQuizAnsweredBySection[sectionId] ?? 0) + 1,
+    };
+    if (correct) {
+      personalQuizCorrectBySection = {
+        ...personalQuizCorrectBySection,
+        sectionId: (personalQuizCorrectBySection[sectionId] ?? 0) + 1,
+      };
+    }
+    _persistPersonalPracticeStats();
+    notifyListeners();
+  }
+
+  (int answered, int correct) quizStatsForSection(String sectionId) {
+    return (
+      personalQuizAnsweredBySection[sectionId] ?? 0,
+      personalQuizCorrectBySection[sectionId] ?? 0,
+    );
+  }
+
+  int flashcardsSeenForSection(String sectionId) {
+    return (seenPersonalFlashcardIdsBySection[sectionId] ?? const <String>{}).length;
+  }
+
+  double completionForPersonalSection({required String categoryId, required String sectionId}) {
+    final category = personalCategories.where((c) => c.id == categoryId).firstOrNull;
+    if (category == null) return 0.0;
+    final section = category.sections.where((s) => s.id == sectionId).firstOrNull;
+    if (section == null || section.questions.isEmpty) return 0.0;
+    final seen = section.questions.where((q) => seenPersonalQuestionIds.contains(q.id)).length;
+    return (seen / section.questions.length).clamp(0.0, 1.0);
+  }
+
+  double combinedCompletionForPersonalSection({required String categoryId, required String sectionId}) {
+    final category = personalCategories.where((c) => c.id == categoryId).firstOrNull;
+    if (category == null) return 0.0;
+    final section = category.sections.where((s) => s.id == sectionId).firstOrNull;
+    if (section == null || section.questions.isEmpty) return 0.0;
+
+    final total = section.questions.length;
+    final flash = (flashcardsSeenForSection(sectionId) / total).clamp(0.0, 1.0);
+    final quiz = ((quizStatsForSection(sectionId).$2) / total).clamp(0.0, 1.0);
+    return ((flash + quiz) / 2).clamp(0.0, 1.0);
+  }
+
+  double completionForPersonalCategory(String categoryId) {
+    final category = personalCategories.where((c) => c.id == categoryId).firstOrNull;
+    if (category == null) return 0.0;
+    final questions = category.sections.expand((s) => s.questions).toList(growable: false);
+    if (questions.isEmpty) return 0.0;
+    final seen = questions.where((q) => seenPersonalQuestionIds.contains(q.id)).length;
+    return (seen / questions.length).clamp(0.0, 1.0);
+  }
+
+  double combinedCompletionForPersonalCategory(String categoryId) {
+    final category = personalCategories.where((c) => c.id == categoryId).firstOrNull;
+    if (category == null) return 0.0;
+    if (category.sections.isEmpty) return 0.0;
+
+    var totalQuestions = 0;
+    var weighted = 0.0;
+    for (final section in category.sections) {
+      if (section.questions.isEmpty) continue;
+      final value = combinedCompletionForPersonalSection(categoryId: category.id, sectionId: section.id);
+      totalQuestions += section.questions.length;
+      weighted += value * section.questions.length;
+    }
+
+    if (totalQuestions == 0) return 0.0;
+    return (weighted / totalQuestions).clamp(0.0, 1.0);
+  }
+
   String? createPersonalCategory(String name) {
     final trimmed = name.trim();
     if (trimmed.isEmpty) return null;
@@ -184,6 +314,8 @@ class AppState extends ChangeNotifier {
     final encoded = base64UrlEncode(utf8.encode(raw));
     return '$_packPrefix$encoded';
   }
+
+
 
   String? importCategoryPack(String data) {
     final trimmed = data.trim();
@@ -408,6 +540,8 @@ class AppState extends ChangeNotifier {
     subject = next;
     _box.put(_subjectKey, subject.id);
 
+    setCustomSubject(null);
+
     practiceSkill = null;
     practiceDifficulty = null;
     practiceQuestionsDoneInDifficulty = 0;
@@ -611,6 +745,10 @@ class AppState extends ChangeNotifier {
       masteryBySkill.clear();
       seenProblemIds.clear();
       wrongStreakBySkill.clear();
+      seenPersonalQuestionIds.clear();
+      seenPersonalFlashcardIdsBySection.clear();
+      personalQuizAnsweredBySection.clear();
+      personalQuizCorrectBySection.clear();
       xp = 0;
       streak = 0;
       lastCorrect = null;
@@ -621,6 +759,10 @@ class AppState extends ChangeNotifier {
 
       await _box.delete(_masteryKey);
       await _box.delete(_seenKey);
+      await _box.delete(_personalSeenKey);
+      await _box.delete(_personalFlashSeenBySectionKey);
+      await _box.delete(_personalQuizAnsweredBySectionKey);
+      await _box.delete(_personalQuizCorrectBySectionKey);
       await _box.delete(_wrongStreakBySkillKey);
       await _box.delete(_xpKey);
       await _box.delete(_streakKey);
@@ -690,9 +832,34 @@ class AppState extends ChangeNotifier {
   void _persist() {
     _box.put(_masteryKey, masteryBySkill);
     _box.put(_seenKey, seenProblemIds.toList());
+    _box.put(_personalSeenKey, seenPersonalQuestionIds.toList());
+    _persistPersonalPracticeStats();
     _box.put(_wrongStreakBySkillKey, wrongStreakBySkill);
     _box.put(_xpKey, xp);
     _box.put(_streakKey, streak);
+  }
+
+  void _persistPersonalPracticeStats() {
+    _box.put(
+      _personalFlashSeenBySectionKey,
+      seenPersonalFlashcardIdsBySection.map((k, v) => MapEntry(k, v.toList(growable: false))),
+    );
+    _box.put(_personalQuizAnsweredBySectionKey, personalQuizAnsweredBySection);
+    _box.put(_personalQuizCorrectBySectionKey, personalQuizCorrectBySection);
+  }
+
+  Map<String, Set<String>> _loadSectionSeenMap(dynamic raw) {
+    if (raw is! Map) return {};
+    final result = <String, Set<String>>{};
+    for (final entry in raw.entries) {
+      final key = entry.key;
+      if (key is! String) continue;
+      final value = entry.value;
+      if (value is List) {
+        result[key] = value.whereType<String>().toSet();
+      }
+    }
+    return result;
   }
 
   void _persistPersonalBanks() {

@@ -91,12 +91,19 @@ class _PersonalPracticeScreenState extends State<PersonalPracticeScreen> {
       return const Scaffold(body: SafeArea(child: Center(child: Text('Category not found.'))));
     }
 
-    final questions = widget.sectionId == null
-        ? [...category.sections.expand((s) => s.questions)]
-        : category.sections
-            .where((s) => s.id == widget.sectionId)
-            .expand((s) => s.questions)
-            .toList(growable: false);
+    final questionRefs = widget.sectionId == null
+        ? [
+            for (final section in category.sections)
+              for (final q in section.questions)
+                (section.id, section.name, q),
+          ]
+        : [
+            for (final section in category.sections.where((s) => s.id == widget.sectionId))
+              for (final q in section.questions)
+                (section.id, section.name, q),
+          ];
+
+    final questions = questionRefs.map((r) => r.$3).toList(growable: false);
     if (questions.isEmpty) {
       return Scaffold(
         appBar: AppBar(title: Text(widget.sectionName == null ? category.name : '${category.name} • ${widget.sectionName}')),
@@ -104,7 +111,9 @@ class _PersonalPracticeScreenState extends State<PersonalPracticeScreen> {
       );
     }
 
-    final question = questions[_index.clamp(0, questions.length - 1)];
+    final ref = questionRefs[_index.clamp(0, questionRefs.length - 1)];
+    final sectionId = ref.$1;
+    final question = ref.$3;
     final options = <String>{question.answer, ...question.incorrectAnswers}
         .where((row) => row.trim().isNotEmpty)
         .toList(growable: false);
@@ -152,6 +161,8 @@ class _PersonalPracticeScreenState extends State<PersonalPracticeScreen> {
                                                 _quizAnswered += 1;
                                                 _quizCorrect += 1;
                                               });
+                                              state.markPersonalQuestionSeen(question.id);
+                                              state.markPersonalQuizAnswered(sectionId: sectionId, questionId: question.id, correct: true);
                                             },
                                       child: const Text('Reveal answer'),
                                     ),
@@ -251,6 +262,8 @@ class _PersonalPracticeScreenState extends State<PersonalPracticeScreen> {
                                         _quizAnswered += 1;
                                         if (isCorrect) _quizCorrect += 1;
                                       });
+                                      state.markPersonalQuestionSeen(question.id);
+                                      state.markPersonalQuizAnswered(sectionId: sectionId, questionId: question.id, correct: _correct == true);
                                     },
                               child: const Text('Submit'),
                             ),
@@ -305,6 +318,9 @@ class _PersonalPracticeScreenState extends State<PersonalPracticeScreen> {
                                         _flipped = !_flipped;
                                         if (!_flipped) _showExplanation = false;
                                       });
+                                      if (!_flipped) return;
+                                      state.markPersonalQuestionSeen(question.id);
+                                      state.markPersonalFlashcardSeen(sectionId: sectionId, questionId: question.id);
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.all(18),

@@ -11,7 +11,9 @@ import 'practice_screen.dart';
 import 'practice_setup_screen.dart';
 import 'progress_screen.dart';
 import 'personal_questions_screen.dart';
+import 'personal_practice_screen.dart';
 import 'subject_import_screen.dart';
+import 'custom_subject_progress_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -21,10 +23,13 @@ class HomeScreen extends StatelessWidget {
     final state = context.watch<AppState>();
     context.watch<BookLibraryState>();
     final subject = state.subject;
+    final selectedCustom = state.selectedCustomSubject;
+    final usingCustom = selectedCustom != null;
     final practiceEnabled =
-        subject == Subject.math || subject == Subject.reading || subject == Subject.science || subject == Subject.history;
+        usingCustom || subject == Subject.math || subject == Subject.reading || subject == Subject.science || subject == Subject.history;
     final currentUser = state.currentUser;
     final customSubjects = [...state.personalCategories]..sort((a, b) => a.name.compareTo(b.name));
+    final displayLabel = usingCustom ? selectedCustom.name : subject.label;
 
     return Scaffold(
       body: SafeArea(
@@ -103,12 +108,9 @@ class HomeScreen extends StatelessWidget {
                             title: category.name,
                             subtitle: '${(category.questions.length + category.sections.fold<int>(0, (sum, s) => sum + s.questions.length))} card${(category.questions.length + category.sections.fold<int>(0, (sum, s) => sum + s.questions.length)) == 1 ? '' : 's'}',
                             onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (_) => PersonalCategoryScreen(categoryId: category.id),
-                                ),
-                              );
+                              state.setCustomSubject(category.id);
                             },
+                            selected: usingCustom && selectedCustom.id == category.id,
                           ),
                         _ImportSubjectCard(
                           onTap: () {
@@ -129,21 +131,37 @@ class HomeScreen extends StatelessWidget {
                           child: FilledButton(
                             onPressed: practiceEnabled
                                 ? () {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(builder: (_) => const PracticeSetupScreen()),
-                                    );
+                                    if (usingCustom) {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (_) => PersonalCategoryScreen(categoryId: selectedCustom.id),
+                                        ),
+                                      );
+                                    } else {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(builder: (_) => const PracticeSetupScreen()),
+                                      );
+                                    }
                                   }
                                 : null,
-                            child: Text(practiceEnabled ? 'Continue ${subject.label.toLowerCase()}' : 'Coming soon'),
+                            child: Text(practiceEnabled ? 'Continue ${displayLabel.toLowerCase()}' : 'Coming soon'),
                           ),
                         ),
                         const SizedBox(width: 12),
                         IconButton.filledTonal(
                           onPressed: practiceEnabled
                               ? () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(builder: (_) => const ProgressScreen()),
-                                  );
+                                  if (usingCustom) {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (_) => CustomSubjectProgressScreen(categoryId: selectedCustom.id),
+                                      ),
+                                    );
+                                  } else {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(builder: (_) => const ProgressScreen()),
+                                    );
+                                  }
                                 }
                               : null,
                           icon: const Icon(Icons.insights_rounded),
@@ -154,7 +172,7 @@ class HomeScreen extends StatelessWidget {
                     if (!practiceEnabled) _ComingSoon(subject: subject),
                     if (practiceEnabled) ...[
                       Text(
-                        'Pick a ${subject.label.toLowerCase()} skill',
+                        usingCustom ? 'Pick a section' : 'Pick a ${subject.label.toLowerCase()} skill',
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.w800,
                             ),
@@ -168,17 +186,38 @@ class HomeScreen extends StatelessWidget {
                         crossAxisSpacing: 12,
                         childAspectRatio: 1.15,
                         children: [
-                          for (final skill in state.skills)
-                            _SkillCard(
-                              skill: skill,
-                              completion: state.completionForSkill(skill),
-                              onTap: () {
-                                state.startSkill(skill);
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(builder: (_) => const PracticeScreen()),
-                                );
-                              },
-                            ),
+                          if (usingCustom)
+                            for (final section in selectedCustom.sections)
+                              _SkillCard(
+                                skill: section.name,
+                                completion: state.combinedCompletionForPersonalSection(
+                                  categoryId: selectedCustom.id,
+                                  sectionId: section.id,
+                                ),
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (_) => PersonalPracticeScreen(
+                                        categoryId: selectedCustom.id,
+                                        sectionId: section.id,
+                                        sectionName: section.name,
+                                      ),
+                                    ),
+                                  );
+                                },
+                              )
+                          else
+                            for (final skill in state.skills)
+                              _SkillCard(
+                                skill: skill,
+                                completion: state.completionForSkill(skill),
+                                onTap: () {
+                                  state.startSkill(skill);
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (_) => const PracticeScreen()),
+                                  );
+                                },
+                              ),
                         ],
                       ),
                     ],
@@ -441,22 +480,26 @@ class _ImportSubjectCard extends StatelessWidget {
 }
 
 class _CustomSubjectCard extends StatelessWidget {
-  const _CustomSubjectCard({required this.title, required this.subtitle, required this.onTap});
+  const _CustomSubjectCard({required this.title, required this.subtitle, required this.onTap, required this.selected});
 
   final String title;
   final String subtitle;
   final VoidCallback onTap;
+  final bool selected;
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final accent = const Color(0xFF8B5CF6);
 
+    final bg = selected ? accent.withOpacity(0.16) : accent.withOpacity(0.12);
+    final side = BorderSide(color: accent.withOpacity(selected ? 0.65 : 0.45), width: 2);
+
     return Material(
-      color: accent.withOpacity(0.12),
+      color: bg,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(22),
-        side: BorderSide(color: accent.withOpacity(0.45), width: 2),
+        side: side,
       ),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
