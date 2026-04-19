@@ -7,6 +7,8 @@ import 'book_library_state.dart';
 import 'data/problem_bank.dart';
 import 'recommendation/recommender.dart';
 import 'screens/home_screen.dart';
+import 'app_navigator.dart';
+import 'widgets/helper_bot.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,8 +57,9 @@ class App extends StatelessWidget {
     );
 
     return MaterialApp(
+      navigatorKey: appNavigatorKey,
       debugShowCheckedModeBanner: false,
-      title: 'RGV Math Coach',
+      title: 'RGV Tutor',
       theme: base.copyWith(
         textTheme: textTheme,
         appBarTheme: AppBarTheme(
@@ -78,6 +81,15 @@ class App extends StatelessWidget {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
         ),
       ),
+      builder: (context, child) {
+        final content = child ?? const SizedBox.shrink();
+        return Stack(
+          children: [
+            content,
+            const HelperBotLauncher(),
+          ],
+        );
+      },
       home: const HomeScreen(),
     );
   }

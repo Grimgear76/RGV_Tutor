@@ -10,12 +10,98 @@ RGV Tutor is an offline-first Flutter MVP for math practice. It provides short m
 - Animated XP bar + mastery bars
 - Instant feedback burst + shake on wrong answers
 
-## Run the app
+## Dependencies (install once)
+
+### 0) Git (recommended)
+
+```powershell
+winget install Git.Git
+git --version
+```
+
+### 1) Flutter SDK
+
+- Install Flutter: https://docs.flutter.dev/get-started/install
+- Verify:
+
+```bash
+flutter --version
+flutter doctor
+```
+
+### 2) Node.js (local API server)
+
+Windows (PowerShell) install:
+
+```powershell
+winget install OpenJS.NodeJS.LTS
+```
+
+Verify:
+
+```bash
+node --version
+npm --version
+```
+
+### 3) Ollama (local helper bot / offline AI)
+
+The app includes a local “Helper Bot” that talks to Ollama at `http://localhost:11434`.
+
+Windows (PowerShell) install:
+
+```powershell
+winget install Ollama.Ollama
+```
+
+If `ollama` isn’t found on your PATH after installing, use the full path:
+
+```powershell
+& "$env:LOCALAPPDATA\Programs\Ollama\ollama.exe" --version
+```
+
+If you added Ollama to PATH (or the installer did) but your current PowerShell session still can’t find it, refresh PATH in this session and re-check:
+
+```powershell
+$env:Path = [Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [Environment]::GetEnvironmentVariable("Path","User")
+where.exe ollama
+ollama --version
+ollama pull llama3.2:1b
+```
+
+Pull the model used by the app (default: `llama3.2:1b`):
+
+```powershell
+ & "$env:LOCALAPPDATA\Programs\Ollama\ollama.exe" pull llama3.2:1b
+```
+
+Verify the Ollama server is running:
+
+```powershell
+curl.exe http://localhost:11434/api/tags
+```
+
+If you’re running the app on an Android emulator, it will use `http://10.0.2.2:11434` to reach the host.
+
+### 4) Python (optional, dev tooling)
+
+Only needed if you want to run scripts in `tools/`.
+
+```bash
+python --version
+```
+
+## Install project dependencies
 
 From this folder:
 
 ```bash
 flutter pub get
+```
+
+## Run the app
+
+```bash
 flutter run
 ```
 
@@ -68,4 +154,4 @@ flutter create .
 flutter pub get
 ```
 
-If you see errors like `'C:\Users\Jonathan' is not recognized...` on Windows, move the project to a path without spaces (for example `C:\src\rgv_math_tutor`) and try again.
+If you see errors like `'C:\Users\Jonathan' is not recognized...` on Windows, move the project to a path without spaces (for example `C:\src\rgv_tutor`) and try again.

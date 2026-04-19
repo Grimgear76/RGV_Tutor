@@ -20,8 +20,6 @@ dependencies:
   pdfx: ^2.6.0
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
   flutter_lints: ^4.0.0
 
 flutter:
