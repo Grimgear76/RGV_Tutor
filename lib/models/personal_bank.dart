@@ -22,7 +22,81 @@ class PersonalBank {
 }
 
 class PersonalCategory {
-  const PersonalCategory({required this.id, required this.name, required this.questions});
+  const PersonalCategory({
+    required this.id,
+    required this.name,
+    required this.questions,
+    this.sections = const [],
+    this.imported = false,
+    this.editUnlocked = false,
+    this.packId,
+  });
+
+  final String id;
+  final String name;
+  final List<PersonalQuestion> questions;
+  final List<PersonalSection> sections;
+  final bool imported;
+  final bool editUnlocked;
+  final String? packId;
+
+  Map<String, dynamic> toMap() => {
+        'id': id,
+        'name': name,
+        'questions': questions.map((q) => q.toMap()).toList(growable: false),
+        'sections': sections.map((s) => s.toMap()).toList(growable: false),
+        'imported': imported,
+        'editUnlocked': editUnlocked,
+        'packId': packId,
+      };
+
+  factory PersonalCategory.fromMap(Map<String, dynamic> map) {
+    final rawQuestions = map['questions'];
+    final questions = (rawQuestions is List ? rawQuestions : const <dynamic>[]) 
+        .whereType<Map>()
+        .map((row) => PersonalQuestion.fromMap(Map<String, dynamic>.from(row)))
+        .toList(growable: false);
+
+    final rawSections = map['sections'];
+    final sections = (rawSections is List ? rawSections : const <dynamic>[]) 
+        .whereType<Map>()
+        .map((row) => PersonalSection.fromMap(Map<String, dynamic>.from(row)))
+        .toList(growable: false);
+
+    return PersonalCategory(
+      id: (map['id'] as String?) ?? '',
+      name: (map['name'] as String?) ?? 'Untitled',
+      questions: questions,
+      sections: sections,
+      imported: (map['imported'] as bool?) ?? false,
+      editUnlocked: (map['editUnlocked'] as bool?) ?? false,
+      packId: map['packId'] as String?,
+    );
+  }
+
+  PersonalCategory copyWith({
+    String? id,
+    String? name,
+    List<PersonalQuestion>? questions,
+    List<PersonalSection>? sections,
+    bool? imported,
+    bool? editUnlocked,
+    String? packId,
+  }) {
+    return PersonalCategory(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      questions: questions ?? this.questions,
+      sections: sections ?? this.sections,
+      imported: imported ?? this.imported,
+      editUnlocked: editUnlocked ?? this.editUnlocked,
+      packId: packId ?? this.packId,
+    );
+  }
+}
+
+class PersonalSection {
+  const PersonalSection({required this.id, required this.name, required this.questions});
 
   final String id;
   final String name;
@@ -34,21 +108,22 @@ class PersonalCategory {
         'questions': questions.map((q) => q.toMap()).toList(growable: false),
       };
 
-  factory PersonalCategory.fromMap(Map<String, dynamic> map) {
+  factory PersonalSection.fromMap(Map<String, dynamic> map) {
     final rawQuestions = map['questions'];
-    final questions = (rawQuestions is List ? rawQuestions : const <dynamic>[])
+    final questions = (rawQuestions is List ? rawQuestions : const <dynamic>[]) 
         .whereType<Map>()
         .map((row) => PersonalQuestion.fromMap(Map<String, dynamic>.from(row)))
         .toList(growable: false);
-    return PersonalCategory(
+
+    return PersonalSection(
       id: (map['id'] as String?) ?? '',
       name: (map['name'] as String?) ?? 'Untitled',
       questions: questions,
     );
   }
 
-  PersonalCategory copyWith({String? id, String? name, List<PersonalQuestion>? questions}) {
-    return PersonalCategory(
+  PersonalSection copyWith({String? id, String? name, List<PersonalQuestion>? questions}) {
+    return PersonalSection(
       id: id ?? this.id,
       name: name ?? this.name,
       questions: questions ?? this.questions,

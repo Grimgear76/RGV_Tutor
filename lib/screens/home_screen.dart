@@ -12,6 +12,9 @@ import 'practice_screen.dart';
 import 'practice_setup_screen.dart';
 import 'progress_screen.dart';
 import 'personal_questions_screen.dart';
+import 'personal_practice_screen.dart';
+import 'subject_import_screen.dart';
+import 'custom_subject_progress_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -19,12 +22,15 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<AppState>();
-    final bookState = context.watch<BookLibraryState>();
-    final colorScheme = Theme.of(context).colorScheme;
+    context.watch<BookLibraryState>();
     final subject = state.subject;
+    final selectedCustom = state.selectedCustomSubject;
+    final usingCustom = selectedCustom != null;
     final practiceEnabled =
-        subject == Subject.math || subject == Subject.reading || subject == Subject.science || subject == Subject.history;
+        usingCustom || subject == Subject.math || subject == Subject.reading || subject == Subject.science || subject == Subject.history;
     final currentUser = state.currentUser;
+    final customSubjects = [...state.personalCategories]..sort((a, b) => a.name.compareTo(b.name));
+    final displayLabel = usingCustom ? selectedCustom.name : subject.label;
 
     return HelperBotPlacement(
       corner: HelperBotCorner.bottomLeft,
@@ -37,111 +43,139 @@ class HomeScreen extends StatelessWidget {
                 sliver: SliverList(
                   delegate: SliverChildListDelegate(
                     [
-                      Row(
-                        children: [
-                          const RgvTutorLogo(size: 40),
-                          const SizedBox(width: 10),
-                          Expanded(
-                            child: Text(
-                              'RGV Tutor',
-                              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                            ),
+                    Row(
+                      children: [
+                        const RgvTutorLogo(size: 40),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Text(
+                            'RGV Tutor',
+                            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                  fontWeight: FontWeight.w900,
+                                ),
                           ),
-                          IconButton(
-                            tooltip: 'Books',
-                            onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(builder: (_) => const BookHubScreen()),
-                              );
-                            },
-                            icon: const Icon(Icons.library_books_rounded),
-                          ),
-                          IconButton(
-                            tooltip: 'Sign out',
-                            onPressed: () => context.read<AppState>().signOut(),
-                            icon: const Icon(Icons.logout_rounded),
-                          ),
-                          const LibraryModeToggle(compact: true),
-                        ],
-                      ),
-                      const SizedBox(height: 14),
-                      if (currentUser != null) ...[
-                        Text(
-                          currentUser.isGuest
-                              ? 'Hi Guest!'
-                              : 'Hi ${currentUser.name.isEmpty ? currentUser.username : currentUser.name}!',
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                fontWeight: FontWeight.w900,
-                              ),
                         ),
-                        const SizedBox(height: 8),
+                        IconButton(
+                          tooltip: 'Books',
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(builder: (_) => const BookHubScreen()),
+                            );
+                          },
+                          icon: const Icon(Icons.library_books_rounded),
+                        ),
+                        IconButton(
+                          tooltip: 'Sign out',
+                          onPressed: () => context.read<AppState>().signOut(),
+                          icon: const Icon(Icons.logout_rounded),
+                        ),
+                        const LibraryModeToggle(compact: true),
                       ],
+                    ),
+                    const SizedBox(height: 14),
+                    if (currentUser != null) ...[
                       Text(
-                        'Pick a subject and practice ${bookState.mode == LibraryMode.online ? 'online' : 'offline'}.',
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              color: colorScheme.onSurfaceVariant,
-                              fontWeight: FontWeight.w600,
-                            ),
-                      ),
-                      const SizedBox(height: 18),
-                      Text(
-                        'Choose a subject',
+                        currentUser.isGuest
+                            ? 'Hi Guest!'
+                            : 'Hi ${currentUser.name.isEmpty ? currentUser.username : currentUser.name}!',
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.w800,
+                              fontWeight: FontWeight.w900,
                             ),
                       ),
-                      SizedBox(height: 10),
-                      GridView.count(
-                        shrinkWrap: true,
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 12,
-                        crossAxisSpacing: 12,
-                        childAspectRatio: 1.2,
-                        physics: NeverScrollableScrollPhysics(),
-                        children: [
-                          for (final s in Subject.values)
-                            _SubjectCard(
-                              subject: s,
-                              selected: s == subject,
-                              onTap: () => state.setSubject(s),
-                            ),
-                        ],
-                      ),
-                      SizedBox(height: 18),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: FilledButton(
-                              onPressed: practiceEnabled
-                                  ? () {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(builder: (_) => const PracticeSetupScreen()),
-                                    );
+                      const SizedBox(height: 8),
+                    ],
+                    const SizedBox(height: 18),
+                    Text(
+                      'Choose a subject',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.w800,
+                          ),
+                    ),
+                    const SizedBox(height: 10),
+                    GridView.count(
+                      shrinkWrap: true,
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 12,
+                      crossAxisSpacing: 12,
+                      childAspectRatio: 1.2,
+                      physics: const NeverScrollableScrollPhysics(),
+                      children: [
+                        for (final s in Subject.values)
+                          _SubjectCard(
+                            subject: s,
+                            selected: s == subject,
+                            onTap: () => state.setSubject(s),
+                          ),
+                        for (final category in customSubjects)
+                          _CustomSubjectCard(
+                            title: category.name,
+                            subtitle: '${(category.questions.length + category.sections.fold<int>(0, (sum, s) => sum + s.questions.length))} card${(category.questions.length + category.sections.fold<int>(0, (sum, s) => sum + s.questions.length)) == 1 ? '' : 's'}',
+                            onTap: () {
+                              state.setCustomSubject(category.id);
+                            },
+                            selected: usingCustom && selectedCustom.id == category.id,
+                          ),
+                        _ImportSubjectCard(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(builder: (_) => const SubjectImportScreen()),
+                            );
+                          },
+                        ),
+                        _CreateSubjectCard(
+                          onTap: () => _showCreateSubjectDialog(context),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 18),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: FilledButton(
+                            onPressed: practiceEnabled
+                                ? () {
+                                    if (usingCustom) {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (_) => PersonalCategoryScreen(categoryId: selectedCustom.id),
+                                        ),
+                                      );
+                                    } else {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(builder: (_) => const PracticeSetupScreen()),
+                                      );
+                                    }
                                   }
                                 : null,
-                            child: Text(practiceEnabled ? 'Continue ${subject.label.toLowerCase()}' : 'Coming soon'),
+                            child: Text(practiceEnabled ? 'Continue ${displayLabel.toLowerCase()}' : 'Coming soon'),
                           ),
                         ),
                         const SizedBox(width: 12),
                         IconButton.filledTonal(
                           onPressed: practiceEnabled
                               ? () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(builder: (_) => const ProgressScreen()),
-                                  );
+                                  if (usingCustom) {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (_) => CustomSubjectProgressScreen(categoryId: selectedCustom.id),
+                                      ),
+                                    );
+                                  } else {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(builder: (_) => const ProgressScreen()),
+                                    );
+                                  }
                                 }
                               : null,
                           icon: const Icon(Icons.insights_rounded),
                         ),
-                        ],
-                      ),
+                      ],
+                    ),
                     const SizedBox(height: 18),
                     if (!practiceEnabled) _ComingSoon(subject: subject),
                     if (practiceEnabled) ...[
                       Text(
-                        'Pick a ${subject.label.toLowerCase()} skill',
+                        usingCustom ? 'Pick a section' : 'Pick a ${subject.label.toLowerCase()} skill',
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.w800,
                             ),
@@ -155,36 +189,50 @@ class HomeScreen extends StatelessWidget {
                         crossAxisSpacing: 12,
                         childAspectRatio: 1.15,
                         children: [
-                          _PersonalQuestionsCard(
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(builder: (_) => const PersonalQuestionsScreen()),
-                              );
-                            },
-                          ),
-                          for (final skill in state.skills)
-                            _SkillCard(
-                              skill: skill,
-                              mastery: state.masteryFor(skill),
-                              onTap: () {
-                                state.startSkill(skill);
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(builder: (_) => const PracticeScreen()),
-                                );
-                              },
-                            ),
+                          if (usingCustom)
+                            for (final section in selectedCustom.sections)
+                              _SkillCard(
+                                skill: section.name,
+                                completion: state.combinedCompletionForPersonalSection(
+                                  categoryId: selectedCustom.id,
+                                  sectionId: section.id,
+                                ),
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (_) => PersonalPracticeScreen(
+                                        categoryId: selectedCustom.id,
+                                        sectionId: section.id,
+                                        sectionName: section.name,
+                                      ),
+                                    ),
+                                  );
+                                },
+                              )
+                          else
+                            for (final skill in state.skills)
+                              _SkillCard(
+                                skill: skill,
+                                completion: state.completionForSkill(skill),
+                                onTap: () {
+                                  state.startSkill(skill);
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (_) => const PracticeScreen()),
+                                  );
+                                },
+                              ),
                         ],
                       ),
                     ],
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
-    ),
-  );
+    );
   }
 }
 
@@ -225,23 +273,12 @@ class _SubjectCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    late final IconData icon;
-    late final Color accent;
-
-    switch (subject) {
-      case Subject.math:
-        icon = Icons.calculate_rounded;
-        accent = colorScheme.primary;
-      case Subject.reading:
-        icon = Icons.menu_book_rounded;
-        accent = const Color(0xFF3B82F6);
-      case Subject.science:
-        icon = Icons.science_rounded;
-        accent = const Color(0xFF10B981);
-      case Subject.history:
-        icon = Icons.public_rounded;
-        accent = const Color(0xFFF59E0B);
-    }
+    final (icon, accent) = switch (subject) {
+      Subject.math => (Icons.calculate_rounded, colorScheme.primary),
+      Subject.reading => (Icons.menu_book_rounded, const Color(0xFF3B82F6)),
+      Subject.science => (Icons.science_rounded, const Color(0xFF10B981)),
+      Subject.history => (Icons.public_rounded, const Color(0xFFF59E0B)),
+    };
 
     final backgroundColor = selected ? accent.withOpacity(0.12) : colorScheme.surfaceContainerHighest;
     final side = selected ? BorderSide(color: accent.withOpacity(0.55), width: 2) : BorderSide.none;
@@ -289,8 +326,53 @@ class _SubjectCard extends StatelessWidget {
   }
 }
 
-class _PersonalQuestionsCard extends StatelessWidget {
-  const _PersonalQuestionsCard({required this.onTap});
+Future<void> _showCreateSubjectDialog(BuildContext context) async {
+  final controller = TextEditingController();
+  final result = await showDialog<String>(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: const Text('Create subject'),
+        content: TextField(
+          controller: controller,
+          decoration: const InputDecoration(
+            labelText: 'Subject name',
+            hintText: 'e.g. Biology',
+          ),
+          textInputAction: TextInputAction.done,
+          autofocus: true,
+          onSubmitted: (value) => Navigator.of(context).pop(value),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Cancel'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(context).pop(controller.text),
+            child: const Text('Create'),
+          ),
+        ],
+      );
+    },
+  );
+
+  if (result == null) return;
+  final trimmed = result.trim();
+  if (trimmed.isEmpty) return;
+
+  if (!context.mounted) return;
+  final state = context.read<AppState>();
+  final id = state.createPersonalCategory(trimmed);
+  if (id == null) return;
+
+  Navigator.of(context).push(
+    MaterialPageRoute(builder: (_) => PersonalCategoryScreen(categoryId: id)),
+  );
+}
+
+class _CreateSubjectCard extends StatelessWidget {
+  const _CreateSubjectCard({required this.onTap});
 
   final VoidCallback onTap;
 
@@ -320,11 +402,11 @@ class _PersonalQuestionsCard extends StatelessWidget {
                   color: accent.withOpacity(0.18),
                   borderRadius: BorderRadius.circular(16),
                 ),
-                child: Icon(Icons.create_rounded, color: accent),
+                child: Icon(Icons.add_rounded, color: accent),
               ),
               const Spacer(),
               Text(
-                'Personal\nQuestions',
+                'Create\nSubject',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w900,
                     ),
@@ -345,11 +427,131 @@ class _PersonalQuestionsCard extends StatelessWidget {
   }
 }
 
+class _ImportSubjectCard extends StatelessWidget {
+  const _ImportSubjectCard({required this.onTap});
+
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final accent = const Color(0xFF06B6D4);
+
+    return Material(
+      color: accent.withOpacity(0.12),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(22),
+        side: BorderSide(color: accent.withOpacity(0.45), width: 2),
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                  color: accent.withOpacity(0.18),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Icon(Icons.qr_code_scanner_rounded, color: accent),
+              ),
+              const Spacer(),
+              Text(
+                'Import\nSubject',
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w900,
+                    ),
+              ),
+              const SizedBox(height: 6),
+              Text(
+                'Scan a QR',
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                      fontWeight: FontWeight.w700,
+                    ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _CustomSubjectCard extends StatelessWidget {
+  const _CustomSubjectCard({required this.title, required this.subtitle, required this.onTap, required this.selected});
+
+  final String title;
+  final String subtitle;
+  final VoidCallback onTap;
+  final bool selected;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final accent = const Color(0xFF8B5CF6);
+
+    final bg = selected ? accent.withOpacity(0.16) : accent.withOpacity(0.12);
+    final side = BorderSide(color: accent.withOpacity(selected ? 0.65 : 0.45), width: 2);
+
+    return Material(
+      color: bg,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(22),
+        side: side,
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                  color: accent.withOpacity(0.18),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Icon(Icons.auto_awesome_rounded, color: accent),
+              ),
+              const Spacer(),
+              Text(
+                title,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w900,
+                    ),
+              ),
+              const SizedBox(height: 6),
+              Text(
+                subtitle,
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                      fontWeight: FontWeight.w700,
+                    ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _SkillCard extends StatelessWidget {
-  const _SkillCard({required this.skill, required this.mastery, required this.onTap});
+  const _SkillCard({required this.skill, required this.completion, required this.onTap});
 
   final String skill;
-  final double mastery;
+  final double completion;
   final VoidCallback onTap;
 
   @override
@@ -384,7 +586,7 @@ class _SkillCard extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(999),
                 child: LinearProgressIndicator(
-                  value: mastery.clamp(0.0, 1.0),
+                  value: completion.clamp(0.0, 1.0),
                   minHeight: 10,
                   backgroundColor: colorScheme.surface,
                   valueColor: AlwaysStoppedAnimation(colorScheme.tertiary),
@@ -392,7 +594,7 @@ class _SkillCard extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                '${(mastery * 100).round()}% mastery',
+                '${(completion * 100).round()}% complete',
                 style: Theme.of(context).textTheme.labelLarge?.copyWith(
                       color: colorScheme.onSurfaceVariant,
                       fontWeight: FontWeight.w700,

@@ -4,6 +4,84 @@ import 'package:provider/provider.dart';
 import '../app_state.dart';
 import '../models/personal_bank.dart';
 import 'personal_practice_screen.dart';
+import 'subject_share_screen.dart';
+
+class PersonalSectionScreen extends StatelessWidget {
+  const PersonalSectionScreen({super.key, required this.categoryId, required this.sectionId});
+
+  final String categoryId;
+  final String sectionId;
+
+  @override
+  Widget build(BuildContext context) {
+    final state = context.watch<AppState>();
+    final category = state.personalCategories.where((c) => c.id == categoryId).firstOrNull;
+    final section = category?.sections.where((s) => s.id == sectionId).firstOrNull;
+
+    if (category == null || section == null) {
+      return const Scaffold(body: SafeArea(child: Center(child: Text('Section not found.'))));
+    }
+
+    final locked = category.imported && !category.editUnlocked;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('${category.name} • ${section.name}'),
+        actions: [
+          IconButton(
+            tooltip: 'Practice',
+            onPressed: section.questions.isEmpty
+                ? null
+                : () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => PersonalPracticeScreen(
+                          categoryId: category.id,
+                          sectionId: section.id,
+                          sectionName: section.name,
+                        ),
+                      ),
+                    );
+                  },
+            icon: const Icon(Icons.play_arrow_rounded),
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: locked ? null : () => _showCreateSectionQuestionDialog(context, categoryId: category.id, sectionId: section.id),
+        icon: const Icon(Icons.add_rounded),
+        label: const Text('Question'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(18),
+        child: section.questions.isEmpty
+            ? _EmptyState(
+                title: 'No questions yet',
+                subtitle: 'Tap “Question” to add one.',
+                icon: Icons.quiz_rounded,
+              )
+            : ListView.separated(
+                itemCount: section.questions.length,
+                separatorBuilder: (_, __) => const SizedBox(height: 12),
+                itemBuilder: (context, index) {
+                  final question = section.questions[index];
+                  return _QuestionTile(
+                    question: question,
+                    onTap: null,
+                    onDelete: locked
+                        ? null
+                        : () => context.read<AppState>().deleteSectionQuestion(
+                              categoryId: category.id,
+                              sectionId: section.id,
+                              questionId: question.id,
+                            ),
+                  );
+                },
+              ),
+      ),
+    );
+  }
+}
 
 class PersonalQuestionsScreen extends StatelessWidget {
   const PersonalQuestionsScreen({super.key});
@@ -84,13 +162,29 @@ class PersonalCategoryScreen extends StatelessWidget {
       );
     }
 
+    final locked = category.imported && !category.editUnlocked;
+    final totalQuestions = category.sections.fold<int>(0, (sum, s) => sum + s.questions.length);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(category.name),
         actions: [
           IconButton(
+            tooltip: 'Share',
+            onPressed: totalQuestions == 0
+                ? null
+                : () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => SubjectShareScreen(categoryId: category.id, categoryName: category.name),
+                      ),
+                    );
+                  },
+            icon: const Icon(Icons.qr_code_rounded),
+          ),
+          IconButton(
             tooltip: 'Practice',
-            onPressed: category.questions.isEmpty
+            onPressed: totalQuestions == 0
                 ? null
                 : () {
                     Navigator.of(context).push(
@@ -101,46 +195,182 @@ class PersonalCategoryScreen extends StatelessWidget {
                   },
             icon: const Icon(Icons.play_arrow_rounded),
           ),
-          IconButton(
-            tooltip: 'Rename',
-            onPressed: () => _showRenameCategoryDialog(context, category),
-            icon: const Icon(Icons.edit_rounded),
-          ),
-          IconButton(
-            tooltip: 'Delete',
-            onPressed: () => _confirmDeleteCategory(context, category),
-            icon: const Icon(Icons.delete_outline_rounded),
-          ),
+          if (locked)
+            IconButton(
+              tooltip: 'Enable editing',
+              onPressed: () => _confirmUnlockEditing(context, categoryId: category.id),
+              icon: const Icon(Icons.lock_open_rounded),
+            )
+          else ...[
+            IconButton(
+              tooltip: 'Rename',
+              onPressed: () => _showRenameCategoryDialog(context, category),
+              icon: const Icon(Icons.edit_rounded),
+            ),
+            IconButton(
+              tooltip: 'Delete',
+              onPressed: () => _confirmDeleteCategory(context, category),
+              icon: const Icon(Icons.delete_outline_rounded),
+            ),
+          ],
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => _showCreateQuestionDialog(context, categoryId: category.id),
+        onPressed: locked ? null : () => _showCreateSectionDialog(context, categoryId: category.id),
         icon: const Icon(Icons.add_rounded),
-        label: const Text('Question'),
+        label: const Text('Section'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(18),
-        child: category.questions.isEmpty
-            ? _EmptyState(
-                title: 'No questions yet',
-                subtitle: 'Tap “Question” to add one.',
-                icon: Icons.quiz_rounded,
+        child: ListView(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    'Sections',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w900),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            if (category.sections.isEmpty)
+              _EmptyState(
+                title: 'No sections yet',
+                subtitle: 'Tap “Section” to add one.',
+                icon: Icons.folder_rounded,
               )
-            : ListView.separated(
-                itemCount: category.questions.length,
-                separatorBuilder: (_, __) => const SizedBox(height: 12),
-                itemBuilder: (context, index) {
-                  final question = category.questions[index];
-                  return _QuestionTile(
-                    question: question,
-                    onTap: () => _showEditQuestionDialog(context, categoryId: category.id, question: question),
-                    onDelete: () => _confirmDeleteQuestion(context, categoryId: category.id, question: question),
-                  );
-                },
-              ),
+            else
+              for (final section in category.sections)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: Material(
+                    color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
+                    clipBehavior: Clip.antiAlias,
+                    child: ListTile(
+                      title: Text(
+                        section.name,
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w900),
+                      ),
+                      subtitle: Text('${section.questions.length} question${section.questions.length == 1 ? '' : 's'}'),
+                      trailing: IconButton(
+                        tooltip: 'Practice',
+                        onPressed: section.questions.isEmpty
+                            ? null
+                            : () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (_) => PersonalPracticeScreen(
+                                      categoryId: category.id,
+                                      sectionId: section.id,
+                                      sectionName: section.name,
+                                    ),
+                                  ),
+                                );
+                              },
+                        icon: const Icon(Icons.play_arrow_rounded),
+                      ),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => PersonalSectionScreen(categoryId: category.id, sectionId: section.id),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+          ],
+        ),
       ),
     );
   }
+}
+
+Future<void> _showCreateSectionDialog(BuildContext context, {required String categoryId}) async {
+  final controller = TextEditingController();
+  final result = await showDialog<String>(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: const Text('Create section'),
+        content: TextField(
+          controller: controller,
+          autofocus: true,
+          textInputAction: TextInputAction.done,
+          decoration: const InputDecoration(labelText: 'Section name', hintText: 'e.g. CS1'),
+          onSubmitted: (value) => Navigator.of(context).pop(value),
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Cancel')),
+          FilledButton(onPressed: () => Navigator.of(context).pop(controller.text), child: const Text('Create')),
+        ],
+      );
+    },
+  );
+
+  if (result == null) return;
+  final trimmed = result.trim();
+  if (trimmed.isEmpty) return;
+  if (!context.mounted) return;
+  context.read<AppState>().createPersonalSection(categoryId: categoryId, name: trimmed);
+}
+
+Future<void> _showCreateSectionQuestionDialog(
+  BuildContext context, {
+  required String categoryId,
+  required String sectionId,
+}) async {
+  final questionController = TextEditingController();
+  final answerController = TextEditingController();
+  final explanationController = TextEditingController();
+  final wrong1Controller = TextEditingController();
+  final wrong2Controller = TextEditingController();
+  final wrong3Controller = TextEditingController();
+
+  final result = await showDialog<bool>(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: const Text('Add question'),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(controller: questionController, decoration: const InputDecoration(labelText: 'Question')),
+              const SizedBox(height: 10),
+              TextField(controller: answerController, decoration: const InputDecoration(labelText: 'Answer')),
+              const SizedBox(height: 10),
+              TextField(controller: explanationController, decoration: const InputDecoration(labelText: 'Explanation (optional)')),
+              const SizedBox(height: 10),
+              TextField(controller: wrong1Controller, decoration: const InputDecoration(labelText: 'Incorrect answer 1 (optional)')),
+              const SizedBox(height: 10),
+              TextField(controller: wrong2Controller, decoration: const InputDecoration(labelText: 'Incorrect answer 2 (optional)')),
+              const SizedBox(height: 10),
+              TextField(controller: wrong3Controller, decoration: const InputDecoration(labelText: 'Incorrect answer 3 (optional)')),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.of(context).pop(false), child: const Text('Cancel')),
+          FilledButton(onPressed: () => Navigator.of(context).pop(true), child: const Text('Add')),
+        ],
+      );
+    },
+  );
+
+  if (result != true) return;
+  if (!context.mounted) return;
+  context.read<AppState>().createSectionQuestion(
+        categoryId: categoryId,
+        sectionId: sectionId,
+        question: questionController.text,
+        answer: answerController.text,
+        explanation: explanationController.text,
+        incorrectAnswers: [wrong1Controller.text, wrong2Controller.text, wrong3Controller.text],
+      );
 }
 
 class _CategoryCard extends StatelessWidget {
@@ -200,8 +430,8 @@ class _QuestionTile extends StatelessWidget {
   const _QuestionTile({required this.question, required this.onTap, required this.onDelete});
 
   final PersonalQuestion question;
-  final VoidCallback onTap;
-  final VoidCallback onDelete;
+  final VoidCallback? onTap;
+  final VoidCallback? onDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -233,6 +463,34 @@ class _QuestionTile extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<void> _confirmUnlockEditing(BuildContext context, {required String categoryId}) async {
+  final confirmed = await showDialog<bool>(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: const Text('Enable editing?'),
+        content: const Text(
+          'This subject was imported. If you enable editing, your copy can diverge from the original.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('Cancel'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('Enable'),
+          ),
+        ],
+      );
+    },
+  );
+
+  if (confirmed != true) return;
+  if (!context.mounted) return;
+  context.read<AppState>().unlockPersonalCategoryEditing(categoryId);
 }
 
 class _EmptyState extends StatelessWidget {

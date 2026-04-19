@@ -8,9 +8,17 @@ import '../models/personal_bank.dart';
 import '../widgets/quiz_card.dart';
 
 class PersonalPracticeScreen extends StatefulWidget {
-  const PersonalPracticeScreen({super.key, required this.categoryId, this.initialMode = PersonalPracticeMode.quiz});
+  const PersonalPracticeScreen({
+    super.key,
+    required this.categoryId,
+    this.sectionId,
+    this.sectionName,
+    this.initialMode = PersonalPracticeMode.quiz,
+  });
 
   final String categoryId;
+  final String? sectionId;
+  final String? sectionName;
   final PersonalPracticeMode initialMode;
 
   @override
@@ -24,6 +32,8 @@ class _PersonalPracticeScreenState extends State<PersonalPracticeScreen> {
   late PersonalPracticeMode _mode;
   bool _flipped = false;
   bool _showExplanation = false;
+  int _quizAnswered = 0;
+  int _quizCorrect = 0;
 
   @override
   void initState() {
@@ -33,8 +43,27 @@ class _PersonalPracticeScreenState extends State<PersonalPracticeScreen> {
 
   void _next(List<PersonalQuestion> questions) {
     if (questions.isEmpty) return;
+    final last = _index >= questions.length - 1;
+    if (last) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (_) => PersonalPracticeFinishScreen(
+            categoryId: widget.categoryId,
+            sectionId: widget.sectionId,
+            sectionName: widget.sectionName,
+            mode: _mode,
+            total: questions.length,
+            quizAnswered: _quizAnswered,
+            quizCorrect: _quizCorrect,
+            flashcardsReviewed: _index + 1,
+          ),
+        ),
+      );
+      return;
+    }
+
     setState(() {
-      _index = (_index + 1) % questions.length;
+      _index = (_index + 1).clamp(0, questions.length - 1);
       _selected = null;
       _correct = null;
       _flipped = false;
@@ -62,15 +91,29 @@ class _PersonalPracticeScreenState extends State<PersonalPracticeScreen> {
       return const Scaffold(body: SafeArea(child: Center(child: Text('Category not found.'))));
     }
 
-    final questions = category.questions;
+    final questionRefs = widget.sectionId == null
+        ? [
+            for (final section in category.sections)
+              for (final q in section.questions)
+                (section.id, section.name, q),
+          ]
+        : [
+            for (final section in category.sections.where((s) => s.id == widget.sectionId))
+              for (final q in section.questions)
+                (section.id, section.name, q),
+          ];
+
+    final questions = questionRefs.map((r) => r.$3).toList(growable: false);
     if (questions.isEmpty) {
       return Scaffold(
-        appBar: AppBar(title: Text(category.name)),
+        appBar: AppBar(title: Text(widget.sectionName == null ? category.name : '${category.name} • ${widget.sectionName}')),
         body: const SafeArea(child: Center(child: Text('No questions in this category yet.'))),
       );
     }
 
-    final question = questions[_index.clamp(0, questions.length - 1)];
+    final ref = questionRefs[_index.clamp(0, questionRefs.length - 1)];
+    final sectionId = ref.$1;
+    final question = ref.$3;
     final options = <String>{question.answer, ...question.incorrectAnswers}
         .where((row) => row.trim().isNotEmpty)
         .toList(growable: false);
@@ -79,7 +122,7 @@ class _PersonalPracticeScreenState extends State<PersonalPracticeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(category.name),
+        title: Text(widget.sectionName == null ? category.name : '${category.name} • ${widget.sectionName}'),
       ),
       body: SafeArea(
         child: Stack(
@@ -115,7 +158,11 @@ class _PersonalPracticeScreenState extends State<PersonalPracticeScreen> {
                                           : () {
                                               setState(() {
                                                 _correct = true;
+                                                _quizAnswered += 1;
+                                                _quizCorrect += 1;
                                               });
+                                              state.markPersonalQuestionSeen(question.id);
+                                              state.markPersonalQuizAnswered(sectionId: sectionId, questionId: question.id, correct: true);
                                             },
                                       child: const Text('Reveal answer'),
                                     ),
@@ -210,8 +257,13 @@ class _PersonalPracticeScreenState extends State<PersonalPracticeScreen> {
                                   : () {
                                       if (_selected == null) return;
                                       setState(() {
-                                        _correct = _selected == correctIndex;
+                                        final isCorrect = _selected == correctIndex;
+                                        _correct = isCorrect;
+                                        _quizAnswered += 1;
+                                        if (isCorrect) _quizCorrect += 1;
                                       });
+                                      state.markPersonalQuestionSeen(question.id);
+                                      state.markPersonalQuizAnswered(sectionId: sectionId, questionId: question.id, correct: _correct == true);
                                     },
                               child: const Text('Submit'),
                             ),
@@ -266,6 +318,9 @@ class _PersonalPracticeScreenState extends State<PersonalPracticeScreen> {
                                         _flipped = !_flipped;
                                         if (!_flipped) _showExplanation = false;
                                       });
+                                      if (!_flipped) return;
+                                      state.markPersonalQuestionSeen(question.id);
+                                      state.markPersonalFlashcardSeen(sectionId: sectionId, questionId: question.id);
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.all(18),
@@ -409,4 +464,112 @@ class _PersonalPracticeScreenState extends State<PersonalPracticeScreen> {
 enum PersonalPracticeMode {
   quiz,
   flashcards,
+}
+
+class PersonalPracticeFinishScreen extends StatelessWidget {
+  const PersonalPracticeFinishScreen({
+    super.key,
+    required this.categoryId,
+    required this.sectionId,
+    required this.sectionName,
+    required this.mode,
+    required this.total,
+    required this.quizAnswered,
+    required this.quizCorrect,
+    required this.flashcardsReviewed,
+  });
+
+  final String categoryId;
+  final String? sectionId;
+  final String? sectionName;
+  final PersonalPracticeMode mode;
+  final int total;
+  final int quizAnswered;
+  final int quizCorrect;
+  final int flashcardsReviewed;
+
+  @override
+  Widget build(BuildContext context) {
+    final nextMode = mode == PersonalPracticeMode.quiz ? PersonalPracticeMode.flashcards : PersonalPracticeMode.quiz;
+    final nextLabel = mode == PersonalPracticeMode.quiz ? 'Switch to flashcards' : 'Switch to quiz';
+    final subtitle = mode == PersonalPracticeMode.quiz
+        ? 'Score: $quizCorrect/$quizAnswered correct'
+        : 'Reviewed: $flashcardsReviewed/$total cards';
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Finished'),
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(18),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Nice work!',
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w900),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                subtitle,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyLarge
+                    ?.copyWith(fontWeight: FontWeight.w600, color: Theme.of(context).colorScheme.onSurfaceVariant),
+              ),
+              const SizedBox(height: 18),
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton.icon(
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (_) => PersonalPracticeScreen(
+                          categoryId: categoryId,
+                          sectionId: sectionId,
+                          sectionName: sectionName,
+                          initialMode: mode,
+                        ),
+                      ),
+                    );
+                  },
+                  icon: const Icon(Icons.refresh_rounded),
+                  label: const Text('Restart'),
+                ),
+              ),
+              const SizedBox(height: 12),
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton.tonal(
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (_) => PersonalPracticeScreen(
+                          categoryId: categoryId,
+                          sectionId: sectionId,
+                          sectionName: sectionName,
+                          initialMode: nextMode,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Text(nextLabel),
+                ),
+              ),
+              const Spacer(),
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton.icon(
+                  onPressed: () => Navigator.of(context).popUntil((route) => route.isFirst),
+                  icon: const Icon(Icons.home_rounded),
+                  label: const Text('Return to subjects'),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
