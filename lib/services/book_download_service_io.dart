@@ -41,8 +41,9 @@ class BookDownloadService {
   }
 
   Stream<BookDownloadProgress> downloadBook({required BookEntry book, required String targetPath}) async* {
-    final request = http.Request('GET', Uri.parse(book.resolvedRemoteUrl));
-    final response = await request.send();
+    final url = book.resolvedRemoteUrl;
+    final request = http.Request('GET', Uri.parse(url));
+    final response = await request.send().timeout(const Duration(seconds: 30));
 
     if (response.statusCode < 200 || response.statusCode >= 300) {
       throw HttpException('Failed with status ${response.statusCode}');
@@ -76,7 +77,13 @@ class BookDownloadService {
     final url = book.coverUrl;
     if (url == null || url.isEmpty) return null;
 
-    final response = await http.get(Uri.parse(url));
+    http.Response response;
+    try {
+      response = await http.get(Uri.parse(url)).timeout(const Duration(seconds: 20));
+    } catch (_) {
+      return null;
+    }
+
     if (response.statusCode < 200 || response.statusCode >= 300) return null;
 
     final dir = await _coversDir();

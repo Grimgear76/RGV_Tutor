@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
 
+const _proxyBaseUrl = String.fromEnvironment('BOOK_PROXY_URL');
+
 class NetworkImageView extends StatelessWidget {
   const NetworkImageView({
     super.key,
@@ -20,8 +22,12 @@ class NetworkImageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final effectiveUrl = _proxyBaseUrl.isEmpty
+        ? url
+        : Uri.parse(_proxyBaseUrl).replace(queryParameters: {'url': url}).toString();
+
     final image = Image.network(
-      url,
+      effectiveUrl,
       width: width,
       height: height,
       fit: fit,

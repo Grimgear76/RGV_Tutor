@@ -191,20 +191,32 @@ class _LibraryTab extends StatelessWidget {
                       },
                 child: const Text('Open'),
               ),
-              FilledButton(
-                onPressed: !canDownload
-                    ? null
-                    : () {
-                        if (!state.deviceOnline) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('You appear to be offline. Connect to the internet to download.')),
-                          );
-                          return;
-                        }
-                        state.download(book.id);
-                      },
-                child: Text(book.downloadState == BookDownloadState.failed ? 'Retry' : 'Download'),
-              ),
+              book.isDownloaded
+                  ? FilledButton.icon(
+                      onPressed: null,
+                      icon: const Icon(Icons.check_rounded),
+                      label: const Text('Downloaded'),
+                    )
+                  : FilledButton(
+                      onPressed: !canDownload
+                          ? null
+                          : () {
+                              if (!state.deviceOnline) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('You appear to be offline. Connect to the internet to download.'),
+                                  ),
+                                );
+                                return;
+                              }
+                              state.download(book.id);
+                            },
+                      child: Text(
+                        book.downloadState == BookDownloadState.downloading
+                            ? 'Downloading'
+                            : (book.downloadState == BookDownloadState.failed ? 'Retry' : 'Download'),
+                      ),
+                    ),
               IconButton.filledTonal(
                 tooltip: 'Remove',
                 onPressed: () => state.remove(book.id),

@@ -196,7 +196,12 @@ class BookLibraryState extends ChangeNotifier {
     if (book.isDownloaded) return book.localPath;
     if (!isOnline) return null;
     if (kIsWeb) return book.remoteUrl;
-    return _downloadService.downloadToTemp(book);
+
+    try {
+      return await _downloadService.downloadToTemp(book);
+    } catch (_) {
+      return null;
+    }
   }
 
   Future<void> markOpened({required String bookId, String? progress}) async {
