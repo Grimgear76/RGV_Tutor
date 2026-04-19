@@ -33,6 +33,8 @@ class AppState extends ChangeNotifier {
   int streak = 0;
   Map<String, int> wrongStreakBySkill = {};
 
+  static const int baseXpDelta = 10;
+
   Problem? current;
   bool? lastCorrect;
 
@@ -360,11 +362,11 @@ class AppState extends ChangeNotifier {
       if (correct) {
         wrongStreakBySkill[problem.skill] = 0;
         streak += 1;
-        xp += _xpGain(problem: problem, masteryBefore: prevMastery);
+        xp += _xpGainForStreak(streak);
       } else {
         wrongStreakBySkill[problem.skill] = (wrongStreakBySkill[problem.skill] ?? 0) + 1;
         streak = 0;
-        xp += 5;
+        xp = (xp - baseXpDelta).clamp(0, 1 << 30).toInt();
       }
 
       _persist();
@@ -468,12 +470,10 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  int _xpGain({required Problem problem, required double masteryBefore}) {
-    final base = 10 + (problem.difficulty - 1) * 4;
-    final productiveZone = masteryBefore >= 0.40 && masteryBefore <= 0.70;
-    final bonus = productiveZone ? 8 : 0;
-    final streakBonus = (streak.clamp(0, 5)) * 2;
-    return base + bonus + streakBonus;
+  int _xpGainForStreak(int streak) {
+    final bonusSteps = (streak - 1).clamp(0, 10);
+    final streakBonus = bonusSteps * 2;
+    return baseXpDelta + streakBonus;
   }
 
   String? _prereqSkill(String skill) {
